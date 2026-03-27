@@ -86,14 +86,235 @@ CMakeFiles/Chess3Players.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/main.cpp.s"
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\main.cpp -o CMakeFiles\Chess3Players.dir\src\main.cpp.s
 
+CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/HexCell.cpp
+CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\Model\HexCell.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\Model\HexCell.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\HexCell.cpp
+
+CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\HexCell.cpp > CMakeFiles\Chess3Players.dir\src\Model\HexCell.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\HexCell.cpp -o CMakeFiles\Chess3Players.dir\src\Model\HexCell.cpp.s
+
+CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Piece.cpp
+CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\Model\Piece.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\Model\Piece.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Piece.cpp
+
+CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Piece.cpp > CMakeFiles\Chess3Players.dir\src\Model\Piece.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Piece.cpp -o CMakeFiles\Chess3Players.dir\src\Model\Piece.cpp.s
+
+CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Pawn.cpp
+CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\Model\Pawn.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\Model\Pawn.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Pawn.cpp
+
+CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Pawn.cpp > CMakeFiles\Chess3Players.dir\src\Model\Pawn.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Pawn.cpp -o CMakeFiles\Chess3Players.dir\src\Model\Pawn.cpp.s
+
+CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Knight.cpp
+CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\Model\Knight.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\Model\Knight.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Knight.cpp
+
+CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Knight.cpp > CMakeFiles\Chess3Players.dir\src\Model\Knight.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Knight.cpp -o CMakeFiles\Chess3Players.dir\src\Model\Knight.cpp.s
+
+CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Bishop.cpp
+CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\Model\Bishop.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\Model\Bishop.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Bishop.cpp
+
+CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Bishop.cpp > CMakeFiles\Chess3Players.dir\src\Model\Bishop.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Bishop.cpp -o CMakeFiles\Chess3Players.dir\src\Model\Bishop.cpp.s
+
+CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Rook.cpp
+CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\Model\Rook.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\Model\Rook.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Rook.cpp
+
+CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Rook.cpp > CMakeFiles\Chess3Players.dir\src\Model\Rook.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Rook.cpp -o CMakeFiles\Chess3Players.dir\src\Model\Rook.cpp.s
+
+CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Queen.cpp
+CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\Model\Queen.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\Model\Queen.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Queen.cpp
+
+CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Queen.cpp > CMakeFiles\Chess3Players.dir\src\Model\Queen.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Queen.cpp -o CMakeFiles\Chess3Players.dir\src\Model\Queen.cpp.s
+
+CMakeFiles/Chess3Players.dir/src/Model/King.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/Model/King.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/Model/King.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/King.cpp
+CMakeFiles/Chess3Players.dir/src/Model/King.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Chess3Players.dir/src/Model/King.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/Model/King.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\Model\King.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\Model\King.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\King.cpp
+
+CMakeFiles/Chess3Players.dir/src/Model/King.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/Model/King.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\King.cpp > CMakeFiles\Chess3Players.dir\src\Model\King.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/Model/King.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/Model/King.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\King.cpp -o CMakeFiles\Chess3Players.dir\src\Model\King.cpp.s
+
+CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Board.cpp
+CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\Model\Board.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\Model\Board.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Board.cpp
+
+CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Board.cpp > CMakeFiles\Chess3Players.dir\src\Model\Board.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Board.cpp -o CMakeFiles\Chess3Players.dir\src\Model\Board.cpp.s
+
+CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/GameState.cpp
+CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\Model\GameState.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\Model\GameState.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\GameState.cpp
+
+CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\GameState.cpp > CMakeFiles\Chess3Players.dir\src\Model\GameState.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\GameState.cpp -o CMakeFiles\Chess3Players.dir\src\Model\GameState.cpp.s
+
+CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/PieceFactory.cpp
+CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\Model\PieceFactory.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\Model\PieceFactory.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\PieceFactory.cpp
+
+CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\PieceFactory.cpp > CMakeFiles\Chess3Players.dir\src\Model\PieceFactory.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\PieceFactory.cpp -o CMakeFiles\Chess3Players.dir\src\Model\PieceFactory.cpp.s
+
+CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/View/Renderer.cpp
+CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\View\Renderer.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\View\Renderer.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\View\Renderer.cpp
+
+CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\View\Renderer.cpp > CMakeFiles\Chess3Players.dir\src\View\Renderer.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\View\Renderer.cpp -o CMakeFiles\Chess3Players.dir\src\View\Renderer.cpp.s
+
+CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Controller/GameController.cpp
+CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\Controller\GameController.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\Controller\GameController.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Controller\GameController.cpp
+
+CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Controller\GameController.cpp > CMakeFiles\Chess3Players.dir\src\Controller\GameController.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Controller\GameController.cpp -o CMakeFiles\Chess3Players.dir\src\Controller\GameController.cpp.s
+
 # Object files for target Chess3Players
 Chess3Players_OBJECTS = \
-"CMakeFiles/Chess3Players.dir/src/main.cpp.obj"
+"CMakeFiles/Chess3Players.dir/src/main.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/Model/King.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj"
 
 # External object files for target Chess3Players
 Chess3Players_EXTERNAL_OBJECTS =
 
 Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/main.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Model/King.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj
 Chess3Players.exe: CMakeFiles/Chess3Players.dir/build.make
 Chess3Players.exe: C:/SFML/lib/libsfml-graphics-d.a
 Chess3Players.exe: C:/SFML/lib/libsfml-window-d.a
@@ -101,7 +322,7 @@ Chess3Players.exe: C:/SFML/lib/libsfml-system-d.a
 Chess3Players.exe: CMakeFiles/Chess3Players.dir/linkLibs.rsp
 Chess3Players.exe: CMakeFiles/Chess3Players.dir/objects1.rsp
 Chess3Players.exe: CMakeFiles/Chess3Players.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Chess3Players.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable Chess3Players.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Chess3Players.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

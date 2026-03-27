@@ -128,6 +128,318 @@ Chess3Players/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/build
 .PHONY : Chess3Players/fast
 
+src/Controller/GameController.obj: src/Controller/GameController.cpp.obj
+.PHONY : src/Controller/GameController.obj
+
+# target to build an object file
+src/Controller/GameController.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj
+.PHONY : src/Controller/GameController.cpp.obj
+
+src/Controller/GameController.i: src/Controller/GameController.cpp.i
+.PHONY : src/Controller/GameController.i
+
+# target to preprocess a source file
+src/Controller/GameController.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.i
+.PHONY : src/Controller/GameController.cpp.i
+
+src/Controller/GameController.s: src/Controller/GameController.cpp.s
+.PHONY : src/Controller/GameController.s
+
+# target to generate assembly for a file
+src/Controller/GameController.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.s
+.PHONY : src/Controller/GameController.cpp.s
+
+src/Model/Bishop.obj: src/Model/Bishop.cpp.obj
+.PHONY : src/Model/Bishop.obj
+
+# target to build an object file
+src/Model/Bishop.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.obj
+.PHONY : src/Model/Bishop.cpp.obj
+
+src/Model/Bishop.i: src/Model/Bishop.cpp.i
+.PHONY : src/Model/Bishop.i
+
+# target to preprocess a source file
+src/Model/Bishop.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.i
+.PHONY : src/Model/Bishop.cpp.i
+
+src/Model/Bishop.s: src/Model/Bishop.cpp.s
+.PHONY : src/Model/Bishop.s
+
+# target to generate assembly for a file
+src/Model/Bishop.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.s
+.PHONY : src/Model/Bishop.cpp.s
+
+src/Model/Board.obj: src/Model/Board.cpp.obj
+.PHONY : src/Model/Board.obj
+
+# target to build an object file
+src/Model/Board.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.obj
+.PHONY : src/Model/Board.cpp.obj
+
+src/Model/Board.i: src/Model/Board.cpp.i
+.PHONY : src/Model/Board.i
+
+# target to preprocess a source file
+src/Model/Board.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.i
+.PHONY : src/Model/Board.cpp.i
+
+src/Model/Board.s: src/Model/Board.cpp.s
+.PHONY : src/Model/Board.s
+
+# target to generate assembly for a file
+src/Model/Board.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.s
+.PHONY : src/Model/Board.cpp.s
+
+src/Model/GameState.obj: src/Model/GameState.cpp.obj
+.PHONY : src/Model/GameState.obj
+
+# target to build an object file
+src/Model/GameState.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.obj
+.PHONY : src/Model/GameState.cpp.obj
+
+src/Model/GameState.i: src/Model/GameState.cpp.i
+.PHONY : src/Model/GameState.i
+
+# target to preprocess a source file
+src/Model/GameState.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.i
+.PHONY : src/Model/GameState.cpp.i
+
+src/Model/GameState.s: src/Model/GameState.cpp.s
+.PHONY : src/Model/GameState.s
+
+# target to generate assembly for a file
+src/Model/GameState.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.s
+.PHONY : src/Model/GameState.cpp.s
+
+src/Model/HexCell.obj: src/Model/HexCell.cpp.obj
+.PHONY : src/Model/HexCell.obj
+
+# target to build an object file
+src/Model/HexCell.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.obj
+.PHONY : src/Model/HexCell.cpp.obj
+
+src/Model/HexCell.i: src/Model/HexCell.cpp.i
+.PHONY : src/Model/HexCell.i
+
+# target to preprocess a source file
+src/Model/HexCell.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.i
+.PHONY : src/Model/HexCell.cpp.i
+
+src/Model/HexCell.s: src/Model/HexCell.cpp.s
+.PHONY : src/Model/HexCell.s
+
+# target to generate assembly for a file
+src/Model/HexCell.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.s
+.PHONY : src/Model/HexCell.cpp.s
+
+src/Model/King.obj: src/Model/King.cpp.obj
+.PHONY : src/Model/King.obj
+
+# target to build an object file
+src/Model/King.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/King.cpp.obj
+.PHONY : src/Model/King.cpp.obj
+
+src/Model/King.i: src/Model/King.cpp.i
+.PHONY : src/Model/King.i
+
+# target to preprocess a source file
+src/Model/King.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/King.cpp.i
+.PHONY : src/Model/King.cpp.i
+
+src/Model/King.s: src/Model/King.cpp.s
+.PHONY : src/Model/King.s
+
+# target to generate assembly for a file
+src/Model/King.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/King.cpp.s
+.PHONY : src/Model/King.cpp.s
+
+src/Model/Knight.obj: src/Model/Knight.cpp.obj
+.PHONY : src/Model/Knight.obj
+
+# target to build an object file
+src/Model/Knight.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.obj
+.PHONY : src/Model/Knight.cpp.obj
+
+src/Model/Knight.i: src/Model/Knight.cpp.i
+.PHONY : src/Model/Knight.i
+
+# target to preprocess a source file
+src/Model/Knight.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.i
+.PHONY : src/Model/Knight.cpp.i
+
+src/Model/Knight.s: src/Model/Knight.cpp.s
+.PHONY : src/Model/Knight.s
+
+# target to generate assembly for a file
+src/Model/Knight.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.s
+.PHONY : src/Model/Knight.cpp.s
+
+src/Model/Pawn.obj: src/Model/Pawn.cpp.obj
+.PHONY : src/Model/Pawn.obj
+
+# target to build an object file
+src/Model/Pawn.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.obj
+.PHONY : src/Model/Pawn.cpp.obj
+
+src/Model/Pawn.i: src/Model/Pawn.cpp.i
+.PHONY : src/Model/Pawn.i
+
+# target to preprocess a source file
+src/Model/Pawn.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.i
+.PHONY : src/Model/Pawn.cpp.i
+
+src/Model/Pawn.s: src/Model/Pawn.cpp.s
+.PHONY : src/Model/Pawn.s
+
+# target to generate assembly for a file
+src/Model/Pawn.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.s
+.PHONY : src/Model/Pawn.cpp.s
+
+src/Model/Piece.obj: src/Model/Piece.cpp.obj
+.PHONY : src/Model/Piece.obj
+
+# target to build an object file
+src/Model/Piece.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.obj
+.PHONY : src/Model/Piece.cpp.obj
+
+src/Model/Piece.i: src/Model/Piece.cpp.i
+.PHONY : src/Model/Piece.i
+
+# target to preprocess a source file
+src/Model/Piece.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.i
+.PHONY : src/Model/Piece.cpp.i
+
+src/Model/Piece.s: src/Model/Piece.cpp.s
+.PHONY : src/Model/Piece.s
+
+# target to generate assembly for a file
+src/Model/Piece.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.s
+.PHONY : src/Model/Piece.cpp.s
+
+src/Model/PieceFactory.obj: src/Model/PieceFactory.cpp.obj
+.PHONY : src/Model/PieceFactory.obj
+
+# target to build an object file
+src/Model/PieceFactory.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.obj
+.PHONY : src/Model/PieceFactory.cpp.obj
+
+src/Model/PieceFactory.i: src/Model/PieceFactory.cpp.i
+.PHONY : src/Model/PieceFactory.i
+
+# target to preprocess a source file
+src/Model/PieceFactory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.i
+.PHONY : src/Model/PieceFactory.cpp.i
+
+src/Model/PieceFactory.s: src/Model/PieceFactory.cpp.s
+.PHONY : src/Model/PieceFactory.s
+
+# target to generate assembly for a file
+src/Model/PieceFactory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.s
+.PHONY : src/Model/PieceFactory.cpp.s
+
+src/Model/Queen.obj: src/Model/Queen.cpp.obj
+.PHONY : src/Model/Queen.obj
+
+# target to build an object file
+src/Model/Queen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.obj
+.PHONY : src/Model/Queen.cpp.obj
+
+src/Model/Queen.i: src/Model/Queen.cpp.i
+.PHONY : src/Model/Queen.i
+
+# target to preprocess a source file
+src/Model/Queen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.i
+.PHONY : src/Model/Queen.cpp.i
+
+src/Model/Queen.s: src/Model/Queen.cpp.s
+.PHONY : src/Model/Queen.s
+
+# target to generate assembly for a file
+src/Model/Queen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.s
+.PHONY : src/Model/Queen.cpp.s
+
+src/Model/Rook.obj: src/Model/Rook.cpp.obj
+.PHONY : src/Model/Rook.obj
+
+# target to build an object file
+src/Model/Rook.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj
+.PHONY : src/Model/Rook.cpp.obj
+
+src/Model/Rook.i: src/Model/Rook.cpp.i
+.PHONY : src/Model/Rook.i
+
+# target to preprocess a source file
+src/Model/Rook.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.i
+.PHONY : src/Model/Rook.cpp.i
+
+src/Model/Rook.s: src/Model/Rook.cpp.s
+.PHONY : src/Model/Rook.s
+
+# target to generate assembly for a file
+src/Model/Rook.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.s
+.PHONY : src/Model/Rook.cpp.s
+
+src/View/Renderer.obj: src/View/Renderer.cpp.obj
+.PHONY : src/View/Renderer.obj
+
+# target to build an object file
+src/View/Renderer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj
+.PHONY : src/View/Renderer.cpp.obj
+
+src/View/Renderer.i: src/View/Renderer.cpp.i
+.PHONY : src/View/Renderer.i
+
+# target to preprocess a source file
+src/View/Renderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.i
+.PHONY : src/View/Renderer.cpp.i
+
+src/View/Renderer.s: src/View/Renderer.cpp.s
+.PHONY : src/View/Renderer.s
+
+# target to generate assembly for a file
+src/View/Renderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.s
+.PHONY : src/View/Renderer.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -161,6 +473,45 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Chess3Players
+	@echo ... src/Controller/GameController.obj
+	@echo ... src/Controller/GameController.i
+	@echo ... src/Controller/GameController.s
+	@echo ... src/Model/Bishop.obj
+	@echo ... src/Model/Bishop.i
+	@echo ... src/Model/Bishop.s
+	@echo ... src/Model/Board.obj
+	@echo ... src/Model/Board.i
+	@echo ... src/Model/Board.s
+	@echo ... src/Model/GameState.obj
+	@echo ... src/Model/GameState.i
+	@echo ... src/Model/GameState.s
+	@echo ... src/Model/HexCell.obj
+	@echo ... src/Model/HexCell.i
+	@echo ... src/Model/HexCell.s
+	@echo ... src/Model/King.obj
+	@echo ... src/Model/King.i
+	@echo ... src/Model/King.s
+	@echo ... src/Model/Knight.obj
+	@echo ... src/Model/Knight.i
+	@echo ... src/Model/Knight.s
+	@echo ... src/Model/Pawn.obj
+	@echo ... src/Model/Pawn.i
+	@echo ... src/Model/Pawn.s
+	@echo ... src/Model/Piece.obj
+	@echo ... src/Model/Piece.i
+	@echo ... src/Model/Piece.s
+	@echo ... src/Model/PieceFactory.obj
+	@echo ... src/Model/PieceFactory.i
+	@echo ... src/Model/PieceFactory.s
+	@echo ... src/Model/Queen.obj
+	@echo ... src/Model/Queen.i
+	@echo ... src/Model/Queen.s
+	@echo ... src/Model/Rook.obj
+	@echo ... src/Model/Rook.i
+	@echo ... src/Model/Rook.s
+	@echo ... src/View/Renderer.obj
+	@echo ... src/View/Renderer.i
+	@echo ... src/View/Renderer.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

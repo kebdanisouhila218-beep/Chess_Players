@@ -1,5 +1,6 @@
 #include "Board.hpp"
 
+const int Board::RADIUS;
 Board::Board() {
     // Génère les 91 cases du plateau Glinski (rayon 5)
     for (int q = -RADIUS; q <= RADIUS; q++) {
