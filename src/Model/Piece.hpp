@@ -35,8 +35,12 @@ public:
     HexCell   getPos()    const { return pos; }
     void      setPos(HexCell p) { pos = p; }
 
+    bool getHasMoved() const { return hasMoved; }
+    void setHasMoved(bool v) { hasMoved = v; }
+
 protected:
     PieceType type;
     Player    owner;
     HexCell   pos;
+    bool      hasMoved = false;
 };

@@ -4,25 +4,24 @@
 std::vector<HexCell> Bishop::getMoves(const Board& board) const {
     std::vector<HexCell> moves;
 
-    // 6 diagonales du fou sur plateau hexagonal
-    std::vector<HexCell> directions = {
-        {+1, +1}, {-1, -1},
-        {+2, -1}, {-2, +1},
-        {+1, -2}, {-1, +2}
+    const std::array<Board::Direction, 4> directions = {
+        Board::Direction::NORTH_EAST,
+        Board::Direction::SOUTH_WEST,
+        Board::Direction::SOUTH_EAST,
+        Board::Direction::NORTH_WEST
     };
 
-    for (const HexCell& dir : directions) {
-        HexCell current = {pos.q + dir.q, pos.r + dir.r};
-        while (board.isValid(current)) {
+    for (Board::Direction dir : directions) {
+        for (const HexCell& current : board.ray(pos, dir)) {
             Piece* target = board.getPiece(current);
             if (target == nullptr) {
                 moves.push_back(current);
             } else {
-                if (target->getOwner() != owner)
+                if (target->getOwner() != owner) {
                     moves.push_back(current);
-                break; // bloqué
+                }
+                break;
             }
-            current = {current.q + dir.q, current.r + dir.r};
         }
     }
 

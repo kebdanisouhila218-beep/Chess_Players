@@ -4,19 +4,25 @@
 std::vector<HexCell> King::getMoves(const Board& board) const {
     std::vector<HexCell> moves;
 
-    // Le roi se déplace d'une case dans les 6 directions
-    std::vector<HexCell> directions = {
-        {+1,  0}, {-1,  0},
-        { 0, +1}, { 0, -1},
-        {+1, -1}, {-1, +1}
+    const std::array<Board::Direction, 8> directions = {
+        Board::Direction::NORTH,
+        Board::Direction::SOUTH,
+        Board::Direction::EAST,
+        Board::Direction::WEST,
+        Board::Direction::NORTH_EAST,
+        Board::Direction::SOUTH_WEST,
+        Board::Direction::SOUTH_EAST,
+        Board::Direction::NORTH_WEST
     };
 
-    for (const HexCell& dir : directions) {
-        HexCell target = {pos.q + dir.q, pos.r + dir.r};
-        if (!board.isValid(target)) continue;
-        Piece* p = board.getPiece(target);
-        if (p == nullptr || p->getOwner() != owner)
-            moves.push_back(target);
+    for (Board::Direction dir : directions) {
+        std::optional<HexCell> target = board.step(pos, dir);
+        if (!target.has_value()) continue;
+
+        Piece* p = board.getPiece(*target);
+        if (p == nullptr || p->getOwner() != owner) {
+            moves.push_back(*target);
+        }
     }
 
     return moves;

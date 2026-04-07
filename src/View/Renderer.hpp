@@ -1,5 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <array>
+#include <optional>
+#include <vector>
 #include "../Model/GameState.hpp"
 #include "../Model/IObserver.hpp"
 
@@ -11,17 +14,31 @@ public:
     void draw(const GameState& state);
     void highlight(const HexCell& c);
 
-    sf::Vector2f hexToPixel(const HexCell& c) const;
-    HexCell      pixelToHex(sf::Vector2f px) const;
+    void setHighlights(const std::vector<HexCell>& cells);
+    void clearHighlights();
+
+    sf::Vector2f cellToPixel(const Board& board, const HexCell& c) const;
+    std::optional<HexCell> pickCell(const Board& board, sf::Vector2f px) const;
 
     void setCurrentState(const GameState* state) { currentState = state; }
 
 private:
+    void initBoardGeometry(const Board& board);
     void drawBoard(const GameState& state);
     void drawPieces(const GameState& state);
-    void drawHex(const HexCell& c, sf::Color color);
+    sf::ConvexShape createTile(const std::array<sf::Vector2f, 4>& points, sf::Color color) const;
+    void drawHUD(const GameState& state);        // <-- nouveau
 
     sf::RenderWindow& window;
     const GameState*  currentState = nullptr;
-    float             tileSize     = 40.f;
+    float             tileRadius   = 18.f;
+
+    sf::Font m_font;
+    bool     m_fontLoaded = false;
+    std::vector<HexCell> m_highlights;
+    std::vector<sf::ConvexShape> m_cellShapes;
+    std::vector<sf::Vector2f> m_cellCenters;
+    std::vector<sf::Color> m_baseColors;
+    bool m_geometryReady = false;
+    sf::Vector2u m_lastWindowSize{0u, 0u};
 };

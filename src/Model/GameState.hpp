@@ -14,6 +14,13 @@ struct Move {
     HexCell from;
     HexCell to;
     Player  player;
+
+    bool   isCastling = false;
+    HexCell rookFrom  = {0, 0};
+    HexCell rookTo    = {0, 0};
+    bool   isEnPassant = false;
+    HexCell capturedPawnCell = {0, 0};
+    bool   isPromotion = false;
 };
 
 class GameState {
@@ -32,6 +39,8 @@ public:
 
     void addObserver(IObserver* o);
     void notifyAll();
+
+    const Move* getLastMove() const;
 
 private:
     Board              board;

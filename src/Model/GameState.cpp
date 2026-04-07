@@ -1,13 +1,75 @@
 #include "GameState.hpp"
+#include "PieceFactory.hpp"
+#include <cmath>
 
 GameState::GameState()
     : currentPlayer(Player::PLAYER1)
     , status(GameStatus::PLAYING)
 {}
 
+const Move* GameState::getLastMove() const {
+    if (moveHistory.empty()) return nullptr;
+    return &moveHistory.back();
+}
+
 void GameState::applyMove(const Move& m) {
+    Move applied = m;
+    Piece* moving = board.getPiece(m.from);
+    if (!moving) return;
+
+    Piece* capturedPiece = board.getPiece(m.to);
+    if (moving->getType() == PieceType::PAWN) {
+        const int dx = m.to.q - m.from.q;
+        const int dy = m.to.r - m.from.r;
+        if ((std::abs(dx) == 1 && std::abs(dy) == 1) && capturedPiece == nullptr) {
+            HexCell captured = {m.to.q, m.from.r};
+            Piece* cap = board.getPiece(captured);
+            if (cap && cap->getType() == PieceType::PAWN && cap->getOwner() != moving->getOwner()) {
+                applied.isEnPassant = true;
+                applied.capturedPawnCell = captured;
+                board.removePiece(captured);
+                delete cap;
+            }
+        }
+    }
+
+    if (capturedPiece) {
+        board.removePiece(m.to);
+        delete capturedPiece;
+    }
+
+    if (moving->getType() == PieceType::KING) {
+        const int dx = m.to.q - m.from.q;
+        const int dy = m.to.r - m.from.r;
+        if (std::abs(dx) == 2 && dy == 0) {
+            HexCell rookFrom = {dx > 0 ? 4 : 0, m.from.r};
+            HexCell rookTo = {m.from.q + (dx > 0 ? 1 : -1), m.from.r};
+            Piece* rook = board.getPiece(rookFrom);
+            if (rook && rook->getType() == PieceType::ROOK && rook->getOwner() == moving->getOwner()) {
+                applied.isCastling = true;
+                applied.rookFrom = rookFrom;
+                applied.rookTo = rookTo;
+                board.movePiece(rookFrom, rookTo);
+                rook->setHasMoved(true);
+            }
+        }
+    }
+
     board.movePiece(m.from, m.to);
-    moveHistory.push_back(m);
+    moving->setHasMoved(true);
+
+    if (moving->getType() == PieceType::PAWN) {
+        if (board.isPromotionCell(m.to, moving->getOwner())) {
+            applied.isPromotion = true;
+            PieceFactory factory;
+            Piece* newQ = factory.create(PieceType::QUEEN, moving->getOwner(), m.to);
+
+            board.setPiece(m.to, newQ);
+            delete moving;
+        }
+    }
+
+    moveHistory.push_back(applied);
     nextPlayer();
     notifyAll();
 }
