@@ -1,24 +1,46 @@
 #include "Knight.hpp"
 #include "Board.hpp"
 
+#include <algorithm>
+#include <array>
+
 std::vector<HexCell> Knight::getMoves(const Board& board) const {
     std::vector<HexCell> moves;
 
-    std::vector<HexCell> jumps = {
-        {pos.q + 2, pos.r + 1}, {pos.q + 2, pos.r - 1},
-        {pos.q - 2, pos.r + 1}, {pos.q - 2, pos.r - 1},
-        {pos.q + 1, pos.r + 2}, {pos.q + 1, pos.r - 2},
-        {pos.q - 1, pos.r + 2}, {pos.q - 1, pos.r - 2}
-    };
+    const std::array<std::array<Board::Direction, 3>, 8> patterns = {{
+        {Board::Direction::NORTH, Board::Direction::NORTH, Board::Direction::EAST},
+        {Board::Direction::NORTH, Board::Direction::NORTH, Board::Direction::WEST},
+        {Board::Direction::SOUTH, Board::Direction::SOUTH, Board::Direction::EAST},
+        {Board::Direction::SOUTH, Board::Direction::SOUTH, Board::Direction::WEST},
+        {Board::Direction::EAST, Board::Direction::EAST, Board::Direction::NORTH},
+        {Board::Direction::EAST, Board::Direction::EAST, Board::Direction::SOUTH},
+        {Board::Direction::WEST, Board::Direction::WEST, Board::Direction::NORTH},
+        {Board::Direction::WEST, Board::Direction::WEST, Board::Direction::SOUTH}
+    }};
 
-    for (const HexCell& c : jumps) {
-        if (!board.isValid(c)) continue;
+    for (const auto& pattern : patterns) {
+        std::optional<HexCell> current = pos;
+        for (Board::Direction dir : pattern) {
+            current = current.has_value() ? board.step(*current, dir) : std::nullopt;
+            if (!current.has_value()) {
+                break;
+            }
+        }
 
-        Piece* target = board.getPiece(c);
+        if (!current.has_value()) {
+            continue;
+        }
+
+        Piece* target = board.getPiece(*current);
         if (target == nullptr || target->getOwner() != owner) {
-            moves.push_back(c);
+            moves.push_back(*current);
         }
     }
+
+    std::sort(moves.begin(), moves.end(), [](const HexCell& a, const HexCell& b) {
+        return a.q < b.q || (a.q == b.q && a.r < b.r);
+    });
+    moves.erase(std::unique(moves.begin(), moves.end()), moves.end());
 
     return moves;
 }
