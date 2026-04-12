@@ -1,6 +1,20 @@
 #include "GameController.hpp"
 #include "../Model/Pawn.hpp"
 
+namespace {
+    std::string pieceTypeText(PieceType type) {
+        switch (type) {
+            case PieceType::PAWN: return "Pion";
+            case PieceType::KNIGHT: return "Cavalier";
+            case PieceType::BISHOP: return "Fou";
+            case PieceType::ROOK: return "Tour";
+            case PieceType::QUEEN: return "Dame";
+            case PieceType::KING: return "Roi";
+            default: return "Piece";
+        }
+    }
+}
+
 GameController::GameController()
     // 850 de hauteur = 800 pour le plateau + 50 pour le HUD joueur courant
     : window(sf::VideoMode({800, 850}), "Chess 3 Players")
@@ -14,6 +28,13 @@ GameController::GameController()
     factory.initBoard(state.getBoard(), Player::PLAYER3);
 
     renderer.draw(state);
+}
+
+std::string GameController::pieceLabel(const Piece* piece, const HexCell& cell) const {
+    if (!piece) {
+        return "Case vide";
+    }
+    return pieceTypeText(piece->getType()) + " (" + std::to_string(cell.q) + "," + std::to_string(cell.r) + ")";
 }
 
 void GameController::run() {
@@ -51,6 +72,7 @@ void GameController::handleClick(int x, int y) {
 
     std::optional<HexCell> picked = renderer.pickCell(state.getBoard(), {(float)x, (float)y});
     if (!picked.has_value()) {
+        renderer.setStatusMessage("Aucune case selectionnee");
         if (selected != nullptr) {
             delete selected;
             selected = nullptr;
@@ -65,9 +87,11 @@ void GameController::handleClick(int x, int y) {
     HexCell clicked = *picked;
 
     if (!state.getBoard().isValid(clicked)) {
+        renderer.setStatusMessage("Case invalide");
         if (selected != nullptr) {
             delete selected;
             selected = nullptr;
+
             validMoves.clear();
             renderer.clearHighlights();
             renderer.draw(state);
@@ -80,6 +104,7 @@ void GameController::handleClick(int x, int y) {
 
         if (p && p->getOwner() == state.getCurrentPlayer()) {
             selected = new HexCell(clicked);
+
             if (p->getType() == PieceType::PAWN) {
                 const Pawn* pawn = dynamic_cast<const Pawn*>(p);
                 if (pawn)
@@ -89,14 +114,25 @@ void GameController::handleClick(int x, int y) {
             } else {
                 validMoves = p->getMoves(state.getBoard());
             }
+            if (validMoves.empty()) {
+                renderer.setStatusMessage(pieceLabel(p, clicked) + " : aucun coup disponible");
+            } else {
+                renderer.setStatusMessage(pieceLabel(p, clicked) + " : " + std::to_string(validMoves.size()) + " coups");
+            }
             renderer.setHighlights(validMoves);
             renderer.draw(state);
         } else {
+            if (p) {
+                renderer.setStatusMessage(pieceLabel(p, clicked) + " : pas votre tour");
+            } else {
+                renderer.setStatusMessage("Case vide");
+            }
             renderer.clearHighlights();
             renderer.draw(state);
         }
     } else {
         Piece* clickedPiece = state.getBoard().getPiece(clicked);
+
         if (clickedPiece && clickedPiece->getOwner() == state.getCurrentPlayer()) {
             *selected = clicked;
             if (clickedPiece->getType() == PieceType::PAWN) {
@@ -107,6 +143,11 @@ void GameController::handleClick(int x, int y) {
                     validMoves = clickedPiece->getMoves(state.getBoard());
             } else {
                 validMoves = clickedPiece->getMoves(state.getBoard());
+            }
+            if (validMoves.empty()) {
+                renderer.setStatusMessage(pieceLabel(clickedPiece, clicked) + " : aucun coup disponible");
+            } else {
+                renderer.setStatusMessage(pieceLabel(clickedPiece, clicked) + " : " + std::to_string(validMoves.size()) + " coups");
             }
             renderer.setHighlights(validMoves);
             renderer.draw(state);
@@ -121,10 +162,13 @@ void GameController::handleClick(int x, int y) {
         if (isValid) {
             Piece* target = state.getBoard().getPiece(clicked);
             if (target == nullptr || target->getOwner() != state.getCurrentPlayer()) {
+                renderer.setStatusMessage("Deplacement vers (" + std::to_string(clicked.q) + "," + std::to_string(clicked.r) + ")");
                 renderer.clearHighlights();
                 Move move{*selected, clicked, state.getCurrentPlayer()};
                 state.applyMove(move);
             }
+        } else {
+            renderer.setStatusMessage("Destination non valide");
         }
 
         delete selected;

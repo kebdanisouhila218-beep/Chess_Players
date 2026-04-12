@@ -6,20 +6,17 @@
 #include <array>
 
 namespace {
-    Board::Direction pawnForward(Player owner) {
-        if (owner == Player::PLAYER1) return Board::Direction::SOUTH;
-        if (owner == Player::PLAYER2) return Board::Direction::EAST;
-        return Board::Direction::NORTH;
+    Board::Direction pawnForward(const Board& board, const HexCell& pos) {
+        const int sextant = board.getSextant(pos);
+        return (sextant % 2 == 0) ? Board::Direction::SOUTH : Board::Direction::EAST;
     }
 
-    std::array<Board::Direction, 2> pawnCaptures(Player owner) {
-        if (owner == Player::PLAYER1) {
+    std::array<Board::Direction, 2> pawnCaptures(const Board& board, const HexCell& pos) {
+        const int sextant = board.getSextant(pos);
+        if (sextant % 2 == 0) {
             return {Board::Direction::SOUTH_EAST, Board::Direction::SOUTH_WEST};
         }
-        if (owner == Player::PLAYER2) {
-            return {Board::Direction::NORTH_EAST, Board::Direction::SOUTH_EAST};
-        }
-        return {Board::Direction::NORTH_EAST, Board::Direction::NORTH_WEST};
+        return {Board::Direction::NORTH_EAST, Board::Direction::SOUTH_EAST};
     }
 }
 
@@ -29,7 +26,7 @@ std::vector<HexCell> Pawn::getMoves(const Board& board) const {
 
 std::vector<HexCell> Pawn::getMoves(const Board& board, const Move* lastMove) const {
     std::vector<HexCell> moves;
-    const Board::Direction forward = pawnForward(owner);
+    const Board::Direction forward = pawnForward(board, pos);
 
     if (std::optional<HexCell> transition = board.getPawnTransition(pos, owner)) {
         if (board.isValid(*transition) && board.getPiece(*transition) == nullptr) {
@@ -49,7 +46,7 @@ std::vector<HexCell> Pawn::getMoves(const Board& board, const Move* lastMove) co
         }
     }
 
-    for (Board::Direction captureDir : pawnCaptures(owner)) {
+    for (Board::Direction captureDir : pawnCaptures(board, pos)) {
         std::optional<HexCell> capture = board.step(pos, captureDir);
         if (!capture.has_value()) {
             continue;
@@ -63,16 +60,15 @@ std::vector<HexCell> Pawn::getMoves(const Board& board, const Move* lastMove) co
     if (lastMove && lastMove->player != owner) {
         Piece* movedPiece = board.getPiece(lastMove->to);
         if (movedPiece && movedPiece->getType() == PieceType::PAWN) {
-            const int dx = lastMove->to.q - lastMove->from.q;
-            const int dy = lastMove->to.r - lastMove->from.r;
-            if (std::abs(dx) + std::abs(dy) == 2) {
-                for (Board::Direction captureDir : pawnCaptures(owner)) {
+            const Board::Direction enemyForward = pawnForward(board, lastMove->from);
+            std::optional<HexCell> mid = board.step(lastMove->from, enemyForward);
+            std::optional<HexCell> end = mid.has_value() ? board.step(*mid, enemyForward) : std::nullopt;
+
+            if (mid.has_value() && end.has_value() && *end == lastMove->to && board.getPiece(*mid) == nullptr) {
+                for (Board::Direction captureDir : pawnCaptures(board, pos)) {
                     std::optional<HexCell> capture = board.step(pos, captureDir);
-                    if (capture.has_value() && *capture == lastMove->to) {
-                        std::optional<HexCell> epTarget = board.step(lastMove->from, forward);
-                        if (epTarget.has_value() && board.getPiece(*epTarget) == nullptr) {
-                            moves.push_back(*epTarget);
-                        }
+                    if (capture.has_value() && *capture == *mid) {
+                        moves.push_back(*capture);
                     }
                 }
             }

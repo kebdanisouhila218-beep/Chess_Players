@@ -2,6 +2,14 @@
 #include "PieceFactory.hpp"
 #include <cmath>
 
+namespace {
+    Board::Direction pawnForward(Player owner) {
+        if (owner == Player::PLAYER1) return Board::Direction::SOUTH;
+        if (owner == Player::PLAYER2) return Board::Direction::EAST;
+        return Board::Direction::NORTH;
+    }
+}
+
 GameState::GameState()
     : currentPlayer(Player::PLAYER1)
     , status(GameStatus::PLAYING)
@@ -19,16 +27,22 @@ void GameState::applyMove(const Move& m) {
 
     Piece* capturedPiece = board.getPiece(m.to);
     if (moving->getType() == PieceType::PAWN) {
-        const int dx = m.to.q - m.from.q;
-        const int dy = m.to.r - m.from.r;
-        if ((std::abs(dx) == 1 && std::abs(dy) == 1) && capturedPiece == nullptr) {
-            HexCell captured = {m.to.q, m.from.r};
-            Piece* cap = board.getPiece(captured);
-            if (cap && cap->getType() == PieceType::PAWN && cap->getOwner() != moving->getOwner()) {
-                applied.isEnPassant = true;
-                applied.capturedPawnCell = captured;
-                board.removePiece(captured);
-                delete cap;
+        const Move* previous = getLastMove();
+        if (capturedPiece == nullptr && previous && previous->player != moving->getOwner()) {
+            Piece* lastPawn = board.getPiece(previous->to);
+            if (lastPawn && lastPawn->getType() == PieceType::PAWN) {
+                const Board::Direction enemyForward = pawnForward(lastPawn->getOwner());
+                std::optional<HexCell> mid = board.step(previous->from, enemyForward);
+                std::optional<HexCell> end = mid.has_value() ? board.step(*mid, enemyForward) : std::nullopt;
+                if (mid.has_value() && end.has_value() && *end == previous->to && *mid == m.to) {
+                    Piece* cap = board.getPiece(previous->to);
+                    if (cap && cap->getOwner() != moving->getOwner()) {
+                        applied.isEnPassant = true;
+                        applied.capturedPawnCell = previous->to;
+                        board.removePiece(previous->to);
+                        delete cap;
+                    }
+                }
             }
         }
     }

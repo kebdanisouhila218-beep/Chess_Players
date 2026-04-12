@@ -58,6 +58,38 @@ namespace {
             default: return sf::String("?");
         }
     }
+
+    float cross2d(const sf::Vector2f& a, const sf::Vector2f& b, const sf::Vector2f& p) {
+        return (b.x - a.x) * (p.y - a.y) - (b.y - a.y) * (p.x - a.x);
+    }
+
+    bool pointInConvexQuad(const sf::ConvexShape& shape, sf::Vector2f point) {
+        const std::size_t count = shape.getPointCount();
+        if (count < 3) {
+            return false;
+        }
+
+        float sign = 0.f;
+        for (std::size_t i = 0; i < count; ++i) {
+            const sf::Vector2f a = shape.getPoint(i);
+            const sf::Vector2f b = shape.getPoint((i + 1) % count);
+            const float cross = cross2d(a, b, point);
+            if (std::abs(cross) < 0.01f) {
+                continue;
+            }
+
+            if (sign == 0.f) {
+                sign = cross;
+                continue;
+            }
+
+            if ((sign < 0.f && cross > 0.f) || (sign > 0.f && cross < 0.f)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
 
 Renderer::Renderer(sf::RenderWindow& window)
@@ -84,6 +116,12 @@ sf::Vector2f Renderer::cellToPixel(const Board& board, const HexCell& c) const {
 }
 
 std::optional<HexCell> Renderer::pickCell(const Board& board, sf::Vector2f px) const {
+    for (std::size_t i = 0; i < m_cellShapes.size(); ++i) {
+        if (pointInConvexQuad(m_cellShapes[i], px)) {
+            return board.getCellById(static_cast<int>(i));
+        }
+    }
+
     const float threshold = 26.f;
     float minDist = threshold;
     int clickedId = -1;
@@ -355,6 +393,17 @@ void Renderer::drawHUD(const GameState& state) {
     nameText.setPosition({140.f, cy});
     window.draw(nameText);
 
+    if (!m_statusMessage.empty()) {
+        sf::Text statusText(m_font);
+        statusText.setString(m_statusMessage);
+        statusText.setCharacterSize(13);
+        statusText.setFillColor(sf::Color(205, 205, 205));
+        auto b = statusText.getLocalBounds();
+        statusText.setOrigin({b.position.x + b.size.x, b.position.y + b.size.y * 0.5f});
+        statusText.setPosition({winW - 92.f, cy});
+        window.draw(statusText);
+    }
+
     // Indicateur visuel des 3 joueurs (petits cercles a droite)
     float dotX = winW - 20.f;
     struct PlayerDot { Player p; sf::Color c; };
@@ -399,4 +448,8 @@ void Renderer::clearHighlights() {
 
 void Renderer::highlight(const HexCell& c) {
     m_highlights.push_back(c);
+}
+
+void Renderer::setStatusMessage(const std::string& message) {
+    m_statusMessage = message;
 }

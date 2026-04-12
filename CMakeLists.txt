@@ -31,3 +31,42 @@ target_link_libraries(Chess3Players PRIVATE
     SFML::Window
     SFML::System
 )
+
+add_executable(RendererPickTests
+    src/renderer_pick_test.cpp
+
+    src/Model/HexCell.cpp
+    src/Model/Piece.cpp
+    src/Model/Pawn.cpp
+    src/Model/Knight.cpp
+    src/Model/Bishop.cpp
+    src/Model/Rook.cpp
+    src/Model/Queen.cpp
+    src/Model/King.cpp
+    src/Model/Board.cpp
+    src/Model/GameState.cpp
+    src/Model/PieceFactory.cpp
+    src/View/Renderer.cpp
+)
+
+target_link_libraries(RendererPickTests PRIVATE
+    SFML::Graphics
+    SFML::Window
+    SFML::System
+)
+
+add_executable(GameLogicManualTests
+    src/game_logic_manual_test.cpp
+
+    src/Model/HexCell.cpp
+    src/Model/Piece.cpp
+    src/Model/Pawn.cpp
+    src/Model/Knight.cpp
+    src/Model/Bishop.cpp
+    src/Model/Rook.cpp
+    src/Model/Queen.cpp
+    src/Model/King.cpp
+    src/Model/Board.cpp
+    src/Model/GameState.cpp
+    src/Model/PieceFactory.cpp
+)

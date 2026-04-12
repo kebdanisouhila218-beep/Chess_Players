@@ -119,11 +119,38 @@ void Board::buildNeighbors() {
         linkNeighbor({7, k}, Direction::SOUTH, {4 + k, 11});
         linkNeighbor({4 + k, 11}, Direction::NORTH, {7, k});
 
+        if (k > 0) {
+            linkNeighbor({7, k}, Direction::SOUTH_WEST, {3 + k, 11});
+            linkNeighbor({3 + k, 11}, Direction::NORTH_EAST, {7, k});
+        }
+        if (k < 3) {
+            linkNeighbor({7, k}, Direction::SOUTH_EAST, {5 + k, 11});
+            linkNeighbor({5 + k, 11}, Direction::NORTH_WEST, {7, k});
+        }
+
         linkNeighbor({k, 3}, Direction::SOUTH, {3, 4 + k});
         linkNeighbor({3, 4 + k}, Direction::NORTH, {k, 3});
 
+        if (k > 0) {
+            linkNeighbor({k, 3}, Direction::SOUTH_WEST, {3, 3 + k});
+            linkNeighbor({3, 3 + k}, Direction::NORTH_EAST, {k, 3});
+        }
+        if (k < 3) {
+            linkNeighbor({k, 3}, Direction::SOUTH_EAST, {3, 5 + k});
+            linkNeighbor({3, 5 + k}, Direction::NORTH_WEST, {k, 3});
+        }
+
         linkNeighbor({8 + k, 7}, Direction::SOUTH, {11, 8 + k});
         linkNeighbor({11, 8 + k}, Direction::NORTH, {8 + k, 7});
+
+        if (k > 0) {
+            linkNeighbor({8 + k, 7}, Direction::SOUTH_WEST, {11, 7 + k});
+            linkNeighbor({11, 7 + k}, Direction::NORTH_EAST, {8 + k, 7});
+        }
+        if (k < 3) {
+            linkNeighbor({8 + k, 7}, Direction::SOUTH_EAST, {11, 9 + k});
+            linkNeighbor({11, 9 + k}, Direction::NORTH_WEST, {8 + k, 7});
+        }
     }
 }
 

@@ -16,6 +16,7 @@ public:
 
     void setHighlights(const std::vector<HexCell>& cells);
     void clearHighlights();
+    void setStatusMessage(const std::string& message);
 
     sf::Vector2f cellToPixel(const Board& board, const HexCell& c) const;
     std::optional<HexCell> pickCell(const Board& board, sf::Vector2f px) const;
@@ -39,6 +40,7 @@ private:
     std::vector<sf::ConvexShape> m_cellShapes;
     std::vector<sf::Vector2f> m_cellCenters;
     std::vector<sf::Color> m_baseColors;
+    std::string m_statusMessage;
     bool m_geometryReady = false;
     sf::Vector2u m_lastWindowSize{0u, 0u};
 };

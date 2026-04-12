@@ -12,6 +12,7 @@ public:
 private:
     void handleEvents();
     void handleClick(int x, int y);
+    std::string pieceLabel(const Piece* piece, const HexCell& cell) const;
 
     sf::RenderWindow window;
     GameState        state;
