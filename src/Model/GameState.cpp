@@ -20,6 +20,57 @@ const Move* GameState::getLastMove() const {
     return &moveHistory.back();
 }
 
+bool GameState::isGameOver() const {
+    int kingsAlive = 0;
+    for (const HexCell& c : board.allValidCells()) {
+        Piece* p = board.getPiece(c);
+        if (p && p->getType() == PieceType::KING) {
+            ++kingsAlive;
+        }
+    }
+    return kingsAlive <= 1;
+}
+
+Player GameState::getWinner() const {
+    if (!isGameOver()) {
+        return Player::NONE;
+    }
+    for (const HexCell& c : board.allValidCells()) {
+        Piece* p = board.getPiece(c);
+        if (p && p->getType() == PieceType::KING) {
+            return p->getOwner();
+        }
+    }
+    return Player::NONE;
+}
+
+// ATTENTION : pour les pions, getMoves() retourne les cases de deplacement
+// ET de capture melangees. isInCheck() peut donc produire un faux positif
+// si un pion est devant le roi sans pouvoir le capturer diagonalement.
+// A corriger quand Pawn exposera separement ses cases de capture.
+bool GameState::isInCheck(Player player) const {
+    HexCell kingPos{-1, -1};
+    for (const HexCell& c : board.allValidCells()) {
+        Piece* p = board.getPiece(c);
+        if (p && p->getOwner() == player && p->getType() == PieceType::KING) {
+            kingPos = c;
+            break;
+        }
+    }
+    if (!board.isValid(kingPos)) return false;
+
+    for (const HexCell& c : board.allValidCells()) {
+        Piece* p = board.getPiece(c);
+        if (!p || p->getOwner() == player) continue;
+
+        std::vector<HexCell> threats = p->getMoves(board);
+        for (const HexCell& t : threats) {
+            if (t == kingPos) return true;
+        }
+    }
+    return false;
+}
+
 void GameState::applyMove(const Move& m) {
     Move applied = m;
     Piece* moving = board.getPiece(m.from);
@@ -88,11 +139,31 @@ void GameState::applyMove(const Move& m) {
     notifyAll();
 }
 
+// LIMITATION CONNUE : undoMove() est actuellement incomplet.
+// Il restaure uniquement la position de la piece deplacee,
+// mais ne restaure PAS :
+//   - la piece capturee (deja delete, perdue definitivement)
+//   - l'etat hasMoved de la piece deplacee
+//   - la piece promue (le pion original est detruit a la promotion)
+//   - la tour deplacee lors d'un roque
+//   - currentPlayer
+//   - status
+//
+// Pour corriger proprement, il faudra enrichir struct Move avec :
+//   - capturedType / capturedOwner / capturedCell
+//   - previousHasMoved
+//   - originalPawnType en cas de promotion
+//   - rookFrom / rookTo deja presents mais non restaures
+//
+// undoMove() n'est pas utilise en jeu normal actuellement.
+// A traiter dans une etape dediee si on implemente un moteur IA
+// ou une fonction "annuler le coup".
 void GameState::undoMove() {
     if (moveHistory.empty()) return;
     Move last = moveHistory.back();
     moveHistory.pop_back();
     board.movePiece(last.to, last.from);
+
     notifyAll();
 }
 
@@ -106,16 +177,16 @@ void GameState::nextPlayer() {
 }
 
 int GameState::evaluate() const {
-    int score = 0;
+    float score = 0.f;
     for (const HexCell& c : board.allValidCells()) {
         Piece* p = board.getPiece(c);
         if (!p) continue;
-        if (p->getOwner() == Player::PLAYER1)
-            score += p->getValue();
+        if (p->getOwner() == currentPlayer)
+            score += static_cast<float>(p->getValue());
         else
-            score -= p->getValue();
+            score -= 0.5f * static_cast<float>(p->getValue());
     }
-    return score;
+    return static_cast<int>(score);
 }
 
 void GameState::addObserver(IObserver* o) {

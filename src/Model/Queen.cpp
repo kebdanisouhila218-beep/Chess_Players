@@ -3,6 +3,21 @@
 #include <algorithm>
 #include <unordered_set>
 
+// La dame combine les 8 directions : 4 cardinales (tour) + 4 diagonales (fou).
+// Elle utilise Board::ray() pour chaque direction, ce qui couvre les coutures.
+//
+// La deduplication (sort + unique) est necessaire car sur ce plateau torique,
+// deux directions distinctes peuvent theoriquement converger vers la meme case
+// apres traversee de couture.
+//
+// Pourquoi pas de getMoves(Board, lastMove) comme le pion ?
+// La dame depend uniquement de la geometrie courante du plateau et de
+// l'occupation des cases. Elle n'a aucun mouvement conditionnel a l'historique
+// (pas d'en passant, pas de double pas initial, pas de transition de couture
+// speciale au premier coup). Le pion seul necessite lastMove.
+//
+// Test de reference : dame en {7,0} doit atteindre {4,11} via couture SOUTH
+// -> couverture assuree par testQueenCrossesSeamThroughRay() dans game_logic_manual_test.cpp
 std::vector<HexCell> Queen::getMoves(const Board& board) const {
     std::vector<HexCell> moves;
 

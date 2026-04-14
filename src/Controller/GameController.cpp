@@ -13,6 +13,15 @@ namespace {
             default: return "Piece";
         }
     }
+
+    std::string winnerText(Player player) {
+        switch (player) {
+            case Player::PLAYER1: return "Joueur 1 - Blancs";
+            case Player::PLAYER2: return "Joueur 2 - Bleus";
+            case Player::PLAYER3: return "Joueur 3 - Rouges";
+            default: return "Aucun gagnant";
+        }
+    }
 }
 
 GameController::GameController()
@@ -65,6 +74,19 @@ void GameController::handleEvents() {
 }
 
 void GameController::handleClick(int x, int y) {
+    if (state.isGameOver()) {
+        renderer.setStatusMessage("Partie terminee - Gagnant : " + winnerText(state.getWinner()));
+        if (selected != nullptr) {
+            delete selected;
+            selected = nullptr;
+        }
+        validMoves.clear();
+        renderer.clearSelectedCell();
+        renderer.clearHighlights();
+        renderer.draw(state);
+        return;
+    }
+
     // Ignore les clics dans la zone HUD (50px en bas)
     sf::Vector2u winSize = window.getSize();
     if (y >= static_cast<int>(winSize.y) - 50)
@@ -78,6 +100,7 @@ void GameController::handleClick(int x, int y) {
             selected = nullptr;
 
             validMoves.clear();
+            renderer.clearSelectedCell();
             renderer.clearHighlights();
             renderer.draw(state);
         }
@@ -93,6 +116,7 @@ void GameController::handleClick(int x, int y) {
             selected = nullptr;
 
             validMoves.clear();
+            renderer.clearSelectedCell();
             renderer.clearHighlights();
             renderer.draw(state);
         }
@@ -104,6 +128,7 @@ void GameController::handleClick(int x, int y) {
 
         if (p && p->getOwner() == state.getCurrentPlayer()) {
             selected = new HexCell(clicked);
+            renderer.setSelectedCell(clicked);
 
             if (p->getType() == PieceType::PAWN) {
                 const Pawn* pawn = dynamic_cast<const Pawn*>(p);
@@ -127,6 +152,7 @@ void GameController::handleClick(int x, int y) {
             } else {
                 renderer.setStatusMessage("Case vide");
             }
+            renderer.clearSelectedCell();
             renderer.clearHighlights();
             renderer.draw(state);
         }
@@ -135,6 +161,7 @@ void GameController::handleClick(int x, int y) {
 
         if (clickedPiece && clickedPiece->getOwner() == state.getCurrentPlayer()) {
             *selected = clicked;
+            renderer.setSelectedCell(clicked);
             if (clickedPiece->getType() == PieceType::PAWN) {
                 const Pawn* pawn = dynamic_cast<const Pawn*>(clickedPiece);
                 if (pawn)
@@ -166,6 +193,9 @@ void GameController::handleClick(int x, int y) {
                 renderer.clearHighlights();
                 Move move{*selected, clicked, state.getCurrentPlayer()};
                 state.applyMove(move);
+                if (state.isGameOver()) {
+                    renderer.setStatusMessage("Partie terminee - Gagnant : " + winnerText(state.getWinner()));
+                }
             }
         } else {
             renderer.setStatusMessage("Destination non valide");
@@ -174,6 +204,7 @@ void GameController::handleClick(int x, int y) {
         delete selected;
         selected = nullptr;
         validMoves.clear();
+        renderer.clearSelectedCell();
         renderer.clearHighlights();
         renderer.draw(state);
     }

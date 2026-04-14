@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <array>
+#include <chrono>
 #include <optional>
 #include <vector>
 #include "../Model/GameState.hpp"
@@ -17,6 +18,8 @@ public:
     void setHighlights(const std::vector<HexCell>& cells);
     void clearHighlights();
     void setStatusMessage(const std::string& message);
+    void setSelectedCell(const HexCell& cell);
+    void clearSelectedCell();
 
     sf::Vector2f cellToPixel(const Board& board, const HexCell& c) const;
     std::optional<HexCell> pickCell(const Board& board, sf::Vector2f px) const;
@@ -27,6 +30,7 @@ private:
     void initBoardGeometry(const Board& board);
     void drawBoard(const GameState& state);
     void drawPieces(const GameState& state);
+    void drawSeams(const Board& board);
     sf::ConvexShape createTile(const std::array<sf::Vector2f, 4>& points, sf::Color color) const;
     void drawHUD(const GameState& state);        // <-- nouveau
 
@@ -40,7 +44,9 @@ private:
     std::vector<sf::ConvexShape> m_cellShapes;
     std::vector<sf::Vector2f> m_cellCenters;
     std::vector<sf::Color> m_baseColors;
+    std::optional<HexCell> m_selectedCell;
     std::string m_statusMessage;
     bool m_geometryReady = false;
     sf::Vector2u m_lastWindowSize{0u, 0u};
+    std::chrono::steady_clock::time_point m_selectionPulseStart = std::chrono::steady_clock::now();
 };

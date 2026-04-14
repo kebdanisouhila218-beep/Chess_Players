@@ -1,6 +1,7 @@
 #include "Renderer.hpp"
 #include <array>
 #include <cmath>
+#include <cstdint>
 
 namespace {
     bool inSextantIntervals(int x, int y, int& sextant) {
@@ -90,6 +91,10 @@ namespace {
 
         return true;
     }
+
+    sf::Vector2f midpoint(const sf::Vector2f& a, const sf::Vector2f& b) {
+        return {(a.x + b.x) * 0.5f, (a.y + b.y) * 0.5f};
+    }
 }
 
 Renderer::Renderer(sf::RenderWindow& window)
@@ -99,6 +104,7 @@ Renderer::Renderer(sf::RenderWindow& window)
         m_font.openFromFile("C:/Windows/Fonts/segoeui.ttf")  ||
         m_font.openFromFile("C:/Windows/Fonts/arial.ttf");
     m_highlights.clear();
+    m_selectedCell.reset();
 }
 
 void Renderer::onStateChanged() {
@@ -117,6 +123,9 @@ sf::Vector2f Renderer::cellToPixel(const Board& board, const HexCell& c) const {
 
 std::optional<HexCell> Renderer::pickCell(const Board& board, sf::Vector2f px) const {
     for (std::size_t i = 0; i < m_cellShapes.size(); ++i) {
+        if (!m_cellShapes[i].getGlobalBounds().contains(px)) {
+            continue;
+        }
         if (pointInConvexQuad(m_cellShapes[i], px)) {
             return board.getCellById(static_cast<int>(i));
         }
@@ -250,6 +259,7 @@ void Renderer::drawBoard(const GameState& state) {
     for (const HexCell& c : m_highlights) {
         const int id = board.getId(c);
         if (id < 0 || id >= static_cast<int>(m_cellShapes.size())) continue;
+
         sf::Color blended = m_baseColors[id];
         blended.r = static_cast<std::uint8_t>(std::min(255, blended.r + 20));
         blended.g = static_cast<std::uint8_t>(std::min(255, blended.g + 60));
@@ -259,8 +269,86 @@ void Renderer::drawBoard(const GameState& state) {
         m_cellShapes[id].setOutlineThickness(2.8f);
     }
 
+    if (m_selectedCell.has_value()) {
+        const int id = board.getId(*m_selectedCell);
+        if (id >= 0 && id < static_cast<int>(m_cellShapes.size())) {
+            const auto elapsed = std::chrono::steady_clock::now() - m_selectionPulseStart;
+            const float t = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count() / 1000.f;
+            const float pulse = 0.5f + 0.5f * std::sin(t * 6.283185307f * 1.2f);
+            sf::Color outline(
+                static_cast<std::uint8_t>(220 + 30 * pulse),
+                static_cast<std::uint8_t>(180 + 50 * pulse),
+                80,
+                255);
+            m_cellShapes[id].setOutlineColor(outline);
+            m_cellShapes[id].setOutlineThickness(3.2f + pulse * 1.6f);
+        }
+    }
+
     for (const sf::ConvexShape& tile : m_cellShapes) {
         window.draw(tile);
+    }
+
+    drawSeams(board);
+}
+
+void Renderer::drawSeams(const Board& board) {
+    auto drawSeam = [&](const HexCell& from, const HexCell& to, float offsetScale) {
+        const int fromId = board.getId(from);
+        const int toId = board.getId(to);
+        if (fromId < 0 || toId < 0 ||
+            fromId >= static_cast<int>(m_cellShapes.size()) || toId >= static_cast<int>(m_cellShapes.size())) {
+            return;
+        }
+
+        const sf::ConvexShape& a = m_cellShapes[fromId];
+        const sf::ConvexShape& b = m_cellShapes[toId];
+        const sf::Vector2f ca = m_cellCenters[fromId];
+        const sf::Vector2f cb = m_cellCenters[toId];
+        const sf::Vector2f dir = cb - ca;
+        const float len = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+        if (len < 0.001f) {
+            return;
+        }
+
+        const sf::Vector2f normal{-dir.y / len, dir.x / len};
+        sf::Vector2f bestA = midpoint(a.getPoint(0), a.getPoint(1));
+        sf::Vector2f bestB = midpoint(b.getPoint(0), b.getPoint(1));
+        float bestProjA = -1e9f;
+        float bestProjB = -1e9f;
+
+        for (std::size_t i = 0; i < a.getPointCount(); ++i) {
+            const sf::Vector2f m = midpoint(a.getPoint(i), a.getPoint((i + 1) % a.getPointCount()));
+            const sf::Vector2f rel = m - ca;
+            const float proj = rel.x * dir.x + rel.y * dir.y;
+            if (proj > bestProjA) {
+                bestProjA = proj;
+                bestA = m;
+            }
+        }
+
+        for (std::size_t i = 0; i < b.getPointCount(); ++i) {
+            const sf::Vector2f m = midpoint(b.getPoint(i), b.getPoint((i + 1) % b.getPointCount()));
+            const sf::Vector2f rel = m - cb;
+            const float proj = rel.x * dir.x + rel.y * dir.y;
+            if (proj < bestProjB) {
+                bestProjB = proj;
+                bestB = m;
+            }
+        }
+
+        sf::VertexArray seam(sf::PrimitiveType::Lines, 2);
+        seam[0].position = bestA + normal * offsetScale;
+        seam[1].position = bestB + normal * offsetScale;
+        seam[0].color = sf::Color(255, 215, 140, 145);
+        seam[1].color = sf::Color(255, 215, 140, 145);
+        window.draw(seam);
+    };
+
+    for (int k = 0; k < 4; ++k) {
+        drawSeam({7, k}, {4 + k, 11}, -2.0f);
+        drawSeam({k, 3}, {3, 4 + k}, 0.0f);
+        drawSeam({8 + k, 7}, {11, 8 + k}, 2.0f);
     }
 }
 
@@ -362,7 +450,10 @@ void Renderer::drawHUD(const GameState& state) {
     float cy = hudY + hudH / 2.f;
     sf::CircleShape dot(12.f);
     dot.setFillColor(playerColor);
-    dot.setOutlineColor(sf::Color(0, 0, 0, 160));
+    dot.setOutlineColor(
+        playerColor == sf::Color(244, 244, 244)
+            ? sf::Color(255, 255, 255, 200)
+            : sf::Color(0, 0, 0, 100));
     dot.setOutlineThickness(1.5f);
     dot.setOrigin({12.f, 12.f});
     dot.setPosition({30.f, cy});
@@ -436,6 +527,15 @@ void Renderer::draw(const GameState& state) {
     drawHUD(state);
 
     window.display();
+}
+
+void Renderer::setSelectedCell(const HexCell& cell) {
+    m_selectedCell = cell;
+    m_selectionPulseStart = std::chrono::steady_clock::now();
+}
+
+void Renderer::clearSelectedCell() {
+    m_selectedCell.reset();
 }
 
 void Renderer::setHighlights(const std::vector<HexCell>& cells) {

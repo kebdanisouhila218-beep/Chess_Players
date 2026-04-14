@@ -115,6 +115,9 @@ void Board::buildNeighbors() {
         }
     }
 
+    // Couture 1 : bord est du sextant haut droit (x=7, y=0..3)
+    // vers bord nord du sextant bas central (x=4..7, y=11).
+    // Cette liaison relie la zone PLAYER1 a la zone PLAYER3.
     for (int k = 0; k < 4; ++k) {
         linkNeighbor({7, k}, Direction::SOUTH, {4 + k, 11});
         linkNeighbor({4 + k, 11}, Direction::NORTH, {7, k});
@@ -128,6 +131,9 @@ void Board::buildNeighbors() {
             linkNeighbor({5 + k, 11}, Direction::NORTH_WEST, {7, k});
         }
 
+        // Couture 2 : bord sud du sextant haut gauche (x=0..3, y=3)
+        // vers bord ouest du sextant central gauche (x=3, y=4..7).
+        // Cette liaison reste dans la zone PLAYER1, mais change de sextant.
         linkNeighbor({k, 3}, Direction::SOUTH, {3, 4 + k});
         linkNeighbor({3, 4 + k}, Direction::NORTH, {k, 3});
 
@@ -140,6 +146,9 @@ void Board::buildNeighbors() {
             linkNeighbor({3, 5 + k}, Direction::NORTH_WEST, {k, 3});
         }
 
+        // Couture 3 : bord sud du sextant central droit (x=8..11, y=7)
+        // vers bord est du sextant bas droit (x=11, y=8..11).
+        // Cette liaison reste dans la zone PLAYER2, mais change de sextant.
         linkNeighbor({8 + k, 7}, Direction::SOUTH, {11, 8 + k});
         linkNeighbor({11, 8 + k}, Direction::NORTH, {8 + k, 7});
 

@@ -31,16 +31,18 @@ public:
     void undoMove();
     void nextPlayer();
     int  evaluate() const;
+    bool isGameOver() const;
+    Player getWinner() const;
 
     Board&       getBoard()         { return board; }
     const Board& getBoard()   const { return board; }
     Player       getCurrentPlayer() const { return currentPlayer; }
     GameStatus   getStatus()        const { return status; }
+    bool         isInCheck(Player player) const;
+    const Move*  getLastMove()      const;
 
     void addObserver(IObserver* o);
     void notifyAll();
-
-    const Move* getLastMove() const;
 
 private:
     Board              board;

@@ -7,6 +7,10 @@
 std::vector<HexCell> Knight::getMoves(const Board& board) const {
     std::vector<HexCell> moves;
 
+    // Les 8 patterns du cavalier enchainent Board::step() afin de
+    // respecter la topologie du plateau, y compris aux coutures.
+    // Le sort+unique final supprime les doublons eventuels produits
+    // par certaines traverses de couture.
     const std::array<std::array<Board::Direction, 3>, 8> patterns = {{
         {Board::Direction::NORTH, Board::Direction::NORTH, Board::Direction::EAST},
         {Board::Direction::NORTH, Board::Direction::NORTH, Board::Direction::WEST},

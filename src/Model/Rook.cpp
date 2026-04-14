@@ -1,6 +1,12 @@
 #include "Rook.hpp"
 #include "Board.hpp"
 
+// La tour se deplace en 4 directions cardinales : NORTH, SOUTH, EAST, WEST.
+// Elle utilise Board::ray() qui suit la topologie des coutures, ce qui lui permet
+// de traverser les 3 zones du plateau sans logique supplementaire.
+//
+// getMoves(const Board&) suffit car la tour ne depend que de la position
+// actuelle des pieces sur le plateau, sans contexte historique.
 std::vector<HexCell> Rook::getMoves(const Board& board) const {
     std::vector<HexCell> moves;
 
