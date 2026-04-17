@@ -387,17 +387,21 @@ void GameState::nextPlayer() {
     }
 }
 
-int GameState::evaluate() const {
+int GameState::evaluate(Player perspective) const {
     float score = 0.f;
     for (const HexCell& c : board.allValidCells()) {
         Piece* p = board.getPiece(c);
         if (!p) continue;
-        if (p->getOwner() == currentPlayer)
+        if (p->getOwner() == perspective)
             score += static_cast<float>(p->getValue());
         else
             score -= 0.5f * static_cast<float>(p->getValue());
     }
     return static_cast<int>(score);
+}
+
+int GameState::evaluate() const {
+    return evaluate(currentPlayer);
 }
 
 void GameState::addObserver(IObserver* o) {

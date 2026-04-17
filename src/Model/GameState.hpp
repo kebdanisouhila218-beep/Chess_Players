@@ -43,9 +43,11 @@ public:
     std::vector<Move> getLegalMovesAsMove(const HexCell& from);
     std::vector<HexCell> getLegalMoves(const HexCell& from);
     void nextPlayer();
+    int  evaluate(Player perspective) const;
     int  evaluate() const;
     bool isGameOver() const;
     Player getWinner() const;
+
     bool isEliminated(Player p) const;
     int  activePlayerCount() const;
     void computeStatus();
