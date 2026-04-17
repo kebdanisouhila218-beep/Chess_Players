@@ -533,9 +533,10 @@ namespace {
         Pawn* pawn = addPiece<Pawn>(board, pieces, Player::PLAYER1, {1, 4});
         addPiece<Pawn>(board, pieces, Player::PLAYER2, {2, 5});
         const std::vector<HexCell> moves = pawn->getMoves(board);
-        const bool ok = contains(moves, {2, 5});
+        const std::vector<HexCell> captures = pawn->getCaptureSquares(board);
+        const bool ok = !contains(moves, {2, 5}) && contains(captures, {2, 5});
         return reportResult("Pawn diagonal capture exists", ok,
-            std::string("moves: ") + moveListText(moves));
+            std::string("moves: ") + moveListText(moves) + " | captures: " + moveListText(captures));
     }
 
     bool testPawnSeamTransition() {
@@ -607,15 +608,17 @@ namespace {
         Board board;
         PieceStore pieces;
         Pawn* pawn = addPiece<Pawn>(board, pieces, Player::PLAYER3, {0, 6});
+
         addPiece<Pawn>(board, pieces, Player::PLAYER2, {2, 5});
         Move lastMove;
         lastMove.from = {0, 5};
         lastMove.to = {2, 5};
         lastMove.player = Player::PLAYER2;
         const std::vector<HexCell> moves = pawn->getMoves(board, &lastMove);
-        const bool ok = contains(moves, {1, 5});
+        const std::vector<HexCell> captures = pawn->getCaptureSquares(board, &lastMove);
+        const bool ok = !contains(moves, {1, 5}) && contains(captures, {1, 5});
         return reportResult("Pawn en passant pattern", ok,
-            std::string("moves: ") + moveListText(moves));
+            std::string("moves: ") + moveListText(moves) + " | captures: " + moveListText(captures));
     }
 
     bool testInitialBoardHasMoves() {

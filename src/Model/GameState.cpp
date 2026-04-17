@@ -49,7 +49,13 @@ std::vector<HexCell> GameState::getLegalMoves(const HexCell& from) {
     std::vector<HexCell> candidateMoves;
     if (piece->getType() == PieceType::PAWN) {
         const Pawn* pawn = dynamic_cast<const Pawn*>(piece);
-        candidateMoves = pawn ? pawn->getMoves(board, getLastMove()) : piece->getMoves(board);
+        if (pawn) {
+            candidateMoves = pawn->getMoves(board, getLastMove());
+            std::vector<HexCell> captureSquares = pawn->getCaptureSquares(board, getLastMove());
+            candidateMoves.insert(candidateMoves.end(), captureSquares.begin(), captureSquares.end());
+        } else {
+            candidateMoves = piece->getMoves(board);
+        }
     } else {
         candidateMoves = piece->getMoves(board);
     }
@@ -181,7 +187,7 @@ bool GameState::isInCheck(Player player) const {
         std::vector<HexCell> threats;
         if (p->getType() == PieceType::PAWN) {
             const Pawn* pawn = dynamic_cast<const Pawn*>(p);
-            threats = pawn ? pawn->getCaptureCells(board) : p->getMoves(board);
+            threats = pawn ? pawn->getCaptureSquares(board, getLastMove()) : p->getMoves(board);
         } else {
             threats = p->getMoves(board);
         }
