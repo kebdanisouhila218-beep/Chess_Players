@@ -112,6 +112,73 @@ std::vector<HexCell> GameState::getLegalMoves(const HexCell& from) {
     return legalMoves;
 }
 
+int GameState::minimax(int depth, Player rootPlayer) {
+    if (depth == 0 || isGameOver()) {
+        return evaluate(rootPlayer);
+    }
+
+    std::vector<Move> allMoves;
+    for (const HexCell& cell : board.allValidCells()) {
+        Piece* piece = board.getPiece(cell);
+        if (!piece || piece->getOwner() != currentPlayer) {
+            continue;
+        }
+        std::vector<Move> pieceMoves = getLegalMovesAsMove(cell);
+        allMoves.insert(allMoves.end(), pieceMoves.begin(), pieceMoves.end());
+    }
+
+    if (allMoves.empty()) {
+        return evaluate(rootPlayer);
+    }
+
+    const bool maximizing = currentPlayer == rootPlayer;
+    int bestScore = maximizing ? std::numeric_limits<int>::min() : std::numeric_limits<int>::max();
+
+    for (const Move& move : allMoves) {
+        applyMove(move, true);
+        const int score = minimax(depth - 1, rootPlayer);
+        undoMove();
+
+        if (maximizing) {
+            bestScore = std::max(bestScore, score);
+        } else {
+            bestScore = std::min(bestScore, score);
+        }
+    }
+
+    return bestScore;
+}
+
+std::optional<Move> GameState::findBestMove(int depth, Player aiPlayer) {
+    if (currentPlayer != aiPlayer) {
+        return std::nullopt;
+    }
+
+    std::optional<Move> bestMove;
+    int bestScore = std::numeric_limits<int>::min();
+
+    for (const HexCell& cell : board.allValidCells()) {
+        Piece* piece = board.getPiece(cell);
+        if (!piece || piece->getOwner() != aiPlayer) {
+            continue;
+        }
+
+        std::vector<Move> legalMoves = getLegalMovesAsMove(cell);
+        for (const Move& move : legalMoves) {
+            applyMove(move, true);
+            const int score = minimax(depth - 1, aiPlayer);
+            undoMove();
+
+            if (!bestMove.has_value() || score > bestScore) {
+                bestScore = score;
+                bestMove = move;
+            }
+        }
+    }
+
+    return bestMove;
+}
+
 bool GameState::isGameOver() const {
     return activePlayerCount() <= 1;
 }
