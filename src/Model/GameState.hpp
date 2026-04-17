@@ -28,6 +28,10 @@ struct Move {
     bool   isEnPassant = false;
     HexCell capturedPawnCell = {0, 0};
     bool   isPromotion = false;
+    Player previousLastAttacker = Player::NONE;
+    GameStatus previousStatus = GameStatus::PLAYING;
+    Player yaltaEliminatedPlayer = Player::NONE;
+    std::vector<std::pair<HexCell, Player>> yaltaPiecesOwnerBefore;
 };
 
 class GameState {

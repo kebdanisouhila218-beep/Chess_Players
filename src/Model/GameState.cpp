@@ -146,9 +146,17 @@ void GameState::computeStatus() {
         const Player eliminatedPlayer = currentPlayer;
         eliminatedPlayers.insert(eliminatedPlayer);
 
+        if (!moveHistory.empty()) {
+            moveHistory.back().yaltaEliminatedPlayer = eliminatedPlayer;
+            moveHistory.back().yaltaPiecesOwnerBefore.clear();
+        }
+
         for (const HexCell& c : board.allValidCells()) {
             Piece* p = board.getPiece(c);
             if (p && p->getOwner() == eliminatedPlayer) {
+                if (!moveHistory.empty()) {
+                    moveHistory.back().yaltaPiecesOwnerBefore.push_back({c, p->getOwner()});
+                }
                 p->setOwner(lastAttacker);
             }
         }
@@ -201,11 +209,16 @@ bool GameState::isInCheck(Player player) const {
 
 void GameState::applyMove(const Move& m, bool isSimulation) {
     Move applied = m;
+    applied.previousLastAttacker = lastAttacker;
+    applied.previousStatus = status;
+    applied.yaltaEliminatedPlayer = Player::NONE;
+    applied.yaltaPiecesOwnerBefore.clear();
     if (!isSimulation) {
         lastAttacker = m.player;
     }
     Piece* moving = board.getPiece(m.from);
     if (!moving) return;
+
     applied.movingPieceHadMoved = moving->getHasMoved();
 
     Piece* capturedPiece = board.getPiece(m.to);
@@ -286,10 +299,21 @@ void GameState::undoMove() {
 
     PieceFactory factory;
 
+    if (last.yaltaEliminatedPlayer != Player::NONE) {
+        eliminatedPlayers.erase(last.yaltaEliminatedPlayer);
+        for (const auto& [cell, owner] : last.yaltaPiecesOwnerBefore) {
+            Piece* piece = board.getPiece(cell);
+            if (piece) {
+                piece->setOwner(owner);
+            }
+        }
+    }
+
     if (last.isPromotion) {
         Piece* promoted = board.getPiece(last.to);
         if (promoted) {
             board.removePiece(last.to);
+
             delete promoted;
         }
 
@@ -330,7 +354,8 @@ void GameState::undoMove() {
     }
 
     currentPlayer = last.player;
-    status = GameStatus::PLAYING;
+    status = last.previousStatus;
+    lastAttacker = last.previousLastAttacker;
 
     notifyAll();
 }
