@@ -40,6 +40,7 @@ public:
 
     void applyMove(const Move& m, bool isSimulation = false);
     void undoMove();
+    std::vector<Move> getLegalMovesAsMove(const HexCell& from);
     std::vector<HexCell> getLegalMoves(const HexCell& from);
     void nextPlayer();
     int  evaluate() const;

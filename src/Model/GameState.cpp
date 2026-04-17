@@ -39,7 +39,7 @@ const Move* GameState::getLastMove() const {
     return &moveHistory.back();
 }
 
-std::vector<HexCell> GameState::getLegalMoves(const HexCell& from) {
+std::vector<Move> GameState::getLegalMovesAsMove(const HexCell& from) {
     Piece* piece = board.getPiece(from);
     if (!piece) {
         return {};
@@ -60,13 +60,14 @@ std::vector<HexCell> GameState::getLegalMoves(const HexCell& from) {
         candidateMoves = piece->getMoves(board);
     }
 
-    std::vector<HexCell> legalMoves;
+    std::vector<Move> legalMoves;
     legalMoves.reserve(candidateMoves.size());
     const Player player = piece->getOwner();
     const bool startsInCheck = isInCheck(player);
 
     for (const HexCell& to : candidateMoves) {
         Move simulated{from, to, player};
+
         const bool isCastling = buildCastlingMove(piece, from, to, simulated);
 
         if (isCastling && startsInCheck) {
@@ -93,11 +94,21 @@ std::vector<HexCell> GameState::getLegalMoves(const HexCell& from) {
         const bool leavesKingInCheck = isInCheck(player);
         undoMove();
         if (!leavesKingInCheck) {
-            legalMoves.push_back(to);
+            legalMoves.push_back(simulated);
 
         }
     }
 
+    return legalMoves;
+}
+
+std::vector<HexCell> GameState::getLegalMoves(const HexCell& from) {
+    std::vector<Move> legalMovesAsMove = getLegalMovesAsMove(from);
+    std::vector<HexCell> legalMoves;
+    legalMoves.reserve(legalMovesAsMove.size());
+    for (const Move& move : legalMovesAsMove) {
+        legalMoves.push_back(move.to);
+    }
     return legalMoves;
 }
 
