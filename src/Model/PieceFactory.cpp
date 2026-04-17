@@ -1,5 +1,7 @@
 #include "PieceFactory.hpp"
 
+//Le découplage des classes comme pawn knight bishop rook
+
 Piece* PieceFactory::create(PieceType type, Player owner, HexCell pos) {
     switch (type) {
         case PieceType::PAWN:   return new Pawn(owner, pos);
@@ -13,7 +15,9 @@ Piece* PieceFactory::create(PieceType type, Player owner, HexCell pos) {
 }
 
 void PieceFactory::initBoard(Board& board, Player player) {
+    //lambda function to place a piece on the board
     auto place = [&](int x, int y, PieceType type) {
+        //Object de type hexcell
         HexCell cell{x, y};
         if (!board.isValid(cell) || board.getPiece(cell) != nullptr) {
             return;

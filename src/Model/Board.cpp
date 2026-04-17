@@ -6,19 +6,20 @@
 
 namespace {
     struct SextantInterval {
-        int x0;
+        /// Structure représentant un intervalle de coordonnées x et y pour un sextant   
+        int x0; //q
         int x1;
-        int y0;
+        int y0; //r
         int y1;
     };
-
+//tableau des sextants
     constexpr std::array<SextantInterval, 6> kIntervals = {
-        SextantInterval{0, 4, 0, 4},
-        SextantInterval{0, 4, 4, 8},
+        SextantInterval{0, 4, 0, 4},  //JB cote gauche 
+        SextantInterval{0, 4, 4, 8},  //JB cote bas  
         SextantInterval{8, 12, 4, 8},
         SextantInterval{8, 12, 8, 12},
         SextantInterval{4, 8, 8, 12},
-        SextantInterval{4, 8, 0, 4}
+        SextantInterval{4, 8, 0, 4}   //JB cote droit
     };
 }
 
@@ -93,6 +94,7 @@ void Board::linkNeighbor(const HexCell& from, Direction dir, const HexCell& to) 
 }
 
 void Board::buildNeighbors() {
+    //Graphe de voisinage
     for (const BoardNode& node : nodes) {
         const int x = node.cell.q;
         const int y = node.cell.r;
@@ -123,6 +125,7 @@ void Board::buildNeighbors() {
         linkNeighbor({4 + k, 11}, Direction::NORTH, {7, k});
 
         if (k > 0) {
+                    //ا تقم بعملية حسابية، بل انقلها فجأة (Teleport
             linkNeighbor({7, k}, Direction::SOUTH_WEST, {3 + k, 11});
             linkNeighbor({3 + k, 11}, Direction::NORTH_EAST, {7, k});
         }
