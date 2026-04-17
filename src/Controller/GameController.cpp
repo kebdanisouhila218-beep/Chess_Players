@@ -22,6 +22,15 @@ namespace {
             default: return "Aucun gagnant";
         }
     }
+
+    int playerIndex(Player player) {
+        switch (player) {
+            case Player::PLAYER1: return 0;
+            case Player::PLAYER2: return 1;
+            case Player::PLAYER3: return 2;
+            default: return -1;
+        }
+    }
 }
 
 GameController::GameController()
@@ -48,7 +57,52 @@ std::string GameController::pieceLabel(const Piece* piece, const HexCell& cell) 
 
 void GameController::run() {
     while (window.isOpen()) {
+        tryAIMove();
         handleEvents();
+    }
+}
+
+void GameController::tryAIMove() {
+    while (!state.isGameOver()) {
+        const int currentIndex = playerIndex(state.getCurrentPlayer());
+        if (currentIndex < 0 || !isAI[static_cast<std::size_t>(currentIndex)]) {
+            return;
+        }
+
+        if (selected != nullptr) {
+            delete selected;
+            selected = nullptr;
+        }
+        validMoves.clear();
+        renderer.clearSelectedCell();
+        renderer.clearHighlights();
+        renderer.setStatusMessage("IA reflechit...");
+        renderer.draw(state);
+
+        std::optional<Move> bestMove = state.findBestMove(2, state.getCurrentPlayer());
+        if (!bestMove.has_value()) {
+            return;
+        }
+
+        state.applyMove(*bestMove);
+
+        if (state.isGameOver()) {
+            renderer.setStatusMessage("Partie terminee - Gagnant : " + winnerText(state.getWinner()));
+        } else {
+            switch (state.getStatus()) {
+                case GameStatus::CHECK:
+                    renderer.setStatusMessage("Echec au roi !");
+                    break;
+                case GameStatus::DRAW:
+                    renderer.setStatusMessage("Pat - Match nul !");
+                    break;
+                default:
+                    renderer.setStatusMessage("Coup IA joue");
+                    break;
+            }
+        }
+
+        renderer.draw(state);
     }
 }
 
@@ -203,5 +257,6 @@ void GameController::handleClick(int x, int y) {
         renderer.clearSelectedCell();
         renderer.clearHighlights();
         renderer.draw(state);
+        tryAIMove();
     }
 }
