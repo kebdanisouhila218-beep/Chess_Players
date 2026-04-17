@@ -1204,6 +1204,47 @@ namespace {
         return reportResult("Yalta elimination skips player", ok,
             ok ? "eliminated player skipped correctly" : details.str());
     }
+
+    bool testUndoMoveRoundTripYaltaElimination() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({4, 3}, factory.create(PieceType::KING, Player::PLAYER1, {4, 3}));
+        state.getBoard().setPiece({0, 7}, factory.create(PieceType::KING, Player::PLAYER2, {0, 7}));
+        state.getBoard().setPiece({8, 11}, factory.create(PieceType::KING, Player::PLAYER3, {8, 11}));
+        state.getBoard().setPiece({0, 6}, factory.create(PieceType::ROOK, Player::PLAYER1, {0, 6}));
+        state.getBoard().setPiece({2, 7}, factory.create(PieceType::ROOK, Player::PLAYER1, {2, 7}));
+        state.getBoard().setPiece({1, 7}, factory.create(PieceType::ROOK, Player::PLAYER1, {1, 7}));
+        state.getBoard().setPiece({1, 8}, factory.create(PieceType::ROOK, Player::PLAYER1, {1, 8}));
+        state.getBoard().setPiece({0, 8}, factory.create(PieceType::PAWN, Player::PLAYER2, {0, 8}));
+
+        const auto before = snapshotBoard(state.getBoard());
+        state.applyMove({{0, 6}, {0, 5}, Player::PLAYER1});
+
+        const bool eliminatedAfterMove = state.isEliminated(Player::PLAYER2);
+        state.undoMove();
+
+        std::string mismatch;
+        const bool boardOk = boardMatchesSnapshot(state.getBoard(), before, mismatch);
+        const bool noEliminatedPlayers = !state.isEliminated(Player::PLAYER1) &&
+                                         !state.isEliminated(Player::PLAYER2) &&
+                                         !state.isEliminated(Player::PLAYER3);
+        const bool turnOk = state.getCurrentPlayer() == Player::PLAYER1;
+        const bool ok = eliminatedAfterMove && boardOk && noEliminatedPlayers && turnOk;
+
+        std::ostringstream details;
+        details << "eliminatedAfterMove=" << (eliminatedAfterMove ? "yes" : "no")
+                << " boardOk=" << (boardOk ? "yes" : "no")
+                << " noEliminatedPlayers=" << (noEliminatedPlayers ? "yes" : "no")
+                << " currentPlayer=" << static_cast<int>(state.getCurrentPlayer());
+        if (!boardOk) {
+            details << " mismatch=" << mismatch;
+        }
+
+        return reportResult("Undo round-trip Yalta elimination", ok,
+            ok ? "elimination state and owners restored" : details.str());
+    }
 }
 
 int main() {
@@ -1256,7 +1297,8 @@ int main() {
         {"isInCheck pawn diagonal triggers check", testIsInCheckPawnDiagonalTriggersCheck},
         {"CHECK status detection", testCheckStatusDetection},
         {"Stalemate detection", testStalemateDetection},
-        {"Yalta elimination skips player", testYaltaEliminationSkipsPlayer}
+        {"Yalta elimination skips player", testYaltaEliminationSkipsPlayer},
+        {"Undo round-trip Yalta elimination", testUndoMoveRoundTripYaltaElimination}
     };
 
     std::cout << "Manual game logic tests\n\n";
