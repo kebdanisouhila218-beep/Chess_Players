@@ -24,8 +24,8 @@ class Piece {
 public:
     Piece(PieceType type, Player owner, HexCell pos)
         : type(type), owner(owner), pos(pos) {}
-
-    virtual ~Piece() = default;
+    virtual ~Piece() = default; //detruire une piece -pion- virtual pour ne pas avoir de fuite de memoire
+ 
 
     virtual std::vector<HexCell> getMoves(const Board& board) const = 0;
     // getValue() reste separe de getMoves() pour distinguer
@@ -33,14 +33,15 @@ public:
     // Une piece peut avoir les memes coups potentiels, mais une valeur
     // strategique differente pour l'IA, le score ou de futures simulations.
     virtual int getValue() const = 0;
-
+//Encapsulation
     PieceType getType()   const { return type; }
     Player    getOwner()  const { return owner; }
     HexCell   getPos()    const { return pos; }
     void      setPos(HexCell p) { pos = p; }
 
     bool isEnemy(const Piece* other) const {
-        return other != nullptr && other->getOwner() != owner;
+       // other c est la case qui contient la piece a verifier
+         return other != nullptr && other->getOwner() != owner;
     }
 
     bool getHasMoved() const { return hasMoved; }

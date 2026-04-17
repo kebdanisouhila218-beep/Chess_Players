@@ -17,10 +17,18 @@
 #include <set>
 #include <sstream>
 #include <string>
+#include <tuple>
 #include <vector>
 
 namespace {
     using PieceStore = std::vector<std::unique_ptr<Piece>>;
+
+    struct PieceSnapshot {
+        bool present = false;
+        PieceType type = PieceType::PAWN;
+        Player owner = Player::NONE;
+        bool hasMoved = false;
+    };
 
     std::string playerText(Player player) {
         switch (player) {
@@ -88,6 +96,50 @@ namespace {
 
     bool contains(const std::vector<HexCell>& moves, const HexCell& target) {
         return std::find(moves.begin(), moves.end(), target) != moves.end();
+    }
+
+    std::vector<std::pair<HexCell, PieceSnapshot>> snapshotBoard(const Board& board) {
+        std::vector<std::pair<HexCell, PieceSnapshot>> snapshot;
+        for (const HexCell& cell : board.allValidCells()) {
+            PieceSnapshot state;
+            if (Piece* piece = board.getPiece(cell)) {
+                state.present = true;
+                state.type = piece->getType();
+                state.owner = piece->getOwner();
+                state.hasMoved = piece->getHasMoved();
+            }
+            snapshot.push_back({cell, state});
+        }
+        return snapshot;
+    }
+
+    bool boardMatchesSnapshot(const Board& board,
+                              const std::vector<std::pair<HexCell, PieceSnapshot>>& snapshot,
+                              std::string& mismatch) {
+        for (const auto& [cell, expected] : snapshot) {
+            Piece* piece = board.getPiece(cell);
+            const bool present = piece != nullptr;
+            if (present != expected.present) {
+                mismatch = cellText(cell) + " presence mismatch";
+                return false;
+            }
+            if (!present) {
+                continue;
+            }
+            if (piece->getType() != expected.type) {
+                mismatch = cellText(cell) + " type mismatch";
+                return false;
+            }
+            if (piece->getOwner() != expected.owner) {
+                mismatch = cellText(cell) + " owner mismatch";
+                return false;
+            }
+            if (piece->getHasMoved() != expected.hasMoved) {
+                mismatch = cellText(cell) + " hasMoved mismatch";
+                return false;
+            }
+        }
+        return true;
     }
 
     struct TestCase {
@@ -875,6 +927,105 @@ namespace {
         return reportResult("Scenario capture updates board correctly", ok,
             "rook captured on (3,4)");
     }
+
+    bool testUndoMoveRoundTripSimpleMove() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({1, 4}, factory.create(PieceType::ROOK, Player::PLAYER1, {1, 4}));
+
+        const auto before = snapshotBoard(state.getBoard());
+        state.applyMove({{1, 4}, {3, 4}, Player::PLAYER1});
+        state.undoMove();
+
+        std::string mismatch;
+        const bool boardOk = boardMatchesSnapshot(state.getBoard(), before, mismatch);
+        Piece* rook = state.getBoard().getPiece({1, 4});
+        const bool ok = boardOk && rook && rook->getType() == PieceType::ROOK &&
+                        rook->getOwner() == Player::PLAYER1 && !rook->getHasMoved() &&
+                        state.getBoard().getPiece({3, 4}) == nullptr;
+        return reportResult("Undo round-trip simple move", ok,
+            ok ? "rook restored to (1,4)" : mismatch);
+    }
+
+    bool testUndoMoveRoundTripCapture() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({1, 4}, factory.create(PieceType::ROOK, Player::PLAYER1, {1, 4}));
+        state.getBoard().setPiece({3, 4}, factory.create(PieceType::PAWN, Player::PLAYER2, {3, 4}));
+
+        const auto before = snapshotBoard(state.getBoard());
+        state.applyMove({{1, 4}, {3, 4}, Player::PLAYER1});
+        state.undoMove();
+
+        std::string mismatch;
+        const bool boardOk = boardMatchesSnapshot(state.getBoard(), before, mismatch);
+        Piece* rook = state.getBoard().getPiece({1, 4});
+        Piece* pawn = state.getBoard().getPiece({3, 4});
+        const bool ok = boardOk && rook && rook->getType() == PieceType::ROOK &&
+                        rook->getOwner() == Player::PLAYER1 && pawn &&
+                        pawn->getType() == PieceType::PAWN && pawn->getOwner() == Player::PLAYER2;
+        return reportResult("Undo round-trip capture", ok,
+            ok ? "captured pawn restored" : mismatch);
+    }
+
+    bool testUndoMoveRoundTripEnPassant() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({0, 6}, factory.create(PieceType::PAWN, Player::PLAYER3, {0, 6}));
+        state.getBoard().setPiece({2, 5}, factory.create(PieceType::PAWN, Player::PLAYER2, {2, 5}));
+
+        Move lastMove;
+        lastMove.from = {0, 5};
+        lastMove.to = {2, 5};
+        lastMove.player = Player::PLAYER2;
+        state.applyMove(lastMove);
+        state.undoMove();
+
+        state.getBoard().removePiece({0, 5});
+        state.getBoard().setPiece({2, 5}, factory.create(PieceType::PAWN, Player::PLAYER2, {2, 5}));
+
+        const auto before = snapshotBoard(state.getBoard());
+        state.applyMove({{0, 6}, {1, 5}, Player::PLAYER3});
+        state.undoMove();
+
+        std::string mismatch;
+        const bool boardOk = boardMatchesSnapshot(state.getBoard(), before, mismatch);
+        Piece* capturingPawn = state.getBoard().getPiece({0, 6});
+        Piece* capturedPawn = state.getBoard().getPiece({2, 5});
+        const bool ok = boardOk && capturingPawn && capturingPawn->getType() == PieceType::PAWN &&
+                        capturingPawn->getOwner() == Player::PLAYER3 && capturedPawn &&
+                        capturedPawn->getType() == PieceType::PAWN && capturedPawn->getOwner() == Player::PLAYER2;
+        return reportResult("Undo round-trip en passant", ok,
+            ok ? "both pawns restored" : mismatch);
+    }
+
+    bool testUndoMoveRoundTripPromotion() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({5, 3}, factory.create(PieceType::PAWN, Player::PLAYER1, {5, 3}));
+
+        const auto before = snapshotBoard(state.getBoard());
+        state.applyMove({{5, 3}, {4, 11}, Player::PLAYER1});
+        Piece* promoted = state.getBoard().getPiece({4, 11});
+        const bool promotedOk = promoted && promoted->getType() == PieceType::QUEEN && promoted->getOwner() == Player::PLAYER1;
+        state.undoMove();
+
+        std::string mismatch;
+        const bool boardOk = boardMatchesSnapshot(state.getBoard(), before, mismatch);
+        Piece* pawn = state.getBoard().getPiece({5, 3});
+        const bool ok = promotedOk && boardOk && pawn && pawn->getType() == PieceType::PAWN &&
+                        pawn->getOwner() == Player::PLAYER1 && state.getBoard().getPiece({4, 11}) == nullptr;
+        return reportResult("Undo round-trip promotion", ok,
+            ok ? "queen removed and pawn restored" : mismatch);
+    }
 }
 
 int main() {
@@ -914,7 +1065,11 @@ int main() {
         {"Scenario knight is mobile in opening position", testScenarioKnightRemainsMobileInOpening},
         {"Scenario king gains legal neighbors after pawn move", testScenarioKingGainsNeighborAfterPawnMove},
         {"Scenario pawn crosses seam in live game", testScenarioPawnCrossesSeamInRealGame},
-        {"Scenario capture updates board correctly", testScenarioCaptureUpdatesBoardCorrectly}
+        {"Scenario capture updates board correctly", testScenarioCaptureUpdatesBoardCorrectly},
+        {"Undo round-trip simple move", testUndoMoveRoundTripSimpleMove},
+        {"Undo round-trip capture", testUndoMoveRoundTripCapture},
+        {"Undo round-trip en passant", testUndoMoveRoundTripEnPassant},
+        {"Undo round-trip promotion", testUndoMoveRoundTripPromotion}
     };
 
     std::cout << "Manual game logic tests\n\n";

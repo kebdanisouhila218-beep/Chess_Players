@@ -1,4 +1,5 @@
 #include "GameState.hpp"
+#include "Pawn.hpp"
 #include "PieceFactory.hpp"
 #include <cmath>
 
@@ -18,6 +19,37 @@ GameState::GameState()
 const Move* GameState::getLastMove() const {
     if (moveHistory.empty()) return nullptr;
     return &moveHistory.back();
+}
+
+std::vector<HexCell> GameState::getLegalMoves(const HexCell& from) {
+    Piece* piece = board.getPiece(from);
+    if (!piece) {
+        return {};
+    }
+
+    std::vector<HexCell> candidateMoves;
+    if (piece->getType() == PieceType::PAWN) {
+        const Pawn* pawn = dynamic_cast<const Pawn*>(piece);
+        candidateMoves = pawn ? pawn->getMoves(board, getLastMove()) : piece->getMoves(board);
+    } else {
+        candidateMoves = piece->getMoves(board);
+    }
+
+    std::vector<HexCell> legalMoves;
+    legalMoves.reserve(candidateMoves.size());
+    const Player player = piece->getOwner();
+
+    for (const HexCell& to : candidateMoves) {
+        Move simulated{from, to, player};
+        applyMove(simulated);
+        const bool leavesKingInCheck = isInCheck(player);
+        undoMove();
+        if (!leavesKingInCheck) {
+            legalMoves.push_back(to);
+        }
+    }
+
+    return legalMoves;
 }
 
 bool GameState::isGameOver() const {
@@ -75,6 +107,7 @@ void GameState::applyMove(const Move& m) {
     Move applied = m;
     Piece* moving = board.getPiece(m.from);
     if (!moving) return;
+    applied.movingPieceHadMoved = moving->getHasMoved();
 
     Piece* capturedPiece = board.getPiece(m.to);
     if (moving->getType() == PieceType::PAWN) {
@@ -90,6 +123,10 @@ void GameState::applyMove(const Move& m) {
                     if (cap && cap->getOwner() != moving->getOwner()) {
                         applied.isEnPassant = true;
                         applied.capturedPawnCell = previous->to;
+                        applied.capturedExists = true;
+                        applied.capturedType = cap->getType();
+                        applied.capturedOwner = cap->getOwner();
+                        applied.capturedCell = previous->to;
                         board.removePiece(previous->to);
                         delete cap;
                     }
@@ -99,6 +136,10 @@ void GameState::applyMove(const Move& m) {
     }
 
     if (capturedPiece) {
+        applied.capturedExists = true;
+        applied.capturedType = capturedPiece->getType();
+        applied.capturedOwner = capturedPiece->getOwner();
+        applied.capturedCell = m.to;
         board.removePiece(m.to);
         delete capturedPiece;
     }
@@ -114,6 +155,7 @@ void GameState::applyMove(const Move& m) {
                 applied.isCastling = true;
                 applied.rookFrom = rookFrom;
                 applied.rookTo = rookTo;
+                applied.rookHadMoved = rook->getHasMoved();
                 board.movePiece(rookFrom, rookTo);
                 rook->setHasMoved(true);
             }
@@ -139,30 +181,58 @@ void GameState::applyMove(const Move& m) {
     notifyAll();
 }
 
-// LIMITATION CONNUE : undoMove() est actuellement incomplet.
-// Il restaure uniquement la position de la piece deplacee,
-// mais ne restaure PAS :
-//   - la piece capturee (deja delete, perdue definitivement)
-//   - l'etat hasMoved de la piece deplacee
-//   - la piece promue (le pion original est detruit a la promotion)
-//   - la tour deplacee lors d'un roque
-//   - currentPlayer
-//   - status
-//
-// Pour corriger proprement, il faudra enrichir struct Move avec :
-//   - capturedType / capturedOwner / capturedCell
-//   - previousHasMoved
-//   - originalPawnType en cas de promotion
-//   - rookFrom / rookTo deja presents mais non restaures
-//
-// undoMove() n'est pas utilise en jeu normal actuellement.
-// A traiter dans une etape dediee si on implemente un moteur IA
-// ou une fonction "annuler le coup".
 void GameState::undoMove() {
     if (moveHistory.empty()) return;
     Move last = moveHistory.back();
     moveHistory.pop_back();
-    board.movePiece(last.to, last.from);
+
+    PieceFactory factory;
+
+    if (last.isPromotion) {
+        Piece* promoted = board.getPiece(last.to);
+        if (promoted) {
+            board.removePiece(last.to);
+            delete promoted;
+        }
+
+        Piece* pawn = factory.create(PieceType::PAWN, last.player, last.from);
+        if (pawn) {
+            pawn->setHasMoved(true);
+            board.setPiece(last.from, pawn);
+            pawn->setHasMoved(last.movingPieceHadMoved);
+        }
+    } else {
+        board.movePiece(last.to, last.from);
+        Piece* moving = board.getPiece(last.from);
+        if (moving) {
+            moving->setHasMoved(last.movingPieceHadMoved);
+        }
+    }
+
+    if (last.isCastling) {
+        Piece* rook = board.getPiece(last.rookTo);
+        if (rook) {
+            board.movePiece(last.rookTo, last.rookFrom);
+            rook->setHasMoved(last.rookHadMoved);
+        }
+    }
+
+    if (last.capturedExists && !last.isEnPassant) {
+        Piece* restored = factory.create(last.capturedType, last.capturedOwner, last.capturedCell);
+        if (restored) {
+            board.setPiece(last.capturedCell, restored);
+        }
+    }
+
+    if (last.isEnPassant) {
+        Piece* pawn = factory.create(PieceType::PAWN, last.capturedOwner, last.capturedPawnCell);
+        if (pawn) {
+            board.setPiece(last.capturedPawnCell, pawn);
+        }
+    }
+
+    currentPlayer = last.player;
+    status = GameStatus::PLAYING;
 
     notifyAll();
 }

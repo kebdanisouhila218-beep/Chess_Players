@@ -129,21 +129,13 @@ void GameController::handleClick(int x, int y) {
         if (p && p->getOwner() == state.getCurrentPlayer()) {
             selected = new HexCell(clicked);
             renderer.setSelectedCell(clicked);
-
-            if (p->getType() == PieceType::PAWN) {
-                const Pawn* pawn = dynamic_cast<const Pawn*>(p);
-                if (pawn)
-                    validMoves = pawn->getMoves(state.getBoard(), state.getLastMove());
-                else
-                    validMoves = p->getMoves(state.getBoard());
-            } else {
-                validMoves = p->getMoves(state.getBoard());
-            }
+            validMoves = state.getLegalMoves(clicked);
             if (validMoves.empty()) {
                 renderer.setStatusMessage(pieceLabel(p, clicked) + " : aucun coup disponible");
             } else {
                 renderer.setStatusMessage(pieceLabel(p, clicked) + " : " + std::to_string(validMoves.size()) + " coups");
             }
+
             renderer.setHighlights(validMoves);
             renderer.draw(state);
         } else {
@@ -162,20 +154,13 @@ void GameController::handleClick(int x, int y) {
         if (clickedPiece && clickedPiece->getOwner() == state.getCurrentPlayer()) {
             *selected = clicked;
             renderer.setSelectedCell(clicked);
-            if (clickedPiece->getType() == PieceType::PAWN) {
-                const Pawn* pawn = dynamic_cast<const Pawn*>(clickedPiece);
-                if (pawn)
-                    validMoves = pawn->getMoves(state.getBoard(), state.getLastMove());
-                else
-                    validMoves = clickedPiece->getMoves(state.getBoard());
-            } else {
-                validMoves = clickedPiece->getMoves(state.getBoard());
-            }
+            validMoves = state.getLegalMoves(clicked);
             if (validMoves.empty()) {
                 renderer.setStatusMessage(pieceLabel(clickedPiece, clicked) + " : aucun coup disponible");
             } else {
                 renderer.setStatusMessage(pieceLabel(clickedPiece, clicked) + " : " + std::to_string(validMoves.size()) + " coups");
             }
+
             renderer.setHighlights(validMoves);
             renderer.draw(state);
             return;
