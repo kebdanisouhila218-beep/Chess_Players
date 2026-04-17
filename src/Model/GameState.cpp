@@ -9,6 +9,21 @@ namespace {
         if (owner == Player::PLAYER2) return Board::Direction::EAST;
         return Board::Direction::NORTH;
     }
+
+    bool isCastlingCandidateMove(Piece* piece, const HexCell& from, const HexCell& to) {
+        return piece && piece->getType() == PieceType::KING && from.r == to.r && std::abs(to.q - from.q) == 2;
+    }
+
+    bool buildCastlingMove(Piece* piece, const HexCell& from, const HexCell& to, Move& move) {
+        if (!isCastlingCandidateMove(piece, from, to)) {
+            return false;
+        }
+
+        move.isCastling = true;
+        move.rookFrom = {to.q > from.q ? 4 : 0, from.r};
+        move.rookTo = {from.q + (to.q > from.q ? 1 : -1), from.r};
+        return true;
+    }
 }
 
 GameState::GameState()
@@ -25,6 +40,7 @@ std::vector<HexCell> GameState::getLegalMoves(const HexCell& from) {
     Piece* piece = board.getPiece(from);
     if (!piece) {
         return {};
+
     }
 
     std::vector<HexCell> candidateMoves;
@@ -38,14 +54,38 @@ std::vector<HexCell> GameState::getLegalMoves(const HexCell& from) {
     std::vector<HexCell> legalMoves;
     legalMoves.reserve(candidateMoves.size());
     const Player player = piece->getOwner();
+    const bool startsInCheck = isInCheck(player);
 
     for (const HexCell& to : candidateMoves) {
         Move simulated{from, to, player};
+        const bool isCastling = buildCastlingMove(piece, from, to, simulated);
+
+        if (isCastling && startsInCheck) {
+            continue;
+        }
+
+        if (isCastling) {
+            HexCell through{from.q + (to.q > from.q ? 1 : -1), from.r};
+            Move intermediate{from, through, player};
+            buildCastlingMove(piece, from, to, intermediate);
+            intermediate.isCastling = false;
+            intermediate.rookFrom = {0, 0};
+            intermediate.rookTo = {0, 0};
+
+            applyMove(intermediate);
+            const bool crossesAttackedSquare = isInCheck(player);
+            undoMove();
+            if (crossesAttackedSquare) {
+                continue;
+            }
+        }
+
         applyMove(simulated);
         const bool leavesKingInCheck = isInCheck(player);
         undoMove();
         if (!leavesKingInCheck) {
             legalMoves.push_back(to);
+
         }
     }
 
@@ -139,26 +179,22 @@ void GameState::applyMove(const Move& m) {
         applied.capturedExists = true;
         applied.capturedType = capturedPiece->getType();
         applied.capturedOwner = capturedPiece->getOwner();
+
         applied.capturedCell = m.to;
         board.removePiece(m.to);
         delete capturedPiece;
     }
 
-    if (moving->getType() == PieceType::KING) {
-        const int dx = m.to.q - m.from.q;
-        const int dy = m.to.r - m.from.r;
-        if (std::abs(dx) == 2 && dy == 0) {
-            HexCell rookFrom = {dx > 0 ? 4 : 0, m.from.r};
-            HexCell rookTo = {m.from.q + (dx > 0 ? 1 : -1), m.from.r};
-            Piece* rook = board.getPiece(rookFrom);
-            if (rook && rook->getType() == PieceType::ROOK && rook->getOwner() == moving->getOwner()) {
-                applied.isCastling = true;
-                applied.rookFrom = rookFrom;
-                applied.rookTo = rookTo;
-                applied.rookHadMoved = rook->getHasMoved();
-                board.movePiece(rookFrom, rookTo);
-                rook->setHasMoved(true);
-            }
+    if (applied.isCastling) {
+        Piece* rook = board.getPiece(applied.rookFrom);
+        if (rook && rook->getType() == PieceType::ROOK && rook->getOwner() == moving->getOwner()) {
+            applied.rookHadMoved = rook->getHasMoved();
+            board.movePiece(applied.rookFrom, applied.rookTo);
+            rook->setHasMoved(true);
+        } else {
+            applied.isCastling = false;
+            applied.rookFrom = {0, 0};
+            applied.rookTo = {0, 0};
         }
     }
 

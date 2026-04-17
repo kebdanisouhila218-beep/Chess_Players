@@ -1026,6 +1026,80 @@ namespace {
         return reportResult("Undo round-trip promotion", ok,
             ok ? "queen removed and pawn restored" : mismatch);
     }
+
+    bool testCastlingAllowed() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({1, 3}, factory.create(PieceType::KING, Player::PLAYER1, {1, 3}));
+        state.getBoard().setPiece({4, 3}, factory.create(PieceType::ROOK, Player::PLAYER1, {4, 3}));
+
+        const std::vector<HexCell> moves = state.getLegalMoves({1, 3});
+        const bool ok = contains(moves, {3, 3});
+        return reportResult("Castling allowed when path and checks are clear", ok,
+            std::string("moves: ") + moveListText(moves));
+    }
+
+    bool testCastlingRejectedWhileInCheck() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({1, 3}, factory.create(PieceType::KING, Player::PLAYER1, {1, 3}));
+        state.getBoard().setPiece({4, 3}, factory.create(PieceType::ROOK, Player::PLAYER1, {4, 3}));
+        state.getBoard().setPiece({1, 0}, factory.create(PieceType::ROOK, Player::PLAYER2, {1, 0}));
+
+        const std::vector<HexCell> moves = state.getLegalMoves({1, 3});
+        const bool ok = !contains(moves, {3, 3});
+        return reportResult("Castling rejected while king is in check", ok,
+            std::string("moves: ") + moveListText(moves));
+    }
+
+    bool testCastlingRejectedThroughAttackedSquare() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({1, 3}, factory.create(PieceType::KING, Player::PLAYER1, {1, 3}));
+        state.getBoard().setPiece({4, 3}, factory.create(PieceType::ROOK, Player::PLAYER1, {4, 3}));
+        state.getBoard().setPiece({2, 0}, factory.create(PieceType::ROOK, Player::PLAYER2, {2, 0}));
+
+        const std::vector<HexCell> moves = state.getLegalMoves({1, 3});
+        const bool ok = !contains(moves, {3, 3});
+        return reportResult("Castling rejected through attacked square", ok,
+            std::string("moves: ") + moveListText(moves));
+    }
+
+    bool testUndoMoveRoundTripCastling() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({1, 3}, factory.create(PieceType::KING, Player::PLAYER1, {1, 3}));
+        state.getBoard().setPiece({4, 3}, factory.create(PieceType::ROOK, Player::PLAYER1, {4, 3}));
+
+        const auto before = snapshotBoard(state.getBoard());
+        Move castle{{1, 3}, {3, 3}, Player::PLAYER1};
+        castle.isCastling = true;
+        castle.rookFrom = {4, 3};
+        castle.rookTo = {2, 3};
+
+        state.applyMove(castle);
+        state.undoMove();
+
+        std::string mismatch;
+        const bool boardOk = boardMatchesSnapshot(state.getBoard(), before, mismatch);
+        Piece* king = state.getBoard().getPiece({1, 3});
+        Piece* rook = state.getBoard().getPiece({4, 3});
+        const bool ok = boardOk && king && king->getType() == PieceType::KING &&
+                        king->getOwner() == Player::PLAYER1 && !king->getHasMoved() &&
+                        rook && rook->getType() == PieceType::ROOK && rook->getOwner() == Player::PLAYER1 &&
+                        !rook->getHasMoved() && state.getBoard().getPiece({2, 3}) == nullptr &&
+                        state.getBoard().getPiece({3, 3}) == nullptr;
+        return reportResult("Undo round-trip castling", ok,
+            ok ? "king and rook restored" : mismatch);
+    }
 }
 
 int main() {
@@ -1069,7 +1143,11 @@ int main() {
         {"Undo round-trip simple move", testUndoMoveRoundTripSimpleMove},
         {"Undo round-trip capture", testUndoMoveRoundTripCapture},
         {"Undo round-trip en passant", testUndoMoveRoundTripEnPassant},
-        {"Undo round-trip promotion", testUndoMoveRoundTripPromotion}
+        {"Undo round-trip promotion", testUndoMoveRoundTripPromotion},
+        {"Castling allowed when path and checks are clear", testCastlingAllowed},
+        {"Castling rejected while king is in check", testCastlingRejectedWhileInCheck},
+        {"Castling rejected through attacked square", testCastlingRejectedThroughAttackedSquare},
+        {"Undo round-trip castling", testUndoMoveRoundTripCastling}
     };
 
     std::cout << "Manual game logic tests\n\n";
