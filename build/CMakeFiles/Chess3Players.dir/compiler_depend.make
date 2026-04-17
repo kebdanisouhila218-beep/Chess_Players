@@ -169,10 +169,13 @@ CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj: C:/Users/etu
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator_base_funcs.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator_base_types.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_multiset.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_pair.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_raw_storage_iter.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_relops.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_set.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_tempbuf.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_tree.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_vector.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stream_iterator.h \
@@ -230,6 +233,7 @@ CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj: C:/Users/etu
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/pstl/glue_memory_defs.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/pstl/pstl_config.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/ratio \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/set \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/sstream \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/stdexcept \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/stdlib.h \
@@ -552,7 +556,10 @@ CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.obj: C:/Users/etudiant/Docu
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator_base_funcs.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator_base_types.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_multiset.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_pair.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_set.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_tree.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_vector.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/unordered_map.h \
@@ -578,6 +585,7 @@ CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.obj: C:/Users/etudiant/Docu
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/new \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/optional \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/pstl/pstl_config.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/set \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/stdlib.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/tr1/bessel_function.tcc \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/tr1/beta_function.tcc \
@@ -867,7 +875,10 @@ CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.obj: C:/Users/etudiant/Documents
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator_base_funcs.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator_base_types.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_multiset.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_pair.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_set.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_tree.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_vector.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/unordered_map.h \
@@ -893,6 +904,7 @@ CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.obj: C:/Users/etudiant/Documents
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/new \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/optional \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/pstl/pstl_config.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/set \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/stdlib.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/tr1/bessel_function.tcc \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/tr1/beta_function.tcc \
@@ -1467,10 +1479,13 @@ CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj: C:/Users/etudiant/Docume
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator_base_funcs.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator_base_types.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_multiset.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_pair.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_raw_storage_iter.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_relops.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_set.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_tempbuf.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_tree.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_vector.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stream_iterator.h \
@@ -1529,6 +1544,7 @@ CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj: C:/Users/etudiant/Docume
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/pstl/glue_memory_defs.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/pstl/pstl_config.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/ratio \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/set \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/sstream \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/stdexcept \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/stdlib.h \
@@ -1784,10 +1800,13 @@ CMakeFiles/Chess3Players.dir/src/main.cpp.obj: C:/Users/etudiant/Documents/GitHu
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator_base_funcs.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_iterator_base_types.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_multiset.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_pair.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_raw_storage_iter.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_relops.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_set.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_tempbuf.h \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_tree.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_vector.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stream_iterator.h \
@@ -1845,6 +1864,7 @@ CMakeFiles/Chess3Players.dir/src/main.cpp.obj: C:/Users/etudiant/Documents/GitHu
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/pstl/glue_memory_defs.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/pstl/pstl_config.h \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/ratio \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/set \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/sstream \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/stdexcept \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/stdlib.h \
@@ -2022,6 +2042,14 @@ C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-ming
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mm_malloc.h:
 
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h:
+
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h:
+
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/time_members.h:
+
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/os_defines.h:
+
 C:/SFML/include/SFML/Graphics/Font.hpp:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/fs_ops.h:
@@ -2047,8 +2075,6 @@ C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-ming
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/basic_ios.tcc:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/allocator.h:
-
-C:/SFML/include/SFML/System/Export.hpp:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/ostream.tcc:
 
@@ -2150,8 +2176,6 @@ C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Knight.hpp:
 
 C:/SFML/include/SFML/System/Utf.hpp:
 
-C:/SFML/include/SFML/Graphics/ConvexShape.hpp:
-
 C:/SFML/include/SFML/Window/Window.hpp:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h:
@@ -2159,6 +2183,10 @@ C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-ming
 C:/SFML/include/SFML/Graphics/Sprite.hpp:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/exception_ptr.h:
+
+C:/SFML/include/SFML/System/Export.hpp:
+
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_multiset.h:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/filesystem:
 
@@ -2304,13 +2332,13 @@ C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-ming
 
 C:/SFML/include/SFML/Graphics/Transform.inl:
 
-C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h:
-
 C:/SFML/include/SFML/Graphics/Rect.inl:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/hashtable.h:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/predefined_ops.h:
+
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_tree.h:
 
 C:/SFML/include/SFML/System.hpp:
 
@@ -2488,6 +2516,12 @@ C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-ming
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_relops.h:
 
+C:/SFML/include/SFML/Graphics/ConvexShape.hpp:
+
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stl_set.h:
+
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/utility.h:
+
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/stream_iterator.h:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/ctime:
@@ -2512,9 +2546,9 @@ C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-ming
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/uses_allocator.h:
 
-C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/ext/type_traits.h:
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/set:
 
-C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/utility.h:
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/ext/type_traits.h:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/vector.tcc:
 
@@ -2529,6 +2563,12 @@ C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-ming
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/tr1/bessel_function.tcc:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/debug/debug.h:
+
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/messages_members.h:
+
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/version.h:
+
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/ext/alloc_traits.h:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/limits:
 
@@ -2583,15 +2623,3 @@ C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-ming
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/cpu_defines.h:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/error_constants.h:
-
-C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/version.h:
-
-C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/ext/alloc_traits.h:
-
-C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/messages_members.h:
-
-C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/os_defines.h:
-
-C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h:
-
-C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/time_members.h:

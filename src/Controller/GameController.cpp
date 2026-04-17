@@ -180,6 +180,17 @@ void GameController::handleClick(int x, int y) {
                 state.applyMove(move);
                 if (state.isGameOver()) {
                     renderer.setStatusMessage("Partie terminee - Gagnant : " + winnerText(state.getWinner()));
+                } else {
+                    switch (state.getStatus()) {
+                        case GameStatus::CHECK:
+                            renderer.setStatusMessage("Echec au roi !");
+                            break;
+                        case GameStatus::DRAW:
+                            renderer.setStatusMessage("Pat - Match nul !");
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         } else {

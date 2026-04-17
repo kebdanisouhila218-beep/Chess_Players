@@ -24,6 +24,17 @@ std::vector<HexCell> Pawn::getMoves(const Board& board) const {
     return getMoves(board, nullptr);
 }
 
+std::vector<HexCell> Pawn::getCaptureCells(const Board& board) const {
+    std::vector<HexCell> cells;
+    for (Board::Direction captureDir : pawnCaptures(board, pos)) {
+        std::optional<HexCell> capture = board.step(pos, captureDir);
+        if (capture.has_value() && board.isValid(*capture)) {
+            cells.push_back(*capture);
+        }
+    }
+    return cells;
+}
+
 std::vector<HexCell> Pawn::getMoves(const Board& board, const Move* lastMove) const {
     std::vector<HexCell> moves;
     const Board::Direction forward = pawnForward(board, pos);

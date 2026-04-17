@@ -10,5 +10,6 @@ public:
 
     std::vector<HexCell> getMoves(const Board& board) const override;
     std::vector<HexCell> getMoves(const Board& board, const Move* lastMove) const;
+    std::vector<HexCell> getCaptureCells(const Board& board) const;
     int getValue() const override { return 1; }
 };

@@ -1100,6 +1100,107 @@ namespace {
         return reportResult("Undo round-trip castling", ok,
             ok ? "king and rook restored" : mismatch);
     }
+
+    bool testIsInCheckPawnNoFalsePositive() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({4, 3}, factory.create(PieceType::KING, Player::PLAYER1, {4, 3}));
+        state.getBoard().setPiece({4, 2}, factory.create(PieceType::PAWN, Player::PLAYER2, {4, 2}));
+
+        const bool ok = !state.isInCheck(Player::PLAYER1);
+        return reportResult("isInCheck pawn no false positive", ok,
+            ok ? "pawn in front does not trigger check" : "FAIL: false positive detected");
+    }
+
+    bool testIsInCheckPawnDiagonalTriggersCheck() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({4, 3}, factory.create(PieceType::KING, Player::PLAYER1, {4, 3}));
+        state.getBoard().setPiece({3, 2}, factory.create(PieceType::PAWN, Player::PLAYER2, {3, 2}));
+
+        const bool ok = state.isInCheck(Player::PLAYER1);
+        return reportResult("isInCheck pawn diagonal triggers check", ok,
+            ok ? "pawn on diagonal correctly triggers check" : "FAIL: check not detected");
+    }
+
+    bool testCheckStatusDetection() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({4, 3}, factory.create(PieceType::KING, Player::PLAYER1, {4, 3}));
+        state.getBoard().setPiece({0, 7}, factory.create(PieceType::KING, Player::PLAYER2, {0, 7}));
+        state.getBoard().setPiece({8, 11}, factory.create(PieceType::KING, Player::PLAYER3, {8, 11}));
+        state.getBoard().setPiece({4, 0}, factory.create(PieceType::ROOK, Player::PLAYER2, {4, 0}));
+        state.getBoard().setPiece({0, 6}, factory.create(PieceType::ROOK, Player::PLAYER1, {0, 6}));
+
+        state.applyMove({{0, 6}, {0, 5}, Player::PLAYER1});
+
+        const bool ok = state.getCurrentPlayer() == Player::PLAYER2 && state.getStatus() == GameStatus::CHECK;
+        return reportResult("CHECK status detection", ok,
+            ok ? "current player correctly marked in check" : "FAIL: CHECK status missing");
+    }
+
+    bool testStalemateDetection() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({4, 3}, factory.create(PieceType::KING, Player::PLAYER1, {4, 3}));
+        state.getBoard().setPiece({8, 11}, factory.create(PieceType::KING, Player::PLAYER3, {8, 11}));
+        state.getBoard().setPiece({4, 2}, factory.create(PieceType::ROOK, Player::PLAYER1, {4, 2}));
+
+        state.applyMove({{4, 2}, {4, 1}, Player::PLAYER1});
+
+        const bool ok = state.getCurrentPlayer() == Player::PLAYER2 && !state.isInCheck(Player::PLAYER2) &&
+                        state.getStatus() == GameStatus::DRAW;
+        std::ostringstream details;
+        details << "activePieces=";
+        bool first = true;
+        for (const HexCell& cell : state.getBoard().allValidCells()) {
+            Piece* piece = state.getBoard().getPiece(cell);
+            if (piece && piece->getOwner() == Player::PLAYER2) {
+                if (!first) details << ' ';
+                details << cellText(cell);
+                first = false;
+            }
+        }
+        details << " inCheck=" << (state.isInCheck(Player::PLAYER2) ? "yes" : "no")
+                << " status=" << static_cast<int>(state.getStatus());
+        return reportResult("Stalemate detection", ok,
+            ok ? "no legal moves and not in check => DRAW" : details.str());
+    }
+
+    bool testYaltaEliminationSkipsPlayer() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({4, 3}, factory.create(PieceType::KING, Player::PLAYER1, {4, 3}));
+        state.getBoard().setPiece({0, 7}, factory.create(PieceType::KING, Player::PLAYER2, {0, 7}));
+        state.getBoard().setPiece({8, 11}, factory.create(PieceType::KING, Player::PLAYER3, {8, 11}));
+        state.getBoard().setPiece({0, 6}, factory.create(PieceType::ROOK, Player::PLAYER1, {0, 6}));
+        state.getBoard().setPiece({2, 7}, factory.create(PieceType::ROOK, Player::PLAYER1, {2, 7}));
+        state.getBoard().setPiece({1, 7}, factory.create(PieceType::ROOK, Player::PLAYER1, {1, 7}));
+        state.getBoard().setPiece({1, 8}, factory.create(PieceType::ROOK, Player::PLAYER1, {1, 8}));
+
+        state.applyMove({{0, 6}, {0, 5}, Player::PLAYER1});
+
+        const bool p2Eliminated = state.isEliminated(Player::PLAYER2);
+        const bool ok = p2Eliminated && state.getCurrentPlayer() == Player::PLAYER3;
+        const std::vector<HexCell> moves = state.getLegalMoves({0, 7});
+        std::ostringstream details;
+        details << "eliminated=" << (p2Eliminated ? "yes" : "no")
+                << " currentPlayer=" << static_cast<int>(state.getCurrentPlayer())
+                << " inCheck=" << (state.isInCheck(Player::PLAYER2) ? "yes" : "no")
+                << " moves=" << moveListText(moves);
+        return reportResult("Yalta elimination skips player", ok,
+            ok ? "eliminated player skipped correctly" : details.str());
+    }
 }
 
 int main() {
@@ -1147,7 +1248,12 @@ int main() {
         {"Castling allowed when path and checks are clear", testCastlingAllowed},
         {"Castling rejected while king is in check", testCastlingRejectedWhileInCheck},
         {"Castling rejected through attacked square", testCastlingRejectedThroughAttackedSquare},
-        {"Undo round-trip castling", testUndoMoveRoundTripCastling}
+        {"Undo round-trip castling", testUndoMoveRoundTripCastling},
+        {"isInCheck pawn no false positive", testIsInCheckPawnNoFalsePositive},
+        {"isInCheck pawn diagonal triggers check", testIsInCheckPawnDiagonalTriggersCheck},
+        {"CHECK status detection", testCheckStatusDetection},
+        {"Stalemate detection", testStalemateDetection},
+        {"Yalta elimination skips player", testYaltaEliminationSkipsPlayer}
     };
 
     std::cout << "Manual game logic tests\n\n";

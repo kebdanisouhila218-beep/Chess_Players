@@ -1,6 +1,7 @@
 #include "GameState.hpp"
 #include "Pawn.hpp"
 #include "PieceFactory.hpp"
+#include <array>
 #include <cmath>
 
 namespace {
@@ -29,6 +30,8 @@ namespace {
 GameState::GameState()
     : currentPlayer(Player::PLAYER1)
     , status(GameStatus::PLAYING)
+    , lastAttacker(Player::NONE)
+    , eliminatedPlayers()
 {}
 
 const Move* GameState::getLastMove() const {
@@ -72,7 +75,7 @@ std::vector<HexCell> GameState::getLegalMoves(const HexCell& from) {
             intermediate.rookFrom = {0, 0};
             intermediate.rookTo = {0, 0};
 
-            applyMove(intermediate);
+            applyMove(intermediate, true);
             const bool crossesAttackedSquare = isInCheck(player);
             undoMove();
             if (crossesAttackedSquare) {
@@ -80,7 +83,7 @@ std::vector<HexCell> GameState::getLegalMoves(const HexCell& from) {
             }
         }
 
-        applyMove(simulated);
+        applyMove(simulated, true);
         const bool leavesKingInCheck = isInCheck(player);
         undoMove();
         if (!leavesKingInCheck) {
@@ -93,37 +96,77 @@ std::vector<HexCell> GameState::getLegalMoves(const HexCell& from) {
 }
 
 bool GameState::isGameOver() const {
-    int kingsAlive = 0;
-    for (const HexCell& c : board.allValidCells()) {
-        Piece* p = board.getPiece(c);
-        if (p && p->getType() == PieceType::KING) {
-            ++kingsAlive;
-        }
-    }
-    return kingsAlive <= 1;
+    return activePlayerCount() <= 1;
 }
 
 Player GameState::getWinner() const {
     if (!isGameOver()) {
         return Player::NONE;
     }
-    for (const HexCell& c : board.allValidCells()) {
-        Piece* p = board.getPiece(c);
-        if (p && p->getType() == PieceType::KING) {
-            return p->getOwner();
+    for (Player p : {Player::PLAYER1, Player::PLAYER2, Player::PLAYER3}) {
+        if (!isEliminated(p)) {
+            return p;
         }
     }
     return Player::NONE;
 }
 
-// ATTENTION : pour les pions, getMoves() retourne les cases de deplacement
-// ET de capture melangees. isInCheck() peut donc produire un faux positif
-// si un pion est devant le roi sans pouvoir le capturer diagonalement.
-// A corriger quand Pawn exposera separement ses cases de capture.
+bool GameState::isEliminated(Player p) const {
+    return eliminatedPlayers.count(p) > 0;
+}
+
+int GameState::activePlayerCount() const {
+    int count = 0;
+    for (Player p : {Player::PLAYER1, Player::PLAYER2, Player::PLAYER3}) {
+        if (!isEliminated(p)) {
+            ++count;
+        }
+    }
+    return count;
+}
+
+void GameState::computeStatus() {
+    bool hasLegal = false;
+    for (const HexCell& c : board.allValidCells()) {
+        Piece* p = board.getPiece(c);
+        if (!p || p->getOwner() != currentPlayer) continue;
+        if (!getLegalMoves(c).empty()) {
+            hasLegal = true;
+            break;
+        }
+    }
+
+    if (!hasLegal && isInCheck(currentPlayer)) {
+        const Player eliminatedPlayer = currentPlayer;
+        eliminatedPlayers.insert(eliminatedPlayer);
+
+        for (const HexCell& c : board.allValidCells()) {
+            Piece* p = board.getPiece(c);
+            if (p && p->getOwner() == eliminatedPlayer) {
+                p->setOwner(lastAttacker);
+            }
+        }
+
+        nextPlayer();
+        if (activePlayerCount() > 1) {
+            status = GameStatus::PLAYING;
+        } else {
+            status = GameStatus::CHECKMATE;
+        }
+    } else if (!hasLegal) {
+        status = GameStatus::DRAW;
+    } else if (isInCheck(currentPlayer)) {
+        status = GameStatus::CHECK;
+    } else {
+        status = GameStatus::PLAYING;
+    }
+}
+
 bool GameState::isInCheck(Player player) const {
     HexCell kingPos{-1, -1};
     for (const HexCell& c : board.allValidCells()) {
         Piece* p = board.getPiece(c);
+
         if (p && p->getOwner() == player && p->getType() == PieceType::KING) {
             kingPos = c;
             break;
@@ -135,16 +178,26 @@ bool GameState::isInCheck(Player player) const {
         Piece* p = board.getPiece(c);
         if (!p || p->getOwner() == player) continue;
 
-        std::vector<HexCell> threats = p->getMoves(board);
+        std::vector<HexCell> threats;
+        if (p->getType() == PieceType::PAWN) {
+            const Pawn* pawn = dynamic_cast<const Pawn*>(p);
+            threats = pawn ? pawn->getCaptureCells(board) : p->getMoves(board);
+        } else {
+            threats = p->getMoves(board);
+        }
         for (const HexCell& t : threats) {
             if (t == kingPos) return true;
         }
     }
     return false;
+
 }
 
-void GameState::applyMove(const Move& m) {
+void GameState::applyMove(const Move& m, bool isSimulation) {
     Move applied = m;
+    if (!isSimulation) {
+        lastAttacker = m.player;
+    }
     Piece* moving = board.getPiece(m.from);
     if (!moving) return;
     applied.movingPieceHadMoved = moving->getHasMoved();
@@ -214,7 +267,10 @@ void GameState::applyMove(const Move& m) {
 
     moveHistory.push_back(applied);
     nextPlayer();
-    notifyAll();
+    if (!isSimulation) {
+        computeStatus();
+        notifyAll();
+    }
 }
 
 void GameState::undoMove() {
@@ -274,11 +330,18 @@ void GameState::undoMove() {
 }
 
 void GameState::nextPlayer() {
-    switch (currentPlayer) {
-        case Player::PLAYER1: currentPlayer = Player::PLAYER2; break;
-        case Player::PLAYER2: currentPlayer = Player::PLAYER3; break;
-        case Player::PLAYER3: currentPlayer = Player::PLAYER1; break;
-        default: break;
+    Player next = currentPlayer;
+    for (int i = 0; i < 3; ++i) {
+        switch (next) {
+            case Player::PLAYER1: next = Player::PLAYER2; break;
+            case Player::PLAYER2: next = Player::PLAYER3; break;
+            case Player::PLAYER3: next = Player::PLAYER1; break;
+            default: next = Player::PLAYER1; break;
+        }
+        if (!isEliminated(next)) {
+            currentPlayer = next;
+            return;
+        }
     }
 }
 

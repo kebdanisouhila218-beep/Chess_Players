@@ -26,7 +26,6 @@ public:
         : type(type), owner(owner), pos(pos) {}
     virtual ~Piece() = default; //detruire une piece -pion- virtual pour ne pas avoir de fuite de memoire
  
-
     virtual std::vector<HexCell> getMoves(const Board& board) const = 0;
     // getValue() reste separe de getMoves() pour distinguer
     // la logique de deplacement de la logique d'evaluation.
@@ -38,6 +37,7 @@ public:
     Player    getOwner()  const { return owner; }
     HexCell   getPos()    const { return pos; }
     void      setPos(HexCell p) { pos = p; }
+    void      setOwner(Player p) { owner = p; }
 
     bool isEnemy(const Piece* other) const {
        // other c est la case qui contient la piece a verifier

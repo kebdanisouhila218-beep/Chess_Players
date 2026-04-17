@@ -2,6 +2,7 @@
 #include "Board.hpp"
 #include "IObserver.hpp"
 #include <vector>
+#include <set>
 
 enum class GameStatus {
     PLAYING,
@@ -33,13 +34,16 @@ class GameState {
 public:
     GameState();
 
-    void applyMove(const Move& m);
+    void applyMove(const Move& m, bool isSimulation = false);
     void undoMove();
     std::vector<HexCell> getLegalMoves(const HexCell& from);
     void nextPlayer();
     int  evaluate() const;
     bool isGameOver() const;
     Player getWinner() const;
+    bool isEliminated(Player p) const;
+    int  activePlayerCount() const;
+    void computeStatus();
 
     Board&       getBoard()         { return board; }
     const Board& getBoard()   const { return board; }
@@ -56,5 +60,7 @@ private:
     Player             currentPlayer;
     GameStatus         status;
     std::vector<Move>  moveHistory;
+    std::set<Player>   eliminatedPlayers;
+    Player             lastAttacker = Player::NONE;
     std::vector<IObserver*> observers;
 };
