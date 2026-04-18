@@ -21,6 +21,7 @@ add_executable(Chess3Players
     src/Model/GameState.cpp
     src/Model/PieceFactory.cpp
 
+    src/View/MenuRenderer.cpp
     src/View/Renderer.cpp
 
     src/Controller/GameController.cpp
