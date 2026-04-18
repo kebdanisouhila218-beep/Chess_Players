@@ -27,7 +27,7 @@ private:
     std::array<bool, 3> isAI = {false, false, true};
     bool gameStarted = false;
     std::chrono::steady_clock::time_point lastAIMoveTime = std::chrono::steady_clock::now();
-    std::chrono::milliseconds aiMoveDelay{900};
+    std::chrono::milliseconds aiMoveDelay{1400};
 
     HexCell* selected = nullptr;
     std::vector<HexCell> validMoves;
