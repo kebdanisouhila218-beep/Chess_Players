@@ -36,6 +36,7 @@ namespace {
 GameController::GameController()
     // 850 de hauteur = 800 pour le plateau + 50 pour le HUD joueur courant
     : window(sf::VideoMode({800, 850}), "Chess 3 Players")
+    , menuRenderer(window)
     , renderer(window)
 {
     state.addObserver(&renderer);
@@ -45,7 +46,7 @@ GameController::GameController()
     factory.initBoard(state.getBoard(), Player::PLAYER2);
     factory.initBoard(state.getBoard(), Player::PLAYER3);
 
-    renderer.draw(state);
+    menuRenderer.draw(isAI);
 }
 
 std::string GameController::pieceLabel(const Piece* piece, const HexCell& cell) const {
@@ -57,53 +58,82 @@ std::string GameController::pieceLabel(const Piece* piece, const HexCell& cell) 
 
 void GameController::run() {
     while (window.isOpen()) {
-        tryAIMove();
+        if (gameStarted) {
+            tryAIMove();
+        }
         handleEvents();
     }
 }
 
-void GameController::tryAIMove() {
-    while (!state.isGameOver()) {
-        const int currentIndex = playerIndex(state.getCurrentPlayer());
-        if (currentIndex < 0 || !isAI[static_cast<std::size_t>(currentIndex)]) {
+void GameController::handleMenuClick(int x, int y) {
+    const sf::Vector2f mouse{static_cast<float>(x), static_cast<float>(y)};
+    const auto toggleBounds = menuRenderer.getToggleBounds();
+    for (std::size_t i = 0; i < toggleBounds.size(); ++i) {
+        if (toggleBounds[i].contains(mouse)) {
+            isAI[i] = !isAI[i];
+            menuRenderer.draw(isAI);
             return;
         }
-
-        if (selected != nullptr) {
-            delete selected;
-            selected = nullptr;
-        }
-        validMoves.clear();
-        renderer.clearSelectedCell();
-        renderer.clearHighlights();
-        renderer.setStatusMessage("IA reflechit...");
-        renderer.draw(state);
-
-        std::optional<Move> bestMove = state.findBestMove(2, state.getCurrentPlayer());
-        if (!bestMove.has_value()) {
-            return;
-        }
-
-        state.applyMove(*bestMove);
-
-        if (state.isGameOver()) {
-            renderer.setStatusMessage("Partie terminee - Gagnant : " + winnerText(state.getWinner()));
-        } else {
-            switch (state.getStatus()) {
-                case GameStatus::CHECK:
-                    renderer.setStatusMessage("Echec au roi !");
-                    break;
-                case GameStatus::DRAW:
-                    renderer.setStatusMessage("Pat - Match nul !");
-                    break;
-                default:
-                    renderer.setStatusMessage("Coup IA joue");
-                    break;
-            }
-        }
-
-        renderer.draw(state);
     }
+
+    if (menuRenderer.getStartButtonBounds().contains(mouse)) {
+        gameStarted = true;
+        lastAIMoveTime = std::chrono::steady_clock::now();
+        renderer.setStatusMessage("Partie demarree");
+        renderer.draw(state);
+        tryAIMove();
+    }
+}
+
+void GameController::tryAIMove() {
+    if (state.isGameOver()) {
+        return;
+    }
+
+    const int currentIndex = playerIndex(state.getCurrentPlayer());
+    if (currentIndex < 0 || !isAI[static_cast<std::size_t>(currentIndex)]) {
+        return;
+    }
+
+    const auto now = std::chrono::steady_clock::now();
+    if (now - lastAIMoveTime < aiMoveDelay) {
+        return;
+    }
+
+    if (selected != nullptr) {
+        delete selected;
+        selected = nullptr;
+    }
+    validMoves.clear();
+    renderer.clearSelectedCell();
+    renderer.clearHighlights();
+    renderer.setStatusMessage("IA reflechit...");
+
+    std::optional<Move> bestMove = state.findBestMove(2, state.getCurrentPlayer());
+    if (!bestMove.has_value()) {
+        return;
+    }
+
+    state.applyMove(*bestMove);
+    lastAIMoveTime = now;
+
+    if (state.isGameOver()) {
+        renderer.setStatusMessage("Partie terminee - Gagnant : " + winnerText(state.getWinner()));
+    } else {
+        switch (state.getStatus()) {
+            case GameStatus::CHECK:
+                renderer.setStatusMessage("Echec au roi !");
+                break;
+            case GameStatus::DRAW:
+                renderer.setStatusMessage("Pat - Match nul !");
+                break;
+            default:
+                renderer.setStatusMessage("Coup IA joue");
+                break;
+        }
+    }
+
+    renderer.draw(state);
 }
 
 void GameController::handleEvents() {
@@ -117,12 +147,21 @@ void GameController::handleEvents() {
                 static_cast<float>(resized->size.y)
             }));
             window.setView(view);
-            renderer.draw(state);
+            if (gameStarted) {
+                renderer.draw(state);
+            } else {
+                menuRenderer.draw(isAI);
+            }
         }
 
         if (const auto* click = event->getIf<sf::Event::MouseButtonPressed>()) {
-            if (click->button == sf::Mouse::Button::Left)
-                handleClick(click->position.x, click->position.y);
+            if (click->button == sf::Mouse::Button::Left) {
+                if (gameStarted) {
+                    handleClick(click->position.x, click->position.y);
+                } else {
+                    handleMenuClick(click->position.x, click->position.y);
+                }
+            }
         }
     }
 }

@@ -40,10 +40,11 @@ public:
     GameState();
 
     void applyMove(const Move& m, bool isSimulation = false);
-    void undoMove();
+    void undoMove(bool notifyObservers = true);
     std::vector<Move> getLegalMovesAsMove(const HexCell& from);
     std::vector<HexCell> getLegalMoves(const HexCell& from);
     void nextPlayer();
+
     int  minimax(int depth, Player rootPlayer);
     std::optional<Move> findBestMove(int depth, Player aiPlayer);
     int  evaluate(Player perspective) const;
@@ -60,6 +61,7 @@ public:
     const Board& getBoard()   const { return board; }
     Player       getCurrentPlayer() const { return currentPlayer; }
     GameStatus   getStatus()        const { return status; }
+    Player       getLastAttacker()  const { return lastAttacker; }
     bool         isInCheck(Player player) const;
     const Move*  getLastMove()      const;
 

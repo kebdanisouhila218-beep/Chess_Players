@@ -113,6 +113,28 @@ namespace {
         return snapshot;
     }
 
+    struct GameStateSnapshot {
+        std::vector<std::pair<HexCell, PieceSnapshot>> board;
+        Player currentPlayer = Player::NONE;
+        GameStatus status = GameStatus::PLAYING;
+        Player lastAttacker = Player::NONE;
+        bool player1Eliminated = false;
+        bool player2Eliminated = false;
+        bool player3Eliminated = false;
+    };
+
+    GameStateSnapshot snapshotGameState(const GameState& state) {
+        GameStateSnapshot snapshot;
+        snapshot.board = snapshotBoard(state.getBoard());
+        snapshot.currentPlayer = state.getCurrentPlayer();
+        snapshot.status = state.getStatus();
+        snapshot.lastAttacker = state.getLastAttacker();
+        snapshot.player1Eliminated = state.isEliminated(Player::PLAYER1);
+        snapshot.player2Eliminated = state.isEliminated(Player::PLAYER2);
+        snapshot.player3Eliminated = state.isEliminated(Player::PLAYER3);
+        return snapshot;
+    }
+
     bool boardMatchesSnapshot(const Board& board,
                               const std::vector<std::pair<HexCell, PieceSnapshot>>& snapshot,
                               std::string& mismatch) {
@@ -138,6 +160,39 @@ namespace {
                 mismatch = cellText(cell) + " hasMoved mismatch";
                 return false;
             }
+        }
+        return true;
+    }
+
+    bool gameStateMatchesSnapshot(const GameState& state,
+                                  const GameStateSnapshot& snapshot,
+                                  std::string& mismatch) {
+        if (!boardMatchesSnapshot(state.getBoard(), snapshot.board, mismatch)) {
+            return false;
+        }
+        if (state.getCurrentPlayer() != snapshot.currentPlayer) {
+            mismatch = "currentPlayer mismatch";
+            return false;
+        }
+        if (state.getStatus() != snapshot.status) {
+            mismatch = "status mismatch";
+            return false;
+        }
+        if (state.getLastAttacker() != snapshot.lastAttacker) {
+            mismatch = "lastAttacker mismatch";
+            return false;
+        }
+        if (state.isEliminated(Player::PLAYER1) != snapshot.player1Eliminated) {
+            mismatch = "PLAYER1 eliminated mismatch";
+            return false;
+        }
+        if (state.isEliminated(Player::PLAYER2) != snapshot.player2Eliminated) {
+            mismatch = "PLAYER2 eliminated mismatch";
+            return false;
+        }
+        if (state.isEliminated(Player::PLAYER3) != snapshot.player3Eliminated) {
+            mismatch = "PLAYER3 eliminated mismatch";
+            return false;
         }
         return true;
     }
@@ -938,14 +993,14 @@ namespace {
         PieceFactory factory;
         state.getBoard().setPiece({1, 4}, factory.create(PieceType::ROOK, Player::PLAYER1, {1, 4}));
 
-        const auto before = snapshotBoard(state.getBoard());
+        const auto before = snapshotGameState(state);
         state.applyMove({{1, 4}, {3, 4}, Player::PLAYER1});
         state.undoMove();
 
         std::string mismatch;
-        const bool boardOk = boardMatchesSnapshot(state.getBoard(), before, mismatch);
+        const bool stateOk = gameStateMatchesSnapshot(state, before, mismatch);
         Piece* rook = state.getBoard().getPiece({1, 4});
-        const bool ok = boardOk && rook && rook->getType() == PieceType::ROOK &&
+        const bool ok = stateOk && rook && rook->getType() == PieceType::ROOK &&
                         rook->getOwner() == Player::PLAYER1 && !rook->getHasMoved() &&
                         state.getBoard().getPiece({3, 4}) == nullptr;
         return reportResult("Undo round-trip simple move", ok,
@@ -960,15 +1015,15 @@ namespace {
         state.getBoard().setPiece({1, 4}, factory.create(PieceType::ROOK, Player::PLAYER1, {1, 4}));
         state.getBoard().setPiece({3, 4}, factory.create(PieceType::PAWN, Player::PLAYER2, {3, 4}));
 
-        const auto before = snapshotBoard(state.getBoard());
+        const auto before = snapshotGameState(state);
         state.applyMove({{1, 4}, {3, 4}, Player::PLAYER1});
         state.undoMove();
 
         std::string mismatch;
-        const bool boardOk = boardMatchesSnapshot(state.getBoard(), before, mismatch);
+        const bool stateOk = gameStateMatchesSnapshot(state, before, mismatch);
         Piece* rook = state.getBoard().getPiece({1, 4});
         Piece* pawn = state.getBoard().getPiece({3, 4});
-        const bool ok = boardOk && rook && rook->getType() == PieceType::ROOK &&
+        const bool ok = stateOk && rook && rook->getType() == PieceType::ROOK &&
                         rook->getOwner() == Player::PLAYER1 && pawn &&
                         pawn->getType() == PieceType::PAWN && pawn->getOwner() == Player::PLAYER2;
         return reportResult("Undo round-trip capture", ok,
@@ -993,15 +1048,15 @@ namespace {
         state.getBoard().removePiece({0, 5});
         state.getBoard().setPiece({2, 5}, factory.create(PieceType::PAWN, Player::PLAYER2, {2, 5}));
 
-        const auto before = snapshotBoard(state.getBoard());
+        const auto before = snapshotGameState(state);
         state.applyMove({{0, 6}, {1, 5}, Player::PLAYER3});
         state.undoMove();
 
         std::string mismatch;
-        const bool boardOk = boardMatchesSnapshot(state.getBoard(), before, mismatch);
+        const bool stateOk = gameStateMatchesSnapshot(state, before, mismatch);
         Piece* capturingPawn = state.getBoard().getPiece({0, 6});
         Piece* capturedPawn = state.getBoard().getPiece({2, 5});
-        const bool ok = boardOk && capturingPawn && capturingPawn->getType() == PieceType::PAWN &&
+        const bool ok = stateOk && capturingPawn && capturingPawn->getType() == PieceType::PAWN &&
                         capturingPawn->getOwner() == Player::PLAYER3 && capturedPawn &&
                         capturedPawn->getType() == PieceType::PAWN && capturedPawn->getOwner() == Player::PLAYER2;
         return reportResult("Undo round-trip en passant", ok,
@@ -1015,16 +1070,16 @@ namespace {
         PieceFactory factory;
         state.getBoard().setPiece({5, 3}, factory.create(PieceType::PAWN, Player::PLAYER1, {5, 3}));
 
-        const auto before = snapshotBoard(state.getBoard());
+        const auto before = snapshotGameState(state);
         state.applyMove({{5, 3}, {4, 11}, Player::PLAYER1});
         Piece* promoted = state.getBoard().getPiece({4, 11});
         const bool promotedOk = promoted && promoted->getType() == PieceType::QUEEN && promoted->getOwner() == Player::PLAYER1;
         state.undoMove();
 
         std::string mismatch;
-        const bool boardOk = boardMatchesSnapshot(state.getBoard(), before, mismatch);
+        const bool stateOk = gameStateMatchesSnapshot(state, before, mismatch);
         Piece* pawn = state.getBoard().getPiece({5, 3});
-        const bool ok = promotedOk && boardOk && pawn && pawn->getType() == PieceType::PAWN &&
+        const bool ok = promotedOk && stateOk && pawn && pawn->getType() == PieceType::PAWN &&
                         pawn->getOwner() == Player::PLAYER1 && state.getBoard().getPiece({4, 11}) == nullptr;
         return reportResult("Undo round-trip promotion", ok,
             ok ? "queen removed and pawn restored" : mismatch);
@@ -1082,20 +1137,20 @@ namespace {
         state.getBoard().setPiece({1, 3}, factory.create(PieceType::KING, Player::PLAYER1, {1, 3}));
         state.getBoard().setPiece({4, 3}, factory.create(PieceType::ROOK, Player::PLAYER1, {4, 3}));
 
-        const auto before = snapshotBoard(state.getBoard());
         Move castle{{1, 3}, {3, 3}, Player::PLAYER1};
         castle.isCastling = true;
         castle.rookFrom = {4, 3};
         castle.rookTo = {2, 3};
 
+        const auto before = snapshotGameState(state);
         state.applyMove(castle);
         state.undoMove();
 
         std::string mismatch;
-        const bool boardOk = boardMatchesSnapshot(state.getBoard(), before, mismatch);
+        const bool stateOk = gameStateMatchesSnapshot(state, before, mismatch);
         Piece* king = state.getBoard().getPiece({1, 3});
         Piece* rook = state.getBoard().getPiece({4, 3});
-        const bool ok = boardOk && king && king->getType() == PieceType::KING &&
+        const bool ok = stateOk && king && king->getType() == PieceType::KING &&
                         king->getOwner() == Player::PLAYER1 && !king->getHasMoved() &&
                         rook && rook->getType() == PieceType::ROOK && rook->getOwner() == Player::PLAYER1 &&
                         !rook->getHasMoved() && state.getBoard().getPiece({2, 3}) == nullptr &&
@@ -1219,26 +1274,23 @@ namespace {
         state.getBoard().setPiece({1, 8}, factory.create(PieceType::ROOK, Player::PLAYER1, {1, 8}));
         state.getBoard().setPiece({0, 8}, factory.create(PieceType::PAWN, Player::PLAYER2, {0, 8}));
 
-        const auto before = snapshotBoard(state.getBoard());
+        const auto before = snapshotGameState(state);
         state.applyMove({{0, 6}, {0, 5}, Player::PLAYER1});
 
         const bool eliminatedAfterMove = state.isEliminated(Player::PLAYER2);
         state.undoMove();
 
         std::string mismatch;
-        const bool boardOk = boardMatchesSnapshot(state.getBoard(), before, mismatch);
-        const bool noEliminatedPlayers = !state.isEliminated(Player::PLAYER1) &&
-                                         !state.isEliminated(Player::PLAYER2) &&
-                                         !state.isEliminated(Player::PLAYER3);
-        const bool turnOk = state.getCurrentPlayer() == Player::PLAYER1;
-        const bool ok = eliminatedAfterMove && boardOk && noEliminatedPlayers && turnOk;
+        const bool stateOk = gameStateMatchesSnapshot(state, before, mismatch);
+        const bool ok = eliminatedAfterMove && stateOk;
 
         std::ostringstream details;
         details << "eliminatedAfterMove=" << (eliminatedAfterMove ? "yes" : "no")
-                << " boardOk=" << (boardOk ? "yes" : "no")
-                << " noEliminatedPlayers=" << (noEliminatedPlayers ? "yes" : "no")
-                << " currentPlayer=" << static_cast<int>(state.getCurrentPlayer());
-        if (!boardOk) {
+                << " stateOk=" << (stateOk ? "yes" : "no")
+                << " currentPlayer=" << static_cast<int>(state.getCurrentPlayer())
+                << " status=" << static_cast<int>(state.getStatus())
+                << " lastAttacker=" << static_cast<int>(state.getLastAttacker());
+        if (!stateOk) {
             details << " mismatch=" << mismatch;
         }
 

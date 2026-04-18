@@ -84,7 +84,7 @@ std::vector<Move> GameState::getLegalMovesAsMove(const HexCell& from) {
 
             applyMove(intermediate, true);
             const bool crossesAttackedSquare = isInCheck(player);
-            undoMove();
+            undoMove(false);
             if (crossesAttackedSquare) {
                 continue;
             }
@@ -92,7 +92,7 @@ std::vector<Move> GameState::getLegalMovesAsMove(const HexCell& from) {
 
         applyMove(simulated, true);
         const bool leavesKingInCheck = isInCheck(player);
-        undoMove();
+        undoMove(false);
         if (!leavesKingInCheck) {
             legalMoves.push_back(simulated);
 
@@ -137,7 +137,7 @@ int GameState::minimax(int depth, Player rootPlayer) {
     for (const Move& move : allMoves) {
         applyMove(move, true);
         const int score = minimax(depth - 1, rootPlayer);
-        undoMove();
+        undoMove(false);
 
         if (maximizing) {
             bestScore = std::max(bestScore, score);
@@ -167,7 +167,7 @@ std::optional<Move> GameState::findBestMove(int depth, Player aiPlayer) {
         for (const Move& move : legalMoves) {
             applyMove(move, true);
             const int score = minimax(depth - 1, aiPlayer);
-            undoMove();
+            undoMove(false);
 
             if (!bestMove.has_value() || score > bestScore) {
                 bestScore = score;
@@ -370,7 +370,7 @@ void GameState::applyMove(const Move& m, bool isSimulation) {
     }
 }
 
-void GameState::undoMove() {
+void GameState::undoMove(bool notifyObservers) {
     if (moveHistory.empty()) return;
     Move last = moveHistory.back();
     moveHistory.pop_back();
@@ -435,7 +435,9 @@ void GameState::undoMove() {
     status = last.previousStatus;
     lastAttacker = last.previousLastAttacker;
 
-    notifyAll();
+    if (notifyObservers) {
+        notifyAll();
+    }
 }
 
 void GameState::nextPlayer() {
