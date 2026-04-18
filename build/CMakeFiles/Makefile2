@@ -90,12 +90,12 @@ clean: CMakeFiles/GameLogicManualTests.dir/clean
 CMakeFiles/Chess3Players.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 "Built target Chess3Players"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 "Built target Chess3Players"
 .PHONY : CMakeFiles/Chess3Players.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Chess3Players.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles 15
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles 16
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/Chess3Players.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles 0
 .PHONY : CMakeFiles/Chess3Players.dir/rule
@@ -107,7 +107,7 @@ Chess3Players: CMakeFiles/Chess3Players.dir/rule
 # codegen rule for target.
 CMakeFiles/Chess3Players.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 "Finished codegen for target Chess3Players"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 "Finished codegen for target Chess3Players"
 .PHONY : CMakeFiles/Chess3Players.dir/codegen
 
 # clean rule for target.
@@ -122,7 +122,7 @@ CMakeFiles/Chess3Players.dir/clean:
 CMakeFiles/RendererPickTests.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=29,30,31,32,33,34,35,36,37,38,39,40,41,42 "Built target RendererPickTests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=30,31,32,33,34,35,36,37,38,39,40,41,42,43 "Built target RendererPickTests"
 .PHONY : CMakeFiles/RendererPickTests.dir/all
 
 # Build rule for subdir invocation for target.
@@ -139,7 +139,7 @@ RendererPickTests: CMakeFiles/RendererPickTests.dir/rule
 # codegen rule for target.
 CMakeFiles/RendererPickTests.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=29,30,31,32,33,34,35,36,37,38,39,40,41,42 "Finished codegen for target RendererPickTests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=30,31,32,33,34,35,36,37,38,39,40,41,42,43 "Finished codegen for target RendererPickTests"
 .PHONY : CMakeFiles/RendererPickTests.dir/codegen
 
 # clean rule for target.
@@ -154,7 +154,7 @@ CMakeFiles/RendererPickTests.dir/clean:
 CMakeFiles/GameLogicManualTests.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=16,17,18,19,20,21,22,23,24,25,26,27,28 "Built target GameLogicManualTests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=17,18,19,20,21,22,23,24,25,26,27,28,29 "Built target GameLogicManualTests"
 .PHONY : CMakeFiles/GameLogicManualTests.dir/all
 
 # Build rule for subdir invocation for target.
@@ -171,7 +171,7 @@ GameLogicManualTests: CMakeFiles/GameLogicManualTests.dir/rule
 # codegen rule for target.
 CMakeFiles/GameLogicManualTests.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=16,17,18,19,20,21,22,23,24,25,26,27,28 "Finished codegen for target GameLogicManualTests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=17,18,19,20,21,22,23,24,25,26,27,28,29 "Finished codegen for target GameLogicManualTests"
 .PHONY : CMakeFiles/GameLogicManualTests.dir/codegen
 
 # clean rule for target.

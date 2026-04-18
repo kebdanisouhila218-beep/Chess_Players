@@ -23,6 +23,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.obj.d"
   "CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj"
   "CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj.d"
+  "CMakeFiles/Chess3Players.dir/src/View/MenuRenderer.cpp.obj"
+  "CMakeFiles/Chess3Players.dir/src/View/MenuRenderer.cpp.obj.d"
   "CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj"
   "CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj.d"
   "CMakeFiles/Chess3Players.dir/src/main.cpp.obj"

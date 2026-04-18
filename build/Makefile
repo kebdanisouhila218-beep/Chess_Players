@@ -508,6 +508,30 @@ src/Model/Rook.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Rook.cpp.s
 .PHONY : src/Model/Rook.cpp.s
 
+src/View/MenuRenderer.obj: src/View/MenuRenderer.cpp.obj
+.PHONY : src/View/MenuRenderer.obj
+
+# target to build an object file
+src/View/MenuRenderer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/MenuRenderer.cpp.obj
+.PHONY : src/View/MenuRenderer.cpp.obj
+
+src/View/MenuRenderer.i: src/View/MenuRenderer.cpp.i
+.PHONY : src/View/MenuRenderer.i
+
+# target to preprocess a source file
+src/View/MenuRenderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/MenuRenderer.cpp.i
+.PHONY : src/View/MenuRenderer.cpp.i
+
+src/View/MenuRenderer.s: src/View/MenuRenderer.cpp.s
+.PHONY : src/View/MenuRenderer.s
+
+# target to generate assembly for a file
+src/View/MenuRenderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/MenuRenderer.cpp.s
+.PHONY : src/View/MenuRenderer.cpp.s
+
 src/View/Renderer.obj: src/View/Renderer.cpp.obj
 .PHONY : src/View/Renderer.obj
 
@@ -654,6 +678,9 @@ help:
 	@echo ... src/Model/Rook.obj
 	@echo ... src/Model/Rook.i
 	@echo ... src/Model/Rook.s
+	@echo ... src/View/MenuRenderer.obj
+	@echo ... src/View/MenuRenderer.i
+	@echo ... src/View/MenuRenderer.s
 	@echo ... src/View/Renderer.obj
 	@echo ... src/View/Renderer.i
 	@echo ... src/View/Renderer.s
