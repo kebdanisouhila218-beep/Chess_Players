@@ -11,6 +11,7 @@ class GameController {
 public:
     GameController();
     void run();
+    void showMenu();
 
 private:
     void handleEvents();

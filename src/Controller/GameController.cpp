@@ -57,11 +57,44 @@ std::string GameController::pieceLabel(const Piece* piece, const HexCell& cell) 
 }
 
 void GameController::run() {
+    showMenu();
+    if (!window.isOpen() || !gameStarted) {
+        return;
+    }
+
     while (window.isOpen()) {
         if (gameStarted) {
             tryAIMove();
         }
         handleEvents();
+    }
+}
+
+void GameController::showMenu() {
+    menuRenderer.draw(isAI);
+
+    while (window.isOpen() && !gameStarted) {
+        while (const std::optional event = window.pollEvent()) {
+            if (event->is<sf::Event::Closed>()) {
+                window.close();
+                return;
+            }
+
+            if (const auto* resized = event->getIf<sf::Event::Resized>()) {
+                sf::View view(sf::FloatRect({0.f, 0.f}, {
+                    static_cast<float>(resized->size.x),
+                    static_cast<float>(resized->size.y)
+                }));
+                window.setView(view);
+                menuRenderer.draw(isAI);
+            }
+
+            if (const auto* click = event->getIf<sf::Event::MouseButtonPressed>()) {
+                if (click->button == sf::Mouse::Button::Left) {
+                    handleMenuClick(click->position.x, click->position.y);
+                }
+            }
+        }
     }
 }
 
