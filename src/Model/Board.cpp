@@ -323,10 +323,12 @@ std::optional<HexCell> Board::getPawnTransition(const HexCell& from, Player owne
         return std::nullopt;
     }
 
-    if (x == 11 && y >= 8 && y <= 11) return HexCell{y, 7};
-    if (y == 7 && x >= 8 && x <= 11) return HexCell{x, 6};
-    if (y == 11 && x >= 4 && x <= 7) return HexCell{7, x - 4};
-    if (x == 7 && y >= 0 && y <= 3) return HexCell{6, y};
+    if (owner == Player::PLAYER3) {
+        if (x == 11 && y >= 8 && y <= 11) return HexCell{y, 7};
+        if (y == 7 && x >= 8 && x <= 11) return HexCell{x, 6};
+        if (y == 11 && x >= 4 && x <= 7) return HexCell{7, x - 4};
+        if (x == 7 && y >= 0 && y <= 3) return HexCell{6, y};
+    }
     return std::nullopt;
 }
 

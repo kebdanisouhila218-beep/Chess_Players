@@ -1,6 +1,6 @@
 #include "PieceFactory.hpp"
 
-//Le découplage des classes comme pawn knight bishop rook
+//Le découplage des classes comme pawn knight BISHOP rook
 
 Piece* PieceFactory::create(PieceType type, Player owner, HexCell pos) {
     switch (type) {

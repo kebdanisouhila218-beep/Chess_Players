@@ -5,10 +5,18 @@
 #include <cmath>
 
 namespace {
-    Board::Direction pawnForward(Player owner) {
-        if (owner == Player::PLAYER1) return Board::Direction::SOUTH;
-        if (owner == Player::PLAYER2) return Board::Direction::EAST;
-        return Board::Direction::NORTH;
+    Board::Direction pawnForward(const Board& board, Player owner, const HexCell& pos) {
+        const int sextant = board.getSextant(pos);
+        switch (owner) {
+            case Player::PLAYER1: // BLANC - avance vers le BAS (r croissant)
+                return Board::Direction::SOUTH;
+            case Player::PLAYER2: // BLEU - avance vers la DROITE (q croissant)
+                return Board::Direction::EAST;
+            case Player::PLAYER3: // ROUGE - avance vers la GAUCHE (q décroissant)
+                return Board::Direction::WEST;
+            default:
+                return Board::Direction::SOUTH;
+        }
     }
 
     bool isCastlingCandidateMove(Piece* piece, const HexCell& from, const HexCell& to) {
@@ -32,7 +40,13 @@ GameState::GameState()
     , status(GameStatus::PLAYING)
     , lastAttacker(Player::NONE)
     , eliminatedPlayers()
-{}
+{
+    // Initialiser le plateau avec les pièces des 3 joueurs
+    PieceFactory factory;
+    factory.initBoard(board, Player::PLAYER1);
+    factory.initBoard(board, Player::PLAYER2);
+    factory.initBoard(board, Player::PLAYER3);
+}
 
 const Move* GameState::getLastMove() const {
     if (moveHistory.empty()) return nullptr;
@@ -371,7 +385,7 @@ void GameState::applyMove(const Move& m, bool isSimulation) {
         if (capturedPiece == nullptr && previous && previous->player != moving->getOwner()) {
             Piece* lastPawn = board.getPiece(previous->to);
             if (lastPawn && lastPawn->getType() == PieceType::PAWN) {
-                const Board::Direction enemyForward = pawnForward(lastPawn->getOwner());
+                const Board::Direction enemyForward = pawnForward(board, lastPawn->getOwner(), lastPawn->getPos());
                 std::optional<HexCell> mid = board.step(previous->from, enemyForward);
                 std::optional<HexCell> end = mid.has_value() ? board.step(*mid, enemyForward) : std::nullopt;
                 if (mid.has_value() && end.has_value() && *end == previous->to && *mid == m.to) {

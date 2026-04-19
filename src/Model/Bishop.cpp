@@ -8,11 +8,7 @@
 // Difference avec la tour :
 //   - Tour  : directions cardinales (NORTH, SOUTH, EAST, WEST)
 //   - Fou   : directions diagonales (NE, SW, SE, NW)
-// Les deux s'appuient sur ray(), mais traversent des familles de liaisons differentes
-// dans Board::buildNeighbors().
-//
-// Test de reference : fou en {6,2} doit atteindre {8,4} (zone PLAYER2)
-// -> couverture assuree par testBishopCrossesIntoOtherZoneDiagonally() dans game_logic_manual_test.cpp
+
 std::vector<HexCell> Bishop::getMoves(const Board& board) const {
     std::vector<HexCell> moves;
 
@@ -26,16 +22,18 @@ std::vector<HexCell> Bishop::getMoves(const Board& board) const {
     for (Board::Direction dir : directions) {
         for (const HexCell& current : board.ray(pos, dir)) {
             Piece* target = board.getPiece(current);
-            if (target == nullptr) {
+            if (target && target->getOwner() != owner) {
+                moves.push_back(current);
+                break; // Stop at first capture
+            }
+            if (!target) {
                 moves.push_back(current);
             } else {
-                if (target->getOwner() != owner) {
-                    moves.push_back(current);
-                }
-                break;
+                break; // Stop at first piece (friendly or enemy)
             }
         }
     }
 
     return moves;
 }
+
