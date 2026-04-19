@@ -9,34 +9,21 @@ namespace {
     Board::Direction pawnForward(const Board& board, Player owner, const HexCell& pos) {
         const int sextant = board.getSextant(pos);
         switch (owner) {
-            case Player::PLAYER1:
-                if (sextant == 0) return Board::Direction::SOUTH;
-                if (sextant == 1) return Board::Direction::SOUTH;
-                if (sextant == 2) return Board::Direction::SOUTH;
-                if (sextant == 3) return Board::Direction::SOUTH;
-                if (sextant == 4) return Board::Direction::SOUTH;
-                if (sextant == 5) return Board::Direction::EAST;
-                break;
-            case Player::PLAYER2:
-                if (sextant == 0) return Board::Direction::SOUTH;
-                if (sextant == 1) return Board::Direction::EAST;
-                if (sextant == 2) return Board::Direction::SOUTH;
-                if (sextant == 3) return Board::Direction::WEST;
-                if (sextant == 4) return Board::Direction::NORTH;
-                if (sextant == 5) return Board::Direction::NORTH;
-                break;
-            case Player::PLAYER3:
-                if (sextant == 0) return Board::Direction::NORTH;
-                if (sextant == 1) return Board::Direction::NORTH;
-                if (sextant == 2) return Board::Direction::NORTH;
-                if (sextant == 3) return Board::Direction::EAST;
-                if (sextant == 4) return Board::Direction::SOUTH;
-                if (sextant == 5) return Board::Direction::WEST;
-                break;
+            case Player::PLAYER1: // BLANC - avance vers le BAS (r croissant)
+                // Dans tous les sextants, PLAYER1 avance vers le bas
+                return Board::Direction::SOUTH;
+                
+            case Player::PLAYER2: // BLEU - avance vers la DROITE (q croissant)
+                // Dans tous les sextants, PLAYER2 avance vers la droite
+                return Board::Direction::EAST;
+                
+            case Player::PLAYER3: // ROUGE - avance vers la GAUCHE (q décroissant)
+                // Dans tous les sextants, PLAYER3 avance vers la gauche
+                return Board::Direction::WEST;
+                
             default:
-                break;
+                return Board::Direction::SOUTH;
         }
-        return Board::Direction::SOUTH;
     }
 
     bool crossesSeam(const Board& board, const HexCell& from, const std::optional<HexCell>& to) {
@@ -80,9 +67,6 @@ std::vector<HexCell> Pawn::getCaptureSquares(const Board& board, const Move* las
     const std::optional<HexCell> transition = !front.has_value() ? board.getPawnTransition(pos, owner) : std::nullopt;
     const bool directSeamForward = crossesSeam(board, pos, front);
 
-    const bool crossingSeam = transition.has_value() || directSeamForward;
-    const HexCell captureBase = transition.has_value() ? *transition : pos;
-
     // If transition is occupied by enemy, it should be a valid capture target
     if (transition.has_value()) {
         Piece* transitionPiece = board.getPiece(*transition);
@@ -99,10 +83,8 @@ std::vector<HexCell> Pawn::getCaptureSquares(const Board& board, const Move* las
         }
     }
 
-    // Only proceed with diagonal captures from original position if no transition
-    // If there's a transition, don't allow diagonal captures from the transition position
-    if (transition.has_value() || directSeamForward) {
-        // Only diagonal captures allowed are direct captures on transition/forward squares (handled above)
+    // If transition, captures from original position make no sense (pawn "teleports")
+    if (transition.has_value()) {
         return cells;
     }
 
@@ -124,8 +106,8 @@ std::vector<HexCell> Pawn::getCaptureSquares(const Board& board, const Move* las
             std::optional<HexCell> end = mid.has_value() ? board.step(*mid, enemyForward) : std::nullopt;
 
             if (mid.has_value() && end.has_value() && *end == lastMove->to && board.getPiece(*mid) == nullptr) {
-                for (Board::Direction captureDir : pawnCaptures(board, owner, captureBase, crossingSeam)) {
-                    std::optional<HexCell> capture = board.step(captureBase, captureDir);
+                for (Board::Direction captureDir : pawnCaptures(board, owner, pos, false)) {
+                    std::optional<HexCell> capture = board.step(pos, captureDir);
                     if (capture.has_value() && *capture == *mid) {
                         cells.push_back(*capture);
                     }
