@@ -11,9 +11,13 @@ namespace {
         switch (owner) {
             case Player::PLAYER1:
                 if (sextant == 5) return Board::Direction::EAST;
+                if (sextant == 4) return Board::Direction::EAST;
+                if (sextant == 3) return Board::Direction::NORTH;
+                if (sextant == 2) return Board::Direction::NORTH;
                 return Board::Direction::SOUTH;
 
             case Player::PLAYER2:
+                if (sextant == 0) return Board::Direction::NORTH;
                 if (sextant == 1) return Board::Direction::EAST;
                 if (sextant == 3) return Board::Direction::WEST;
                 if (sextant == 4) return Board::Direction::NORTH;
