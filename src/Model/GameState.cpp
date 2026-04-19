@@ -8,12 +8,25 @@ namespace {
     Board::Direction pawnForward(const Board& board, Player owner, const HexCell& pos) {
         const int sextant = board.getSextant(pos);
         switch (owner) {
-            case Player::PLAYER1: // BLANC - avance vers le BAS (r croissant)
+            case Player::PLAYER1:
+                if (sextant == 5) return Board::Direction::EAST;
                 return Board::Direction::SOUTH;
-            case Player::PLAYER2: // BLEU - avance vers la DROITE (q croissant)
-                return Board::Direction::EAST;
-            case Player::PLAYER3: // ROUGE - avance vers la GAUCHE (q décroissant)
-                return Board::Direction::WEST;
+
+            case Player::PLAYER2:
+                if (sextant == 1) return Board::Direction::EAST;
+                if (sextant == 3) return Board::Direction::WEST;
+                if (sextant == 4) return Board::Direction::NORTH;
+                if (sextant == 5) return Board::Direction::NORTH;
+                return Board::Direction::SOUTH;
+
+            case Player::PLAYER3:
+                if (sextant == 0) return Board::Direction::NORTH;
+                if (sextant == 1) return Board::Direction::NORTH;
+                if (sextant == 2) return Board::Direction::NORTH;
+                if (sextant == 3) return Board::Direction::EAST;
+                if (sextant == 5) return Board::Direction::WEST;
+                return Board::Direction::SOUTH; // sextant 4
+
             default:
                 return Board::Direction::SOUTH;
         }
