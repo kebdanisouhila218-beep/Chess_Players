@@ -43,10 +43,6 @@ GameController::GameController(bool windowVisible)
     state.addObserver(&renderer);
     renderer.setCurrentState(&state);
 
-    factory.initBoard(state.getBoard(), Player::PLAYER1);
-    factory.initBoard(state.getBoard(), Player::PLAYER2);
-    factory.initBoard(state.getBoard(), Player::PLAYER3);
-
     menuRenderer.draw(isAI);
 }
 
