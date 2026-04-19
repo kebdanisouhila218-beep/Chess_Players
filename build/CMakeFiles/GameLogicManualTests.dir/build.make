@@ -72,6 +72,7 @@ CMakeFiles/GameLogicManualTests.dir/codegen:
 .PHONY : CMakeFiles/GameLogicManualTests.dir/codegen
 
 CMakeFiles/GameLogicManualTests.dir/src/game_logic_manual_test.cpp.obj: CMakeFiles/GameLogicManualTests.dir/flags.make
+CMakeFiles/GameLogicManualTests.dir/src/game_logic_manual_test.cpp.obj: CMakeFiles/GameLogicManualTests.dir/includes_CXX.rsp
 CMakeFiles/GameLogicManualTests.dir/src/game_logic_manual_test.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/game_logic_manual_test.cpp
 CMakeFiles/GameLogicManualTests.dir/src/game_logic_manual_test.cpp.obj: CMakeFiles/GameLogicManualTests.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/GameLogicManualTests.dir/src/game_logic_manual_test.cpp.obj"
@@ -86,6 +87,7 @@ CMakeFiles/GameLogicManualTests.dir/src/game_logic_manual_test.cpp.s: cmake_forc
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\game_logic_manual_test.cpp -o CMakeFiles\GameLogicManualTests.dir\src\game_logic_manual_test.cpp.s
 
 CMakeFiles/GameLogicManualTests.dir/src/Model/HexCell.cpp.obj: CMakeFiles/GameLogicManualTests.dir/flags.make
+CMakeFiles/GameLogicManualTests.dir/src/Model/HexCell.cpp.obj: CMakeFiles/GameLogicManualTests.dir/includes_CXX.rsp
 CMakeFiles/GameLogicManualTests.dir/src/Model/HexCell.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/HexCell.cpp
 CMakeFiles/GameLogicManualTests.dir/src/Model/HexCell.cpp.obj: CMakeFiles/GameLogicManualTests.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/GameLogicManualTests.dir/src/Model/HexCell.cpp.obj"
@@ -100,6 +102,7 @@ CMakeFiles/GameLogicManualTests.dir/src/Model/HexCell.cpp.s: cmake_force
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\HexCell.cpp -o CMakeFiles\GameLogicManualTests.dir\src\Model\HexCell.cpp.s
 
 CMakeFiles/GameLogicManualTests.dir/src/Model/Piece.cpp.obj: CMakeFiles/GameLogicManualTests.dir/flags.make
+CMakeFiles/GameLogicManualTests.dir/src/Model/Piece.cpp.obj: CMakeFiles/GameLogicManualTests.dir/includes_CXX.rsp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Piece.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Piece.cpp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Piece.cpp.obj: CMakeFiles/GameLogicManualTests.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/GameLogicManualTests.dir/src/Model/Piece.cpp.obj"
@@ -114,6 +117,7 @@ CMakeFiles/GameLogicManualTests.dir/src/Model/Piece.cpp.s: cmake_force
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Piece.cpp -o CMakeFiles\GameLogicManualTests.dir\src\Model\Piece.cpp.s
 
 CMakeFiles/GameLogicManualTests.dir/src/Model/Pawn.cpp.obj: CMakeFiles/GameLogicManualTests.dir/flags.make
+CMakeFiles/GameLogicManualTests.dir/src/Model/Pawn.cpp.obj: CMakeFiles/GameLogicManualTests.dir/includes_CXX.rsp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Pawn.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Pawn.cpp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Pawn.cpp.obj: CMakeFiles/GameLogicManualTests.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/GameLogicManualTests.dir/src/Model/Pawn.cpp.obj"
@@ -128,6 +132,7 @@ CMakeFiles/GameLogicManualTests.dir/src/Model/Pawn.cpp.s: cmake_force
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Pawn.cpp -o CMakeFiles\GameLogicManualTests.dir\src\Model\Pawn.cpp.s
 
 CMakeFiles/GameLogicManualTests.dir/src/Model/Knight.cpp.obj: CMakeFiles/GameLogicManualTests.dir/flags.make
+CMakeFiles/GameLogicManualTests.dir/src/Model/Knight.cpp.obj: CMakeFiles/GameLogicManualTests.dir/includes_CXX.rsp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Knight.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Knight.cpp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Knight.cpp.obj: CMakeFiles/GameLogicManualTests.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/GameLogicManualTests.dir/src/Model/Knight.cpp.obj"
@@ -142,6 +147,7 @@ CMakeFiles/GameLogicManualTests.dir/src/Model/Knight.cpp.s: cmake_force
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Knight.cpp -o CMakeFiles\GameLogicManualTests.dir\src\Model\Knight.cpp.s
 
 CMakeFiles/GameLogicManualTests.dir/src/Model/Bishop.cpp.obj: CMakeFiles/GameLogicManualTests.dir/flags.make
+CMakeFiles/GameLogicManualTests.dir/src/Model/Bishop.cpp.obj: CMakeFiles/GameLogicManualTests.dir/includes_CXX.rsp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Bishop.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Bishop.cpp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Bishop.cpp.obj: CMakeFiles/GameLogicManualTests.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/GameLogicManualTests.dir/src/Model/Bishop.cpp.obj"
@@ -156,6 +162,7 @@ CMakeFiles/GameLogicManualTests.dir/src/Model/Bishop.cpp.s: cmake_force
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Bishop.cpp -o CMakeFiles\GameLogicManualTests.dir\src\Model\Bishop.cpp.s
 
 CMakeFiles/GameLogicManualTests.dir/src/Model/Rook.cpp.obj: CMakeFiles/GameLogicManualTests.dir/flags.make
+CMakeFiles/GameLogicManualTests.dir/src/Model/Rook.cpp.obj: CMakeFiles/GameLogicManualTests.dir/includes_CXX.rsp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Rook.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Rook.cpp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Rook.cpp.obj: CMakeFiles/GameLogicManualTests.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/GameLogicManualTests.dir/src/Model/Rook.cpp.obj"
@@ -170,6 +177,7 @@ CMakeFiles/GameLogicManualTests.dir/src/Model/Rook.cpp.s: cmake_force
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Rook.cpp -o CMakeFiles\GameLogicManualTests.dir\src\Model\Rook.cpp.s
 
 CMakeFiles/GameLogicManualTests.dir/src/Model/Queen.cpp.obj: CMakeFiles/GameLogicManualTests.dir/flags.make
+CMakeFiles/GameLogicManualTests.dir/src/Model/Queen.cpp.obj: CMakeFiles/GameLogicManualTests.dir/includes_CXX.rsp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Queen.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Queen.cpp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Queen.cpp.obj: CMakeFiles/GameLogicManualTests.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/GameLogicManualTests.dir/src/Model/Queen.cpp.obj"
@@ -184,6 +192,7 @@ CMakeFiles/GameLogicManualTests.dir/src/Model/Queen.cpp.s: cmake_force
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Queen.cpp -o CMakeFiles\GameLogicManualTests.dir\src\Model\Queen.cpp.s
 
 CMakeFiles/GameLogicManualTests.dir/src/Model/King.cpp.obj: CMakeFiles/GameLogicManualTests.dir/flags.make
+CMakeFiles/GameLogicManualTests.dir/src/Model/King.cpp.obj: CMakeFiles/GameLogicManualTests.dir/includes_CXX.rsp
 CMakeFiles/GameLogicManualTests.dir/src/Model/King.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/King.cpp
 CMakeFiles/GameLogicManualTests.dir/src/Model/King.cpp.obj: CMakeFiles/GameLogicManualTests.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/GameLogicManualTests.dir/src/Model/King.cpp.obj"
@@ -198,6 +207,7 @@ CMakeFiles/GameLogicManualTests.dir/src/Model/King.cpp.s: cmake_force
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\King.cpp -o CMakeFiles\GameLogicManualTests.dir\src\Model\King.cpp.s
 
 CMakeFiles/GameLogicManualTests.dir/src/Model/Board.cpp.obj: CMakeFiles/GameLogicManualTests.dir/flags.make
+CMakeFiles/GameLogicManualTests.dir/src/Model/Board.cpp.obj: CMakeFiles/GameLogicManualTests.dir/includes_CXX.rsp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Board.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Board.cpp
 CMakeFiles/GameLogicManualTests.dir/src/Model/Board.cpp.obj: CMakeFiles/GameLogicManualTests.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/GameLogicManualTests.dir/src/Model/Board.cpp.obj"
@@ -212,6 +222,7 @@ CMakeFiles/GameLogicManualTests.dir/src/Model/Board.cpp.s: cmake_force
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\Board.cpp -o CMakeFiles\GameLogicManualTests.dir\src\Model\Board.cpp.s
 
 CMakeFiles/GameLogicManualTests.dir/src/Model/GameState.cpp.obj: CMakeFiles/GameLogicManualTests.dir/flags.make
+CMakeFiles/GameLogicManualTests.dir/src/Model/GameState.cpp.obj: CMakeFiles/GameLogicManualTests.dir/includes_CXX.rsp
 CMakeFiles/GameLogicManualTests.dir/src/Model/GameState.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/GameState.cpp
 CMakeFiles/GameLogicManualTests.dir/src/Model/GameState.cpp.obj: CMakeFiles/GameLogicManualTests.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/GameLogicManualTests.dir/src/Model/GameState.cpp.obj"
@@ -226,6 +237,7 @@ CMakeFiles/GameLogicManualTests.dir/src/Model/GameState.cpp.s: cmake_force
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Model\GameState.cpp -o CMakeFiles\GameLogicManualTests.dir\src\Model\GameState.cpp.s
 
 CMakeFiles/GameLogicManualTests.dir/src/Model/PieceFactory.cpp.obj: CMakeFiles/GameLogicManualTests.dir/flags.make
+CMakeFiles/GameLogicManualTests.dir/src/Model/PieceFactory.cpp.obj: CMakeFiles/GameLogicManualTests.dir/includes_CXX.rsp
 CMakeFiles/GameLogicManualTests.dir/src/Model/PieceFactory.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/PieceFactory.cpp
 CMakeFiles/GameLogicManualTests.dir/src/Model/PieceFactory.cpp.obj: CMakeFiles/GameLogicManualTests.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/GameLogicManualTests.dir/src/Model/PieceFactory.cpp.obj"
@@ -270,6 +282,9 @@ GameLogicManualTests.exe: CMakeFiles/GameLogicManualTests.dir/src/Model/Board.cp
 GameLogicManualTests.exe: CMakeFiles/GameLogicManualTests.dir/src/Model/GameState.cpp.obj
 GameLogicManualTests.exe: CMakeFiles/GameLogicManualTests.dir/src/Model/PieceFactory.cpp.obj
 GameLogicManualTests.exe: CMakeFiles/GameLogicManualTests.dir/build.make
+GameLogicManualTests.exe: C:/SFML/lib/libsfml-graphics-d.a
+GameLogicManualTests.exe: C:/SFML/lib/libsfml-window-d.a
+GameLogicManualTests.exe: C:/SFML/lib/libsfml-system-d.a
 GameLogicManualTests.exe: CMakeFiles/GameLogicManualTests.dir/linkLibs.rsp
 GameLogicManualTests.exe: CMakeFiles/GameLogicManualTests.dir/objects1.rsp
 GameLogicManualTests.exe: CMakeFiles/GameLogicManualTests.dir/link.txt

@@ -4,7 +4,7 @@
 # compile CXX with C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/bin/g++.exe
 CXX_DEFINES = 
 
-CXX_INCLUDES = @CMakeFiles/GameLogicManualTests.dir/includes_CXX.rsp
+CXX_INCLUDES = @CMakeFiles/ControllerManualTests.dir/includes_CXX.rsp
 
 CXX_FLAGS = -std=gnu++17
 

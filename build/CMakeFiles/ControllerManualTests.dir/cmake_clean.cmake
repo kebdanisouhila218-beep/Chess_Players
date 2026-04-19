@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/ControllerManualTests.dir/src/Controller/GameController.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/Controller/GameController.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Bishop.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Bishop.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Board.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Board.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/GameState.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/GameState.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/HexCell.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/HexCell.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/King.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/King.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Knight.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Knight.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Pawn.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Pawn.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Piece.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Piece.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/PieceFactory.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/PieceFactory.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Queen.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Queen.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Rook.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/Model/Rook.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/View/MenuRenderer.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/View/MenuRenderer.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/View/Renderer.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/View/Renderer.cpp.obj.d"
+  "CMakeFiles/ControllerManualTests.dir/src/controller_manual_test.cpp.obj"
+  "CMakeFiles/ControllerManualTests.dir/src/controller_manual_test.cpp.obj.d"
+  "ControllerManualTests.exe"
+  "ControllerManualTests.exe.manifest"
+  "ControllerManualTests.pdb"
+  "libControllerManualTests.dll.a"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/ControllerManualTests.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

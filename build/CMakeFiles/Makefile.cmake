@@ -72,4 +72,7 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/Chess3Players.dir/DependInfo.cmake"
   "CMakeFiles/RendererPickTests.dir/DependInfo.cmake"
   "CMakeFiles/GameLogicManualTests.dir/DependInfo.cmake"
+  "CMakeFiles/MenuAIManualTests.dir/DependInfo.cmake"
+  "CMakeFiles/ControllerManualTests.dir/DependInfo.cmake"
+  "CMakeFiles/BoardMatrixDebug.dir/DependInfo.cmake"
   )
