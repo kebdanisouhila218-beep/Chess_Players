@@ -139,7 +139,9 @@ std::vector<HexCell> Pawn::getMoves(const Board& board, const Move* lastMove) co
         moves.push_back(*front);
         if (!getHasMoved()) {
             std::optional<HexCell> front2 = board.step(*front, forward);
-            if (front2.has_value() && board.getPiece(*front2) == nullptr) {
+            // Ne pas autoriser la double avance si le second pas franchit une couture
+            if (front2.has_value() && board.getPiece(*front2) == nullptr
+                    && !crossesSeam(board, *front, front2)) {
                 moves.push_back(*front2);
             }
         }
