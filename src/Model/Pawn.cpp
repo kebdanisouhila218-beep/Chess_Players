@@ -12,6 +12,8 @@ namespace {
             case Player::PLAYER1:
                 if (sextant == 0) return Board::Direction::SOUTH;
                 if (sextant == 1) return Board::Direction::SOUTH;
+                if (sextant == 2) return Board::Direction::SOUTH;
+                if (sextant == 3) return Board::Direction::SOUTH;
                 if (sextant == 4) return Board::Direction::SOUTH;
                 if (sextant == 5) return Board::Direction::EAST;
                 break;
@@ -20,8 +22,11 @@ namespace {
                 if (sextant == 1) return Board::Direction::EAST;
                 if (sextant == 2) return Board::Direction::SOUTH;
                 if (sextant == 3) return Board::Direction::WEST;
+                if (sextant == 4) return Board::Direction::NORTH;
+                if (sextant == 5) return Board::Direction::NORTH;
                 break;
             case Player::PLAYER3:
+                if (sextant == 0) return Board::Direction::NORTH;
                 if (sextant == 1) return Board::Direction::NORTH;
                 if (sextant == 2) return Board::Direction::NORTH;
                 if (sextant == 3) return Board::Direction::EAST;
@@ -94,22 +99,15 @@ std::vector<HexCell> Pawn::getCaptureSquares(const Board& board, const Move* las
         }
     }
 
-    // Only proceed with diagonal captures if the forward/transition square is not occupied by friendly piece
-    bool forwardBlocked = false;
-    if (transition.has_value() && board.getPiece(*transition) != nullptr) {
-        forwardBlocked = true;
-    }
-    if (directSeamForward && front.has_value() && board.getPiece(*front) != nullptr) {
-        forwardBlocked = true;
-    }
-
-    if (forwardBlocked) {
-        // Skip diagonal captures if forward is blocked
+    // Only proceed with diagonal captures from original position if no transition
+    // If there's a transition, don't allow diagonal captures from the transition position
+    if (transition.has_value() || directSeamForward) {
+        // Only diagonal captures allowed are direct captures on transition/forward squares (handled above)
         return cells;
     }
 
-    for (Board::Direction captureDir : pawnCaptures(board, owner, captureBase, crossingSeam)) {
-        std::optional<HexCell> capture = board.step(captureBase, captureDir);
+    for (Board::Direction captureDir : pawnCaptures(board, owner, pos, false)) {
+        std::optional<HexCell> capture = board.step(pos, captureDir);
         if (capture.has_value() && board.isValid(*capture)) {
             Piece* target = board.getPiece(*capture);
             if (target && target->getOwner() != owner) {
