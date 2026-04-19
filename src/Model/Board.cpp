@@ -335,11 +335,31 @@ bool Board::isPromotionCell(const HexCell& c, Player owner) const {
         return false;
     }
 
+    const auto isOneOf = [&](std::initializer_list<HexCell> cells) {
+        for (const HexCell& cell : cells) {
+            if (c == cell) {
+                return true;
+            }
+        }
+        return false;
+    };
+
     if (owner == Player::PLAYER1) {
-        return c.r >= 8 && c.q >= 4 && c.q <= 8;
+        return isOneOf({
+            {0, 4}, {0, 5}, {0, 6}, {0, 7},
+            {8, 4}, {9, 4}, {10, 4}, {11, 4},
+            {4, 8}, {5, 8}, {6, 8}, {7, 8}, {8, 8}
+        });
     }
     if (owner == Player::PLAYER2) {
-        return (c.q <= 3 && c.r <= 3) || (c.q >= 8 && c.r >= 8);
+        return isOneOf({
+            {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},
+            {4, 8}, {5, 8}, {6, 8}, {7, 8}, {8, 8}
+        });
     }
-    return (c.q >= 4 && c.q <= 7 && c.r <= 2) || (c.q >= 8 && c.r >= 4 && c.r <= 7);
+    return isOneOf({
+        {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},
+        {0, 4}, {0, 5}, {0, 6}, {0, 7},
+        {8, 4}, {9, 4}, {10, 4}, {11, 4}
+    });
 }

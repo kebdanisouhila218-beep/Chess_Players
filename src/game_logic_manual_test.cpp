@@ -615,6 +615,138 @@ namespace {
             std::string("moves: ") + moveListText(moves));
     }
 
+    bool testPawnSeamEmptyAdvanceOnly() {
+        Board board;
+        PieceStore pieces;
+        clearBoard(board);
+
+        Pawn* pawn = addPiece<Pawn>(board, pieces, Player::PLAYER1, {7, 3});
+        const std::vector<HexCell> moves = pawn->getMoves(board);
+        const std::vector<HexCell> captures = pawn->getCaptureSquares(board);
+        const bool ok = moves.size() == 1 && contains(moves, {7, 11}) && captures.empty();
+        return reportResult("Pawn seam empty -> advance only", ok,
+            std::string("moves: ") + moveListText(moves) + " | captures: " + moveListText(captures));
+    }
+
+    bool testPawnSeamOccupiedNoAdvance() {
+        Board board;
+        PieceStore pieces;
+        clearBoard(board);
+
+        Pawn* pawn = addPiece<Pawn>(board, pieces, Player::PLAYER1, {7, 3});
+        addPiece<Pawn>(board, pieces, Player::PLAYER3, {7, 11});
+        const std::vector<HexCell> moves = pawn->getMoves(board);
+        const std::vector<HexCell> captures = pawn->getCaptureSquares(board);
+        const bool ok = !contains(moves, {7, 11}) && !contains(captures, {7, 11});
+        return reportResult("Pawn seam occupied -> no forward advance", ok,
+            std::string("moves: ") + moveListText(moves) + " | captures: " + moveListText(captures));
+    }
+
+    bool testPawnSeamOccupiedWithDiagonalEnemyCaptureOnly() {
+        Board board;
+        PieceStore pieces;
+        clearBoard(board);
+
+        Pawn* pawn = addPiece<Pawn>(board, pieces, Player::PLAYER1, {7, 3});
+        addPiece<Pawn>(board, pieces, Player::PLAYER3, {7, 11});
+        addPiece<Pawn>(board, pieces, Player::PLAYER3, {8, 10});
+        const std::vector<HexCell> moves = pawn->getMoves(board);
+        const std::vector<HexCell> captures = pawn->getCaptureSquares(board);
+        const bool ok = moves.empty() && captures.empty();
+        return reportResult("Pawn seam occupied + diagonal enemy -> no move", ok,
+            std::string("moves: ") + moveListText(moves) + " | captures: " + moveListText(captures));
+    }
+
+    bool testPawnSeamOccupiedWithoutDiagonalEnemyHasNoMove() {
+        Board board;
+        PieceStore pieces;
+        clearBoard(board);
+
+        Pawn* pawn = addPiece<Pawn>(board, pieces, Player::PLAYER1, {7, 3});
+        addPiece<Pawn>(board, pieces, Player::PLAYER3, {7, 11});
+        addPiece<Pawn>(board, pieces, Player::PLAYER1, {8, 10});
+        addPiece<Pawn>(board, pieces, Player::PLAYER1, {6, 10});
+        const std::vector<HexCell> moves = pawn->getMoves(board);
+        const std::vector<HexCell> captures = pawn->getCaptureSquares(board);
+        const bool ok = moves.empty() && captures.empty();
+        return reportResult("Pawn seam occupied + no diagonal enemy -> no move", ok,
+            std::string("moves: ") + moveListText(moves) + " | captures: " + moveListText(captures));
+    }
+
+    bool testPawnSeamRulesApplyToPlayer2() {
+        Board board;
+        PieceStore pieces;
+        clearBoard(board);
+
+        Pawn* pawn = addPiece<Pawn>(board, pieces, Player::PLAYER2, {3, 7});
+
+        const std::vector<HexCell> emptyMoves = pawn->getMoves(board);
+        const std::vector<HexCell> emptyCaptures = pawn->getCaptureSquares(board);
+        const bool emptyOk = emptyMoves.size() == 1 && contains(emptyMoves, {3, 3}) && emptyCaptures.empty();
+
+        addPiece<Pawn>(board, pieces, Player::PLAYER1, {3, 3});
+        const std::vector<HexCell> blockedMoves = pawn->getMoves(board);
+        const std::vector<HexCell> blockedCaptures = pawn->getCaptureSquares(board);
+        const bool blockedOk = blockedMoves.empty() && blockedCaptures.empty();
+
+        addPiece<Pawn>(board, pieces, Player::PLAYER1, {2, 2});
+        const std::vector<HexCell> captureMoves = pawn->getMoves(board);
+        const std::vector<HexCell> captureCaptures = pawn->getCaptureSquares(board);
+        const bool captureOk = captureMoves.empty() && captureCaptures.empty();
+
+        std::ostringstream details;
+        details << "empty moves: " << moveListText(emptyMoves)
+                << " | blocked moves: " << moveListText(blockedMoves)
+                << " | blocked captures: " << moveListText(blockedCaptures)
+                << " | capture captures: " << moveListText(captureCaptures);
+        return reportResult("Pawn seam rules apply to PLAYER2", emptyOk && blockedOk && captureOk, details.str());
+    }
+
+    bool testPawnSeamRulesApplyToPlayer3() {
+        Board board;
+        PieceStore pieces;
+        clearBoard(board);
+
+        Pawn* pawn = addPiece<Pawn>(board, pieces, Player::PLAYER3, {11, 8});
+
+        const std::vector<HexCell> emptyMoves = pawn->getMoves(board);
+        const std::vector<HexCell> emptyCaptures = pawn->getCaptureSquares(board);
+        const bool emptyOk = emptyMoves.size() == 1 && contains(emptyMoves, {8, 7}) && emptyCaptures.empty();
+
+        addPiece<Pawn>(board, pieces, Player::PLAYER2, {8, 7});
+        const std::vector<HexCell> blockedMoves = pawn->getMoves(board);
+        const std::vector<HexCell> blockedCaptures = pawn->getCaptureSquares(board);
+        const bool blockedOk = blockedMoves.empty() && blockedCaptures.empty();
+
+        addPiece<Pawn>(board, pieces, Player::PLAYER2, {9, 6});
+        const std::vector<HexCell> captureMoves = pawn->getMoves(board);
+        const std::vector<HexCell> captureCaptures = pawn->getCaptureSquares(board);
+        const bool captureOk = captureMoves.empty() && captureCaptures.empty();
+
+        std::ostringstream details;
+        details << "empty moves: " << moveListText(emptyMoves)
+                << " | blocked moves: " << moveListText(blockedMoves)
+                << " | blocked captures: " << moveListText(blockedCaptures)
+                << " | capture captures: " << moveListText(captureCaptures);
+        return reportResult("Pawn seam rules apply to PLAYER3", emptyOk && blockedOk && captureOk, details.str());
+    }
+
+    bool testPawnDirectSeamForwardBlockedForPlayer2() {
+        Board board;
+        PieceStore pieces;
+        clearBoard(board);
+
+        Pawn* pawn = addPiece<Pawn>(board, pieces, Player::PLAYER2, {10, 7});
+        addPiece<Pawn>(board, pieces, Player::PLAYER3, {11, 10});
+        addPiece<Bishop>(board, pieces, Player::PLAYER3, {11, 11});
+
+        const std::vector<HexCell> moves = pawn->getMoves(board);
+        const std::vector<HexCell> captures = pawn->getCaptureSquares(board);
+        const bool ok = moves.empty() && captures.empty();
+        return reportResult("Pawn direct seam forward blocked for PLAYER2", ok,
+            std::string("moves: ") + moveListText(moves) + " | captures: " + moveListText(captures));
+    }
+
     bool testPawnBlockedForwardCannotAdvance() {
         Board board;
         PieceStore pieces;
@@ -651,12 +783,36 @@ namespace {
     bool testPromotionZonesReachability() {
         Board board;
         bool ok = true;
+        ok = ok && board.isPromotionCell({0, 4}, Player::PLAYER1);
+        ok = ok && board.isPromotionCell({8, 4}, Player::PLAYER1);
         ok = ok && board.isPromotionCell({4, 8}, Player::PLAYER1);
         ok = ok && board.isPromotionCell({0, 0}, Player::PLAYER2);
+        ok = ok && board.isPromotionCell({4, 8}, Player::PLAYER2);
+        ok = ok && board.isPromotionCell({0, 0}, Player::PLAYER3);
         ok = ok && board.isPromotionCell({8, 4}, Player::PLAYER3);
+        ok = ok && !board.isPromotionCell({3, 3}, Player::PLAYER2);
         ok = ok && !board.isPromotionCell({1, 4}, Player::PLAYER1);
         return reportResult("Promotion zone invariants", ok,
             "sample promotion cells verified");
+    }
+
+    bool testPlayer2DoesNotPromoteTooEarlyAtThreeThree() {
+        GameState state;
+        clearBoard(state.getBoard());
+
+        PieceFactory factory;
+        state.getBoard().setPiece({3, 7}, factory.create(PieceType::PAWN, Player::PLAYER2, {3, 7}));
+
+        Move move;
+        move.from = {3, 7};
+        move.to = {3, 3};
+        move.player = Player::PLAYER2;
+
+        state.applyMove(move);
+        Piece* piece = state.getBoard().getPiece({3, 3});
+        const bool ok = piece && piece->getType() == PieceType::PAWN && piece->getOwner() == Player::PLAYER2;
+        return reportResult("PLAYER2 no early promotion on (3,3)", ok,
+            ok ? "pawn stays pawn on (3,3)" : "FAIL: pawn promoted too early on (3,3)");
     }
 
     bool testPawnEnPassantPattern() {
@@ -963,10 +1119,10 @@ namespace {
 
         Piece* piece = state.getBoard().getPiece({4, 11});
         const Move* lastMove = state.getLastMove();
-        const bool ok = piece && piece->getType() == PieceType::QUEEN && piece->getOwner() == Player::PLAYER1 &&
-                        lastMove && lastMove->to == HexCell{4, 11} && lastMove->from == HexCell{5, 3} && lastMove->isPromotion;
+        const bool ok = piece && piece->getType() == PieceType::PAWN && piece->getOwner() == Player::PLAYER1 &&
+                        lastMove && lastMove->to == HexCell{4, 11} && lastMove->from == HexCell{5, 3} && !lastMove->isPromotion;
         return reportResult("Scenario pawn crosses seam in live game", ok,
-            piece ? "pawn crossed seam and promoted on (4,11)" : "piece missing after seam move");
+            piece ? "pawn crossed seam and stayed pawn on (4,11)" : "piece missing after seam move");
     }
 
     bool testScenarioCaptureUpdatesBoardCorrectly() {
@@ -1072,17 +1228,17 @@ namespace {
 
         const auto before = snapshotGameState(state);
         state.applyMove({{5, 3}, {4, 11}, Player::PLAYER1});
-        Piece* promoted = state.getBoard().getPiece({4, 11});
-        const bool promotedOk = promoted && promoted->getType() == PieceType::QUEEN && promoted->getOwner() == Player::PLAYER1;
+        Piece* moved = state.getBoard().getPiece({4, 11});
+        const bool movedOk = moved && moved->getType() == PieceType::PAWN && moved->getOwner() == Player::PLAYER1;
         state.undoMove();
 
         std::string mismatch;
         const bool stateOk = gameStateMatchesSnapshot(state, before, mismatch);
         Piece* pawn = state.getBoard().getPiece({5, 3});
-        const bool ok = promotedOk && stateOk && pawn && pawn->getType() == PieceType::PAWN &&
+        const bool ok = movedOk && stateOk && pawn && pawn->getType() == PieceType::PAWN &&
                         pawn->getOwner() == Player::PLAYER1 && state.getBoard().getPiece({4, 11}) == nullptr;
         return reportResult("Undo round-trip promotion", ok,
-            ok ? "queen removed and pawn restored" : mismatch);
+            ok ? "pawn moved and restored without promotion" : mismatch);
     }
 
     bool testCastlingAllowed() {
@@ -1321,10 +1477,18 @@ int main() {
         {"Pawn diagonal capture exists", testPawnDiagonalCapture},
         {"Pawn seam transition", testPawnSeamTransition},
         {"Pawn continues away from enemy base after seam transition", testPawnContinuesAfterSeamTransition},
+        {"Pawn seam empty -> advance only", testPawnSeamEmptyAdvanceOnly},
+        {"Pawn seam occupied -> no forward advance", testPawnSeamOccupiedNoAdvance},
+        {"Pawn seam occupied + diagonal enemy -> diagonal capture only", testPawnSeamOccupiedWithDiagonalEnemyCaptureOnly},
+        {"Pawn seam occupied + no diagonal enemy -> no move", testPawnSeamOccupiedWithoutDiagonalEnemyHasNoMove},
+        {"Pawn seam rules apply to PLAYER2", testPawnSeamRulesApplyToPlayer2},
+        {"Pawn seam rules apply to PLAYER3", testPawnSeamRulesApplyToPlayer3},
+        {"Pawn direct seam forward blocked for PLAYER2", testPawnDirectSeamForwardBlockedForPlayer2},
         {"Pawn blocked forward cannot advance", testPawnBlockedForwardCannotAdvance},
         {"Queen combines straight and diagonal reach", testQueenCombinesRookAndBishopPatterns},
         {"Queen crosses seam through topological ray", testQueenCrossesSeamThroughRay},
         {"Promotion zone invariants", testPromotionZonesReachability},
+        {"PLAYER2 no early promotion on (3,3)", testPlayer2DoesNotPromoteTooEarlyAtThreeThree},
         {"Pawn en passant pattern", testPawnEnPassantPattern},
         {"Initial setup has playable pieces", testInitialBoardHasMoves},
         {"Initial playable pieces by player", testInitialPlayablePiecesByPlayer},
