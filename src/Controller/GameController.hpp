@@ -9,15 +9,23 @@
 
 class GameController {
 public:
-    GameController();
+    explicit GameController(bool windowVisible = true);
     void run();
-    void showMenu();
+    void setAIConfig(const std::array<bool, 3>& config);
+    const std::array<bool, 3>& getAIConfig() const;
+    void startGameForTests();
+    bool stepAIMoveForTests(bool ignoreDelay = true);
+    bool hasGameStarted() const;
+    GameState& getState();
+    const GameState& getState() const;
 
 private:
+    void showMenu();
+    void startGame();
     void handleEvents();
     void handleClick(int x, int y);
     void handleMenuClick(int x, int y);
-    void tryAIMove();
+    bool tryAIMove(bool ignoreDelay = false);
     std::string pieceLabel(const Piece* piece, const HexCell& cell) const;
 
     sf::RenderWindow window;

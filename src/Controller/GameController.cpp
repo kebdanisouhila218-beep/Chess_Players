@@ -33,12 +33,13 @@ namespace {
     }
 }
 
-GameController::GameController()
+GameController::GameController(bool windowVisible)
     // 850 de hauteur = 800 pour le plateau + 50 pour le HUD joueur courant
     : window(sf::VideoMode({800, 850}), "Chess 3 Players")
     , menuRenderer(window)
     , renderer(window)
 {
+    window.setVisible(windowVisible);
     state.addObserver(&renderer);
     renderer.setCurrentState(&state);
 
@@ -47,6 +48,37 @@ GameController::GameController()
     factory.initBoard(state.getBoard(), Player::PLAYER3);
 
     menuRenderer.draw(isAI);
+}
+
+void GameController::setAIConfig(const std::array<bool, 3>& config) {
+    isAI = config;
+    if (!gameStarted && window.isOpen()) {
+        menuRenderer.draw(isAI);
+    }
+}
+
+const std::array<bool, 3>& GameController::getAIConfig() const {
+    return isAI;
+}
+
+void GameController::startGameForTests() {
+    startGame();
+}
+
+bool GameController::stepAIMoveForTests(bool ignoreDelay) {
+    return tryAIMove(ignoreDelay);
+}
+
+bool GameController::hasGameStarted() const {
+    return gameStarted;
+}
+
+GameState& GameController::getState() {
+    return state;
+}
+
+const GameState& GameController::getState() const {
+    return state;
 }
 
 std::string GameController::pieceLabel(const Piece* piece, const HexCell& cell) const {
@@ -68,6 +100,14 @@ void GameController::run() {
         }
         handleEvents();
     }
+}
+
+void GameController::startGame() {
+    gameStarted = true;
+    lastAIMoveTime = std::chrono::steady_clock::now();
+    renderer.setStatusMessage("Partie demarree");
+    renderer.draw(state);
+    tryAIMove();
 }
 
 void GameController::showMenu() {
@@ -110,27 +150,23 @@ void GameController::handleMenuClick(int x, int y) {
     }
 
     if (menuRenderer.getStartButtonBounds().contains(mouse)) {
-        gameStarted = true;
-        lastAIMoveTime = std::chrono::steady_clock::now();
-        renderer.setStatusMessage("Partie demarree");
-        renderer.draw(state);
-        tryAIMove();
+        startGame();
     }
 }
 
-void GameController::tryAIMove() {
+bool GameController::tryAIMove(bool ignoreDelay) {
     if (state.isGameOver()) {
-        return;
+        return false;
     }
 
     const int currentIndex = playerIndex(state.getCurrentPlayer());
     if (currentIndex < 0 || !isAI[static_cast<std::size_t>(currentIndex)]) {
-        return;
+        return false;
     }
 
     const auto now = std::chrono::steady_clock::now();
-    if (now - lastAIMoveTime < aiMoveDelay) {
-        return;
+    if (!ignoreDelay && now - lastAIMoveTime < aiMoveDelay) {
+        return false;
     }
 
     if (selected != nullptr) {
@@ -144,7 +180,7 @@ void GameController::tryAIMove() {
 
     std::optional<Move> bestMove = state.findBestMove(2, state.getCurrentPlayer());
     if (!bestMove.has_value()) {
-        return;
+        return false;
     }
 
     state.applyMove(*bestMove);
@@ -167,12 +203,15 @@ void GameController::tryAIMove() {
     }
 
     renderer.draw(state);
+    return true;
 }
 
 void GameController::handleEvents() {
     while (const std::optional event = window.pollEvent()) {
-        if (event->is<sf::Event::Closed>())
+        if (event->is<sf::Event::Closed>()) {
             window.close();
+            return;
+        }
 
         if (const auto* resized = event->getIf<sf::Event::Resized>()) {
             sf::View view(sf::FloatRect({0.f, 0.f}, {
@@ -299,6 +338,7 @@ void GameController::handleClick(int x, int y) {
 
         if (isValid) {
             Piece* target = state.getBoard().getPiece(clicked);
+            // Allow move to empty square OR capture of enemy piece
             if (target == nullptr || target->getOwner() != state.getCurrentPlayer()) {
                 renderer.setStatusMessage("Deplacement vers (" + std::to_string(clicked.q) + "," + std::to_string(clicked.r) + ")");
                 renderer.clearHighlights();
