@@ -290,6 +290,7 @@ void Renderer::drawBoard(const GameState& state) {
     }
 
     drawSeams(board);
+    if (m_showIds) drawCellIds(board);
 }
 
 void Renderer::drawSeams(const Board& board) {
@@ -349,6 +350,38 @@ void Renderer::drawSeams(const Board& board) {
         drawSeam({7, k}, {4 + k, 11}, -2.0f);
         drawSeam({k, 3}, {3, 4 + k}, 0.0f);
         drawSeam({8 + k, 7}, {11, 8 + k}, 2.0f);
+    }
+}
+
+void Renderer::drawCellIds(const Board& board) {
+    if (!m_fontLoaded) return;
+    for (int id = 0; id < Board::CELL_COUNT; ++id) {
+        const HexCell cell = board.getCellById(id);
+        const sf::Vector2f center = m_cellCenters[static_cast<std::size_t>(id)];
+
+        // Ligne 1 : id
+        sf::Text t1(m_font);
+        t1.setString(std::to_string(id));
+        t1.setCharacterSize(9);
+        t1.setFillColor(sf::Color(255, 255, 80, 230));
+        {
+            auto b = t1.getLocalBounds();
+            t1.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y + b.size.y * 0.5f});
+        }
+        t1.setPosition(center + sf::Vector2f(0.f, -7.f));
+        window.draw(t1);
+
+        // Ligne 2 : (q,r)
+        sf::Text t2(m_font);
+        t2.setString("(" + std::to_string(cell.q) + "," + std::to_string(cell.r) + ")");
+        t2.setCharacterSize(8);
+        t2.setFillColor(sf::Color(200, 200, 200, 200));
+        {
+            auto b = t2.getLocalBounds();
+            t2.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y + b.size.y * 0.5f});
+        }
+        t2.setPosition(center + sf::Vector2f(0.f, 4.f));
+        window.draw(t2);
     }
 }
 

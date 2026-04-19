@@ -25,14 +25,16 @@ public:
     std::optional<HexCell> pickCell(const Board& board, sf::Vector2f px) const;
 
     void setCurrentState(const GameState* state) { currentState = state; }
+    void toggleShowIds() { m_showIds = !m_showIds; }
 
 private:
     void initBoardGeometry(const Board& board);
     void drawBoard(const GameState& state);
     void drawPieces(const GameState& state);
     void drawSeams(const Board& board);
+    void drawCellIds(const Board& board);
     sf::ConvexShape createTile(const std::array<sf::Vector2f, 4>& points, sf::Color color) const;
-    void drawHUD(const GameState& state);        // <-- nouveau
+    void drawHUD(const GameState& state);
 
     sf::RenderWindow& window;
     const GameState*  currentState = nullptr;
@@ -47,6 +49,7 @@ private:
     std::optional<HexCell> m_selectedCell;
     std::string m_statusMessage;
     bool m_geometryReady = false;
+    bool m_showIds = false;
     sf::Vector2u m_lastWindowSize{0u, 0u};
     std::chrono::steady_clock::time_point m_selectionPulseStart = std::chrono::steady_clock::now();
 };

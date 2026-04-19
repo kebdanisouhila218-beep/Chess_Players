@@ -222,6 +222,13 @@ void GameController::handleEvents() {
             }
         }
 
+        if (const auto* key = event->getIf<sf::Event::KeyPressed>()) {
+            if (key->code == sf::Keyboard::Key::I && gameStarted) {
+                renderer.toggleShowIds();
+                renderer.draw(state);
+            }
+        }
+
         if (const auto* click = event->getIf<sf::Event::MouseButtonPressed>()) {
             if (click->button == sf::Mouse::Button::Left) {
                 if (gameStarted) {
