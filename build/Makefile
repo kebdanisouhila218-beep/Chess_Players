@@ -128,78 +128,12 @@ Chess3Players/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/build
 .PHONY : Chess3Players/fast
 
-#=============================================================================
-# Target rules for targets named RendererPickTests
-
-# Build rule for target.
-RendererPickTests: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 RendererPickTests
-.PHONY : RendererPickTests
-
-# fast build rule for target.
-RendererPickTests/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/build
-.PHONY : RendererPickTests/fast
-
-#=============================================================================
-# Target rules for targets named GameLogicManualTests
-
-# Build rule for target.
-GameLogicManualTests: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 GameLogicManualTests
-.PHONY : GameLogicManualTests
-
-# fast build rule for target.
-GameLogicManualTests/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/build
-.PHONY : GameLogicManualTests/fast
-
-#=============================================================================
-# Target rules for targets named MenuAIManualTests
-
-# Build rule for target.
-MenuAIManualTests: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 MenuAIManualTests
-.PHONY : MenuAIManualTests
-
-# fast build rule for target.
-MenuAIManualTests/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/build
-.PHONY : MenuAIManualTests/fast
-
-#=============================================================================
-# Target rules for targets named ControllerManualTests
-
-# Build rule for target.
-ControllerManualTests: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 ControllerManualTests
-.PHONY : ControllerManualTests
-
-# fast build rule for target.
-ControllerManualTests/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/build
-.PHONY : ControllerManualTests/fast
-
-#=============================================================================
-# Target rules for targets named BoardMatrixDebug
-
-# Build rule for target.
-BoardMatrixDebug: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 BoardMatrixDebug
-.PHONY : BoardMatrixDebug
-
-# fast build rule for target.
-BoardMatrixDebug/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/build
-.PHONY : BoardMatrixDebug/fast
-
 src/Controller/GameController.obj: src/Controller/GameController.cpp.obj
 .PHONY : src/Controller/GameController.obj
 
 # target to build an object file
 src/Controller/GameController.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Controller/GameController.cpp.obj
 .PHONY : src/Controller/GameController.cpp.obj
 
 src/Controller/GameController.i: src/Controller/GameController.cpp.i
@@ -208,7 +142,6 @@ src/Controller/GameController.i: src/Controller/GameController.cpp.i
 # target to preprocess a source file
 src/Controller/GameController.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Controller/GameController.cpp.i
 .PHONY : src/Controller/GameController.cpp.i
 
 src/Controller/GameController.s: src/Controller/GameController.cpp.s
@@ -217,7 +150,6 @@ src/Controller/GameController.s: src/Controller/GameController.cpp.s
 # target to generate assembly for a file
 src/Controller/GameController.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Controller/GameController.cpp.s
 .PHONY : src/Controller/GameController.cpp.s
 
 src/Model/Bishop.obj: src/Model/Bishop.cpp.obj
@@ -226,11 +158,6 @@ src/Model/Bishop.obj: src/Model/Bishop.cpp.obj
 # target to build an object file
 src/Model/Bishop.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Bishop.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Bishop.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Bishop.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Bishop.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Bishop.cpp.obj
 .PHONY : src/Model/Bishop.cpp.obj
 
 src/Model/Bishop.i: src/Model/Bishop.cpp.i
@@ -239,11 +166,6 @@ src/Model/Bishop.i: src/Model/Bishop.cpp.i
 # target to preprocess a source file
 src/Model/Bishop.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Bishop.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Bishop.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Bishop.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Bishop.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Bishop.cpp.i
 .PHONY : src/Model/Bishop.cpp.i
 
 src/Model/Bishop.s: src/Model/Bishop.cpp.s
@@ -252,11 +174,6 @@ src/Model/Bishop.s: src/Model/Bishop.cpp.s
 # target to generate assembly for a file
 src/Model/Bishop.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Bishop.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Bishop.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Bishop.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Bishop.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Bishop.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Bishop.cpp.s
 .PHONY : src/Model/Bishop.cpp.s
 
 src/Model/Board.obj: src/Model/Board.cpp.obj
@@ -265,11 +182,6 @@ src/Model/Board.obj: src/Model/Board.cpp.obj
 # target to build an object file
 src/Model/Board.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Board.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Board.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Board.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Board.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Board.cpp.obj
 .PHONY : src/Model/Board.cpp.obj
 
 src/Model/Board.i: src/Model/Board.cpp.i
@@ -278,11 +190,6 @@ src/Model/Board.i: src/Model/Board.cpp.i
 # target to preprocess a source file
 src/Model/Board.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Board.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Board.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Board.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Board.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Board.cpp.i
 .PHONY : src/Model/Board.cpp.i
 
 src/Model/Board.s: src/Model/Board.cpp.s
@@ -291,11 +198,6 @@ src/Model/Board.s: src/Model/Board.cpp.s
 # target to generate assembly for a file
 src/Model/Board.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Board.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Board.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Board.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Board.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Board.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Board.cpp.s
 .PHONY : src/Model/Board.cpp.s
 
 src/Model/GameState.obj: src/Model/GameState.cpp.obj
@@ -304,11 +206,6 @@ src/Model/GameState.obj: src/Model/GameState.cpp.obj
 # target to build an object file
 src/Model/GameState.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/GameState.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/GameState.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/GameState.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/GameState.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/GameState.cpp.obj
 .PHONY : src/Model/GameState.cpp.obj
 
 src/Model/GameState.i: src/Model/GameState.cpp.i
@@ -317,11 +214,6 @@ src/Model/GameState.i: src/Model/GameState.cpp.i
 # target to preprocess a source file
 src/Model/GameState.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/GameState.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/GameState.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/GameState.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/GameState.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/GameState.cpp.i
 .PHONY : src/Model/GameState.cpp.i
 
 src/Model/GameState.s: src/Model/GameState.cpp.s
@@ -330,11 +222,6 @@ src/Model/GameState.s: src/Model/GameState.cpp.s
 # target to generate assembly for a file
 src/Model/GameState.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/GameState.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/GameState.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/GameState.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/GameState.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/GameState.cpp.s
 .PHONY : src/Model/GameState.cpp.s
 
 src/Model/HexCell.obj: src/Model/HexCell.cpp.obj
@@ -343,11 +230,6 @@ src/Model/HexCell.obj: src/Model/HexCell.cpp.obj
 # target to build an object file
 src/Model/HexCell.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/HexCell.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/HexCell.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/HexCell.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/HexCell.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/HexCell.cpp.obj
 .PHONY : src/Model/HexCell.cpp.obj
 
 src/Model/HexCell.i: src/Model/HexCell.cpp.i
@@ -356,11 +238,6 @@ src/Model/HexCell.i: src/Model/HexCell.cpp.i
 # target to preprocess a source file
 src/Model/HexCell.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/HexCell.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/HexCell.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/HexCell.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/HexCell.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/HexCell.cpp.i
 .PHONY : src/Model/HexCell.cpp.i
 
 src/Model/HexCell.s: src/Model/HexCell.cpp.s
@@ -369,11 +246,6 @@ src/Model/HexCell.s: src/Model/HexCell.cpp.s
 # target to generate assembly for a file
 src/Model/HexCell.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/HexCell.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/HexCell.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/HexCell.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/HexCell.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/HexCell.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/HexCell.cpp.s
 .PHONY : src/Model/HexCell.cpp.s
 
 src/Model/King.obj: src/Model/King.cpp.obj
@@ -382,11 +254,6 @@ src/Model/King.obj: src/Model/King.cpp.obj
 # target to build an object file
 src/Model/King.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/King.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/King.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/King.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/King.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/King.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/King.cpp.obj
 .PHONY : src/Model/King.cpp.obj
 
 src/Model/King.i: src/Model/King.cpp.i
@@ -395,11 +262,6 @@ src/Model/King.i: src/Model/King.cpp.i
 # target to preprocess a source file
 src/Model/King.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/King.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/King.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/King.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/King.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/King.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/King.cpp.i
 .PHONY : src/Model/King.cpp.i
 
 src/Model/King.s: src/Model/King.cpp.s
@@ -408,11 +270,6 @@ src/Model/King.s: src/Model/King.cpp.s
 # target to generate assembly for a file
 src/Model/King.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/King.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/King.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/King.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/King.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/King.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/King.cpp.s
 .PHONY : src/Model/King.cpp.s
 
 src/Model/Knight.obj: src/Model/Knight.cpp.obj
@@ -421,11 +278,6 @@ src/Model/Knight.obj: src/Model/Knight.cpp.obj
 # target to build an object file
 src/Model/Knight.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Knight.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Knight.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Knight.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Knight.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Knight.cpp.obj
 .PHONY : src/Model/Knight.cpp.obj
 
 src/Model/Knight.i: src/Model/Knight.cpp.i
@@ -434,11 +286,6 @@ src/Model/Knight.i: src/Model/Knight.cpp.i
 # target to preprocess a source file
 src/Model/Knight.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Knight.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Knight.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Knight.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Knight.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Knight.cpp.i
 .PHONY : src/Model/Knight.cpp.i
 
 src/Model/Knight.s: src/Model/Knight.cpp.s
@@ -447,11 +294,6 @@ src/Model/Knight.s: src/Model/Knight.cpp.s
 # target to generate assembly for a file
 src/Model/Knight.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Knight.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Knight.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Knight.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Knight.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Knight.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Knight.cpp.s
 .PHONY : src/Model/Knight.cpp.s
 
 src/Model/Pawn.obj: src/Model/Pawn.cpp.obj
@@ -460,11 +302,6 @@ src/Model/Pawn.obj: src/Model/Pawn.cpp.obj
 # target to build an object file
 src/Model/Pawn.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Pawn.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Pawn.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Pawn.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Pawn.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Pawn.cpp.obj
 .PHONY : src/Model/Pawn.cpp.obj
 
 src/Model/Pawn.i: src/Model/Pawn.cpp.i
@@ -473,11 +310,6 @@ src/Model/Pawn.i: src/Model/Pawn.cpp.i
 # target to preprocess a source file
 src/Model/Pawn.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Pawn.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Pawn.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Pawn.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Pawn.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Pawn.cpp.i
 .PHONY : src/Model/Pawn.cpp.i
 
 src/Model/Pawn.s: src/Model/Pawn.cpp.s
@@ -486,11 +318,6 @@ src/Model/Pawn.s: src/Model/Pawn.cpp.s
 # target to generate assembly for a file
 src/Model/Pawn.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Pawn.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Pawn.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Pawn.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Pawn.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Pawn.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Pawn.cpp.s
 .PHONY : src/Model/Pawn.cpp.s
 
 src/Model/Piece.obj: src/Model/Piece.cpp.obj
@@ -499,11 +326,6 @@ src/Model/Piece.obj: src/Model/Piece.cpp.obj
 # target to build an object file
 src/Model/Piece.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Piece.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Piece.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Piece.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Piece.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Piece.cpp.obj
 .PHONY : src/Model/Piece.cpp.obj
 
 src/Model/Piece.i: src/Model/Piece.cpp.i
@@ -512,11 +334,6 @@ src/Model/Piece.i: src/Model/Piece.cpp.i
 # target to preprocess a source file
 src/Model/Piece.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Piece.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Piece.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Piece.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Piece.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Piece.cpp.i
 .PHONY : src/Model/Piece.cpp.i
 
 src/Model/Piece.s: src/Model/Piece.cpp.s
@@ -525,11 +342,6 @@ src/Model/Piece.s: src/Model/Piece.cpp.s
 # target to generate assembly for a file
 src/Model/Piece.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Piece.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Piece.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Piece.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Piece.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Piece.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Piece.cpp.s
 .PHONY : src/Model/Piece.cpp.s
 
 src/Model/PieceFactory.obj: src/Model/PieceFactory.cpp.obj
@@ -538,11 +350,6 @@ src/Model/PieceFactory.obj: src/Model/PieceFactory.cpp.obj
 # target to build an object file
 src/Model/PieceFactory.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/PieceFactory.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/PieceFactory.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/PieceFactory.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/PieceFactory.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/PieceFactory.cpp.obj
 .PHONY : src/Model/PieceFactory.cpp.obj
 
 src/Model/PieceFactory.i: src/Model/PieceFactory.cpp.i
@@ -551,11 +358,6 @@ src/Model/PieceFactory.i: src/Model/PieceFactory.cpp.i
 # target to preprocess a source file
 src/Model/PieceFactory.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/PieceFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/PieceFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/PieceFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/PieceFactory.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/PieceFactory.cpp.i
 .PHONY : src/Model/PieceFactory.cpp.i
 
 src/Model/PieceFactory.s: src/Model/PieceFactory.cpp.s
@@ -564,11 +366,6 @@ src/Model/PieceFactory.s: src/Model/PieceFactory.cpp.s
 # target to generate assembly for a file
 src/Model/PieceFactory.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/PieceFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/PieceFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/PieceFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/PieceFactory.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/PieceFactory.cpp.s
 .PHONY : src/Model/PieceFactory.cpp.s
 
 src/Model/Queen.obj: src/Model/Queen.cpp.obj
@@ -577,11 +374,6 @@ src/Model/Queen.obj: src/Model/Queen.cpp.obj
 # target to build an object file
 src/Model/Queen.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Queen.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Queen.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Queen.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Queen.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Queen.cpp.obj
 .PHONY : src/Model/Queen.cpp.obj
 
 src/Model/Queen.i: src/Model/Queen.cpp.i
@@ -590,11 +382,6 @@ src/Model/Queen.i: src/Model/Queen.cpp.i
 # target to preprocess a source file
 src/Model/Queen.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Queen.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Queen.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Queen.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Queen.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Queen.cpp.i
 .PHONY : src/Model/Queen.cpp.i
 
 src/Model/Queen.s: src/Model/Queen.cpp.s
@@ -603,11 +390,6 @@ src/Model/Queen.s: src/Model/Queen.cpp.s
 # target to generate assembly for a file
 src/Model/Queen.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Queen.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Queen.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Queen.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Queen.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Queen.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Queen.cpp.s
 .PHONY : src/Model/Queen.cpp.s
 
 src/Model/Rook.obj: src/Model/Rook.cpp.obj
@@ -616,11 +398,6 @@ src/Model/Rook.obj: src/Model/Rook.cpp.obj
 # target to build an object file
 src/Model/Rook.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Rook.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Rook.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Rook.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Rook.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Rook.cpp.obj
 .PHONY : src/Model/Rook.cpp.obj
 
 src/Model/Rook.i: src/Model/Rook.cpp.i
@@ -629,11 +406,6 @@ src/Model/Rook.i: src/Model/Rook.cpp.i
 # target to preprocess a source file
 src/Model/Rook.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Rook.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Rook.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Rook.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Rook.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Rook.cpp.i
 .PHONY : src/Model/Rook.cpp.i
 
 src/Model/Rook.s: src/Model/Rook.cpp.s
@@ -642,36 +414,7 @@ src/Model/Rook.s: src/Model/Rook.cpp.s
 # target to generate assembly for a file
 src/Model/Rook.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/Model/Rook.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/Model/Rook.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/Model/Rook.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/Model/Rook.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/Rook.cpp.s
 .PHONY : src/Model/Rook.cpp.s
-
-src/Model/boardaffichage.obj: src/Model/boardaffichage.cpp.obj
-.PHONY : src/Model/boardaffichage.obj
-
-# target to build an object file
-src/Model/boardaffichage.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/boardaffichage.cpp.obj
-.PHONY : src/Model/boardaffichage.cpp.obj
-
-src/Model/boardaffichage.i: src/Model/boardaffichage.cpp.i
-.PHONY : src/Model/boardaffichage.i
-
-# target to preprocess a source file
-src/Model/boardaffichage.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/boardaffichage.cpp.i
-.PHONY : src/Model/boardaffichage.cpp.i
-
-src/Model/boardaffichage.s: src/Model/boardaffichage.cpp.s
-.PHONY : src/Model/boardaffichage.s
-
-# target to generate assembly for a file
-src/Model/boardaffichage.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/Model/boardaffichage.cpp.s
-.PHONY : src/Model/boardaffichage.cpp.s
 
 src/View/MenuRenderer.obj: src/View/MenuRenderer.cpp.obj
 .PHONY : src/View/MenuRenderer.obj
@@ -679,7 +422,6 @@ src/View/MenuRenderer.obj: src/View/MenuRenderer.cpp.obj
 # target to build an object file
 src/View/MenuRenderer.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/MenuRenderer.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/View/MenuRenderer.cpp.obj
 .PHONY : src/View/MenuRenderer.cpp.obj
 
 src/View/MenuRenderer.i: src/View/MenuRenderer.cpp.i
@@ -688,7 +430,6 @@ src/View/MenuRenderer.i: src/View/MenuRenderer.cpp.i
 # target to preprocess a source file
 src/View/MenuRenderer.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/MenuRenderer.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/View/MenuRenderer.cpp.i
 .PHONY : src/View/MenuRenderer.cpp.i
 
 src/View/MenuRenderer.s: src/View/MenuRenderer.cpp.s
@@ -697,7 +438,6 @@ src/View/MenuRenderer.s: src/View/MenuRenderer.cpp.s
 # target to generate assembly for a file
 src/View/MenuRenderer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/MenuRenderer.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/View/MenuRenderer.cpp.s
 .PHONY : src/View/MenuRenderer.cpp.s
 
 src/View/Renderer.obj: src/View/Renderer.cpp.obj
@@ -706,8 +446,6 @@ src/View/Renderer.obj: src/View/Renderer.cpp.obj
 # target to build an object file
 src/View/Renderer.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/View/Renderer.cpp.obj
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/View/Renderer.cpp.obj
 .PHONY : src/View/Renderer.cpp.obj
 
 src/View/Renderer.i: src/View/Renderer.cpp.i
@@ -716,8 +454,6 @@ src/View/Renderer.i: src/View/Renderer.cpp.i
 # target to preprocess a source file
 src/View/Renderer.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/View/Renderer.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/View/Renderer.cpp.i
 .PHONY : src/View/Renderer.cpp.i
 
 src/View/Renderer.s: src/View/Renderer.cpp.s
@@ -726,81 +462,7 @@ src/View/Renderer.s: src/View/Renderer.cpp.s
 # target to generate assembly for a file
 src/View/Renderer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/View/Renderer.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/View/Renderer.cpp.s
 .PHONY : src/View/Renderer.cpp.s
-
-src/board_matrix_debug_main.obj: src/board_matrix_debug_main.cpp.obj
-.PHONY : src/board_matrix_debug_main.obj
-
-# target to build an object file
-src/board_matrix_debug_main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/board_matrix_debug_main.cpp.obj
-.PHONY : src/board_matrix_debug_main.cpp.obj
-
-src/board_matrix_debug_main.i: src/board_matrix_debug_main.cpp.i
-.PHONY : src/board_matrix_debug_main.i
-
-# target to preprocess a source file
-src/board_matrix_debug_main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/board_matrix_debug_main.cpp.i
-.PHONY : src/board_matrix_debug_main.cpp.i
-
-src/board_matrix_debug_main.s: src/board_matrix_debug_main.cpp.s
-.PHONY : src/board_matrix_debug_main.s
-
-# target to generate assembly for a file
-src/board_matrix_debug_main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BoardMatrixDebug.dir\build.make CMakeFiles/BoardMatrixDebug.dir/src/board_matrix_debug_main.cpp.s
-.PHONY : src/board_matrix_debug_main.cpp.s
-
-src/controller_manual_test.obj: src/controller_manual_test.cpp.obj
-.PHONY : src/controller_manual_test.obj
-
-# target to build an object file
-src/controller_manual_test.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/controller_manual_test.cpp.obj
-.PHONY : src/controller_manual_test.cpp.obj
-
-src/controller_manual_test.i: src/controller_manual_test.cpp.i
-.PHONY : src/controller_manual_test.i
-
-# target to preprocess a source file
-src/controller_manual_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/controller_manual_test.cpp.i
-.PHONY : src/controller_manual_test.cpp.i
-
-src/controller_manual_test.s: src/controller_manual_test.cpp.s
-.PHONY : src/controller_manual_test.s
-
-# target to generate assembly for a file
-src/controller_manual_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ControllerManualTests.dir\build.make CMakeFiles/ControllerManualTests.dir/src/controller_manual_test.cpp.s
-.PHONY : src/controller_manual_test.cpp.s
-
-src/game_logic_manual_test.obj: src/game_logic_manual_test.cpp.obj
-.PHONY : src/game_logic_manual_test.obj
-
-# target to build an object file
-src/game_logic_manual_test.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/game_logic_manual_test.cpp.obj
-.PHONY : src/game_logic_manual_test.cpp.obj
-
-src/game_logic_manual_test.i: src/game_logic_manual_test.cpp.i
-.PHONY : src/game_logic_manual_test.i
-
-# target to preprocess a source file
-src/game_logic_manual_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/game_logic_manual_test.cpp.i
-.PHONY : src/game_logic_manual_test.cpp.i
-
-src/game_logic_manual_test.s: src/game_logic_manual_test.cpp.s
-.PHONY : src/game_logic_manual_test.s
-
-# target to generate assembly for a file
-src/game_logic_manual_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameLogicManualTests.dir\build.make CMakeFiles/GameLogicManualTests.dir/src/game_logic_manual_test.cpp.s
-.PHONY : src/game_logic_manual_test.cpp.s
 
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
@@ -826,54 +488,6 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/menu_ai_manual_test.obj: src/menu_ai_manual_test.cpp.obj
-.PHONY : src/menu_ai_manual_test.obj
-
-# target to build an object file
-src/menu_ai_manual_test.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/menu_ai_manual_test.cpp.obj
-.PHONY : src/menu_ai_manual_test.cpp.obj
-
-src/menu_ai_manual_test.i: src/menu_ai_manual_test.cpp.i
-.PHONY : src/menu_ai_manual_test.i
-
-# target to preprocess a source file
-src/menu_ai_manual_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/menu_ai_manual_test.cpp.i
-.PHONY : src/menu_ai_manual_test.cpp.i
-
-src/menu_ai_manual_test.s: src/menu_ai_manual_test.cpp.s
-.PHONY : src/menu_ai_manual_test.s
-
-# target to generate assembly for a file
-src/menu_ai_manual_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MenuAIManualTests.dir\build.make CMakeFiles/MenuAIManualTests.dir/src/menu_ai_manual_test.cpp.s
-.PHONY : src/menu_ai_manual_test.cpp.s
-
-src/renderer_pick_test.obj: src/renderer_pick_test.cpp.obj
-.PHONY : src/renderer_pick_test.obj
-
-# target to build an object file
-src/renderer_pick_test.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/renderer_pick_test.cpp.obj
-.PHONY : src/renderer_pick_test.cpp.obj
-
-src/renderer_pick_test.i: src/renderer_pick_test.cpp.i
-.PHONY : src/renderer_pick_test.i
-
-# target to preprocess a source file
-src/renderer_pick_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/renderer_pick_test.cpp.i
-.PHONY : src/renderer_pick_test.cpp.i
-
-src/renderer_pick_test.s: src/renderer_pick_test.cpp.s
-.PHONY : src/renderer_pick_test.s
-
-# target to generate assembly for a file
-src/renderer_pick_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\RendererPickTests.dir\build.make CMakeFiles/RendererPickTests.dir/src/renderer_pick_test.cpp.s
-.PHONY : src/renderer_pick_test.cpp.s
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -882,12 +496,7 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... BoardMatrixDebug
 	@echo ... Chess3Players
-	@echo ... ControllerManualTests
-	@echo ... GameLogicManualTests
-	@echo ... MenuAIManualTests
-	@echo ... RendererPickTests
 	@echo ... src/Controller/GameController.obj
 	@echo ... src/Controller/GameController.i
 	@echo ... src/Controller/GameController.s
@@ -924,33 +533,15 @@ help:
 	@echo ... src/Model/Rook.obj
 	@echo ... src/Model/Rook.i
 	@echo ... src/Model/Rook.s
-	@echo ... src/Model/boardaffichage.obj
-	@echo ... src/Model/boardaffichage.i
-	@echo ... src/Model/boardaffichage.s
 	@echo ... src/View/MenuRenderer.obj
 	@echo ... src/View/MenuRenderer.i
 	@echo ... src/View/MenuRenderer.s
 	@echo ... src/View/Renderer.obj
 	@echo ... src/View/Renderer.i
 	@echo ... src/View/Renderer.s
-	@echo ... src/board_matrix_debug_main.obj
-	@echo ... src/board_matrix_debug_main.i
-	@echo ... src/board_matrix_debug_main.s
-	@echo ... src/controller_manual_test.obj
-	@echo ... src/controller_manual_test.i
-	@echo ... src/controller_manual_test.s
-	@echo ... src/game_logic_manual_test.obj
-	@echo ... src/game_logic_manual_test.i
-	@echo ... src/game_logic_manual_test.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
-	@echo ... src/menu_ai_manual_test.obj
-	@echo ... src/menu_ai_manual_test.i
-	@echo ... src/menu_ai_manual_test.s
-	@echo ... src/renderer_pick_test.obj
-	@echo ... src/renderer_pick_test.i
-	@echo ... src/renderer_pick_test.s
 .PHONY : help
 
 
