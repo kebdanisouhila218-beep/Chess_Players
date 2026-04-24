@@ -1,5 +1,6 @@
 #include "GameController.hpp"
 #include "../Model/Pawn.hpp"
+#include <iostream>
 
 namespace {
     std::string pieceTypeText(PieceType type) {
@@ -30,6 +31,19 @@ namespace {
             case Player::PLAYER3: return 2;
             default: return -1;
         }
+    }
+
+    std::string playerTag(Player player) {
+        switch (player) {
+            case Player::PLAYER1: return "J1-Blancs";
+            case Player::PLAYER2: return "J2-Bleus";
+            case Player::PLAYER3: return "J3-Rouges";
+            default: return "??";
+        }
+    }
+
+    std::string cellStr(const Board& b, const HexCell& c) {
+        return "#" + std::to_string(b.getId(c)) + "(" + std::to_string(c.q) + "," + std::to_string(c.r) + ")";
     }
 }
 
@@ -179,8 +193,16 @@ bool GameController::tryAIMove(bool ignoreDelay) {
         return false;
     }
 
-    state.applyMove(*bestMove);
-    lastAIMoveTime = now;
+    {
+        const Board& b = state.getBoard();
+        Piece* mp = b.getPiece(bestMove->from);
+        std::string ptype = mp ? pieceTypeText(mp->getType()) : "?";
+        state.applyMove(*bestMove);
+        lastAIMoveTime = now;
+        std::cout << "\n[IA-" << playerTag(bestMove->player) << "] "
+                  << "joue " << ptype << " "
+                  << cellStr(b, bestMove->from) << " -> " << cellStr(b, bestMove->to) << "\n";
+    }
 
     if (state.isGameOver()) {
         renderer.setStatusMessage("Partie terminee - Gagnant : " + winnerText(state.getWinner()));
@@ -298,6 +320,19 @@ void GameController::handleClick(int x, int y) {
             selected = new HexCell(clicked);
             renderer.setSelectedCell(clicked);
             validMoves = state.getLegalMoves(clicked);
+            {
+                const Board& b = state.getBoard();
+                std::cout << "\n[" << playerTag(p->getOwner()) << "] "
+                          << pieceTypeText(p->getType()) << " " << cellStr(b, clicked)
+                          << " | " << validMoves.size() << " coup(s) possible(s) :";
+                if (validMoves.empty()) {
+                    std::cout << " aucun";
+                } else {
+                    for (const HexCell& m : validMoves)
+                        std::cout << "  " << cellStr(b, m);
+                }
+                std::cout << "\n";
+            }
             if (validMoves.empty()) {
                 renderer.setStatusMessage(pieceLabel(p, clicked) + " : aucun coup disponible");
             } else {
@@ -323,6 +358,19 @@ void GameController::handleClick(int x, int y) {
             *selected = clicked;
             renderer.setSelectedCell(clicked);
             validMoves = state.getLegalMoves(clicked);
+            {
+                const Board& b = state.getBoard();
+                std::cout << "\n[" << playerTag(clickedPiece->getOwner()) << "] "
+                          << pieceTypeText(clickedPiece->getType()) << " " << cellStr(b, clicked)
+                          << " | " << validMoves.size() << " coup(s) possible(s) :";
+                if (validMoves.empty()) {
+                    std::cout << " aucun";
+                } else {
+                    for (const HexCell& m : validMoves)
+                        std::cout << "  " << cellStr(b, m);
+                }
+                std::cout << "\n";
+            }
             if (validMoves.empty()) {
                 renderer.setStatusMessage(pieceLabel(clickedPiece, clicked) + " : aucun coup disponible");
             } else {
@@ -346,6 +394,14 @@ void GameController::handleClick(int x, int y) {
                 renderer.setStatusMessage("Deplacement vers (" + std::to_string(clicked.q) + "," + std::to_string(clicked.r) + ")");
                 renderer.clearHighlights();
                 Move move{*selected, clicked, state.getCurrentPlayer()};
+                {
+                    const Board& b = state.getBoard();
+                    Piece* mp = b.getPiece(move.from);
+                    std::string ptype = mp ? pieceTypeText(mp->getType()) : "?";
+                    std::cout << "[" << playerTag(move.player) << "] "
+                              << "joue " << ptype << " "
+                              << cellStr(b, move.from) << " -> " << cellStr(b, move.to) << "\n";
+                }
                 state.applyMove(move);
                 if (state.isGameOver()) {
                     renderer.setStatusMessage("Partie terminee - Gagnant : " + winnerText(state.getWinner()));

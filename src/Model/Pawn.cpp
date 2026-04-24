@@ -11,7 +11,7 @@ namespace {
         switch (owner) {
             case Player::PLAYER1:
                 if (sextant == 5) return Board::Direction::EAST;
-                if (sextant == 4) return Board::Direction::EAST;
+                if (sextant == 4) return Board::Direction::NORTH;
                 if (sextant == 3) return Board::Direction::NORTH;
                 if (sextant == 2) return Board::Direction::NORTH;
                 return Board::Direction::SOUTH;
@@ -35,6 +35,24 @@ namespace {
             default:
                 return Board::Direction::SOUTH;
         }
+    }
+
+    // La couture 1 relie (4+k,11) NORTH -> (7,k), écrasant le voisin naturel (4+k,10).
+    // Cette fonction détecte ce cas et retourne le voisin géométrique réel.
+    std::optional<HexCell> pawnActualStep(const Board& board, const HexCell& pos, Board::Direction dir) {
+        const std::optional<HexCell> cell = board.step(pos, dir);
+        if (!cell.has_value()) return std::nullopt;
+        if (board.getSextant(pos) == 4 && board.getSextant(*cell) == 5) {
+            HexCell direct = pos;
+            switch (dir) {
+                case Board::Direction::NORTH:      direct = {pos.q,     pos.r - 1}; break;
+                case Board::Direction::NORTH_EAST: direct = {pos.q + 1, pos.r - 1}; break;
+                case Board::Direction::NORTH_WEST: direct = {pos.q - 1, pos.r - 1}; break;
+                default: return cell;
+            }
+            return board.isValid(direct) ? std::optional<HexCell>(direct) : std::nullopt;
+        }
+        return cell;
     }
 
     bool crossesSeam(const Board& board, const HexCell& from, const std::optional<HexCell>& to) {
@@ -74,7 +92,7 @@ std::vector<HexCell> Pawn::getMoves(const Board& board) const {
 std::vector<HexCell> Pawn::getCaptureSquares(const Board& board, const Move* lastMove) const {
     std::vector<HexCell> cells;
     const Board::Direction forward = pawnForward(board, owner, pos);
-    const std::optional<HexCell> front = board.step(pos, forward);
+    const std::optional<HexCell> front = pawnActualStep(board, pos, forward);
     const std::optional<HexCell> transition = !front.has_value() ? board.getPawnTransition(pos, owner) : std::nullopt;
     const bool directSeamForward = crossesSeam(board, pos, front);
 
@@ -100,7 +118,7 @@ std::vector<HexCell> Pawn::getCaptureSquares(const Board& board, const Move* las
     }
 
     for (Board::Direction captureDir : pawnCaptures(board, owner, pos, false)) {
-        std::optional<HexCell> capture = board.step(pos, captureDir);
+        std::optional<HexCell> capture = pawnActualStep(board, pos, captureDir);
         if (capture.has_value() && board.isValid(*capture)) {
             Piece* target = board.getPiece(*capture);
             if (target && target->getOwner() != owner) {
@@ -135,7 +153,7 @@ std::vector<HexCell> Pawn::getMoves(const Board& board, const Move* lastMove) co
 
     const Board::Direction forward = pawnForward(board, owner, pos);
 
-    std::optional<HexCell> front = board.step(pos, forward);
+    std::optional<HexCell> front = pawnActualStep(board, pos, forward);
 
     if (!front.has_value()) {
         if (std::optional<HexCell> transition = board.getPawnTransition(pos, owner)) {
@@ -149,7 +167,7 @@ std::vector<HexCell> Pawn::getMoves(const Board& board, const Move* lastMove) co
     if (front.has_value() && board.getPiece(*front) == nullptr) {
         moves.push_back(*front);
         if (!getHasMoved()) {
-            std::optional<HexCell> front2 = board.step(*front, forward);
+            std::optional<HexCell> front2 = pawnActualStep(board, *front, forward);
             // Ne pas autoriser la double avance si le second pas franchit une couture
             if (front2.has_value() && board.getPiece(*front2) == nullptr
                     && !crossesSeam(board, *front, front2)) {

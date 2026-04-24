@@ -222,6 +222,7 @@ CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj: C:/Users/etu
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/iomanip \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/ios \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/iosfwd \
+  C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/iostream \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/istream \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/iterator \
   C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/limits \
@@ -2344,6 +2345,8 @@ C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-ming
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/gthr.h:
 
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/gthr-default.h:
+
 C:/SFML/include/SFML/Graphics/Font.hpp:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/fs_ops.h:
@@ -2748,8 +2751,6 @@ C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-ming
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/locale_facets_nonio.tcc:
 
-C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/gthr-default.h:
-
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/bits/memory_resource.h:
 
 C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Rook.cpp:
@@ -2759,6 +2760,8 @@ C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-ming
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++allocator.h:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/exception:
+
+C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/iostream:
 
 C:/Users/etudiant/Downloads/winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3/mingw64/include/c++/14.2.0/tr1/exp_integral.tcc:
 

@@ -362,8 +362,8 @@ void Renderer::drawCellIds(const Board& board) {
         // Ligne 1 : id
         sf::Text t1(m_font);
         t1.setString(std::to_string(id));
-        t1.setCharacterSize(9);
-        t1.setFillColor(sf::Color(255, 255, 80, 230));
+        t1.setCharacterSize(12);
+        t1.setFillColor(sf::Color(255, 60, 60, 240));
         {
             auto b = t1.getLocalBounds();
             t1.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y + b.size.y * 0.5f});
@@ -374,8 +374,8 @@ void Renderer::drawCellIds(const Board& board) {
         // Ligne 2 : (q,r)
         sf::Text t2(m_font);
         t2.setString("(" + std::to_string(cell.q) + "," + std::to_string(cell.r) + ")");
-        t2.setCharacterSize(8);
-        t2.setFillColor(sf::Color(200, 200, 200, 200));
+        t2.setCharacterSize(10);
+        t2.setFillColor(sf::Color(255, 100, 100, 220));
         {
             auto b = t2.getLocalBounds();
             t2.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y + b.size.y * 0.5f});
