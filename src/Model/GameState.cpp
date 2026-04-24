@@ -145,67 +145,7 @@ int GameState::minimax(int depth, Player rootPlayer) {
 }
 
 int GameState::evaluateWithCoalition(Player rootPlayer) const {
-    // Enhanced evaluation for 3-player games considering coalitions
-    float score = 0.f;
-    
-    // Get material values for all players
-    float player1Value = 0.f, player2Value = 0.f, player3Value = 0.f;
-    
-    for (const HexCell& c : board.allValidCells()) {
-        Piece* p = board.getPiece(c);
-        if (!p) continue;
-        
-        float value = static_cast<float>(p->getValue());
-        
-        if (p->getOwner() == Player::PLAYER1) {
-            player1Value += value;
-        } else if (p->getOwner() == Player::PLAYER2) {
-            player2Value += value;
-        } else if (p->getOwner() == Player::PLAYER3) {
-            player3Value += value;
-        }
-    }
-    
-    // Coalition-aware evaluation
-    switch (rootPlayer) {
-        case Player::PLAYER1:
-            // Player 1 wants to maximize their advantage over Players 2&3
-            // But also wants to prevent Players 2&3 from getting too strong
-            score = player1Value - 0.7f * player2Value - 0.7f * player3Value;
-            // Bonus for keeping other players balanced
-            {
-                float balance1 = std::abs(player2Value - player3Value);
-                score += balance1 * 0.1f; // Small bonus for balance
-            }
-            break;
-            
-        case Player::PLAYER2:
-            // Player 2 wants to maximize their advantage over Players 1&3
-            score = player2Value - 0.7f * player1Value - 0.7f * player3Value;
-            {
-                float balance2 = std::abs(player1Value - player3Value);
-                score += balance2 * 0.1f;
-            }
-            break;
-            
-        case Player::PLAYER3:
-            // Player 3 wants to maximize their advantage over Players 1&2
-            score = player3Value - 0.7f * player1Value - 0.7f * player2Value;
-            {
-                float balance3 = std::abs(player1Value - player2Value);
-                score += balance3 * 0.1f;
-            }
-            break;
-            
-        default:
-            score = 0.f;
-            break;
-    }
-    
-    // Add position bonuses
-    score += evaluatePositionBonus(rootPlayer);
-    
-    return static_cast<int>(score);
+    return evaluate(rootPlayer);
 }
 
 std::optional<Move> GameState::findBestMove(int depth, Player aiPlayer) {
@@ -516,50 +456,34 @@ void GameState::nextPlayer() {
 }
 
 int GameState::evaluate(Player perspective) const {
-    float score = 0.f;
-    
-    // Count pieces by player for material evaluation
-    int player1Count = 0, player2Count = 0, player3Count = 0;
-    float player1Value = 0.f, player2Value = 0.f, player3Value = 0.f;
-    
+    float mat1 = 0.f, mat2 = 0.f, mat3 = 0.f;
+    bool king1 = false, king2 = false, king3 = false;
+
     for (const HexCell& c : board.allValidCells()) {
         Piece* p = board.getPiece(c);
         if (!p) continue;
-        
-        float value = static_cast<float>(p->getValue());
-        
-        if (p->getOwner() == Player::PLAYER1) {
-            player1Count++;
-            player1Value += value;
-        } else if (p->getOwner() == Player::PLAYER2) {
-            player2Count++;
-            player2Value += value;
-        } else if (p->getOwner() == Player::PLAYER3) {
-            player3Count++;
-            player3Value += value;
-        }
+        float v = static_cast<float>(p->getValue());
+        if (p->getOwner() == Player::PLAYER1) { mat1 += v; if (p->getType() == PieceType::KING) king1 = true; }
+        else if (p->getOwner() == Player::PLAYER2) { mat2 += v; if (p->getType() == PieceType::KING) king2 = true; }
+        else if (p->getOwner() == Player::PLAYER3) { mat3 += v; if (p->getType() == PieceType::KING) king3 = true; }
     }
-    
-    // Differential scoring based on perspective
-    switch (perspective) {
-        case Player::PLAYER1:
-            score = player1Value - 0.6f * player2Value - 0.6f * player3Value;
-            // Position bonus: center control and advancement
-            score += evaluatePositionBonus(Player::PLAYER1);
-            break;
-        case Player::PLAYER2:
-            score = player2Value - 0.6f * player1Value - 0.6f * player3Value;
-            score += evaluatePositionBonus(Player::PLAYER2);
-            break;
-        case Player::PLAYER3:
-            score = player3Value - 0.6f * player1Value - 0.6f * player2Value;
-            score += evaluatePositionBonus(Player::PLAYER3);
-            break;
-        default:
-            score = 0.f;
-            break;
+
+    float myMat, e1Mat, e2Mat;
+    bool myKing, e1King, e2King;
+    if (perspective == Player::PLAYER1) {
+        myMat = mat1; myKing = king1; e1Mat = mat2; e1King = king2; e2Mat = mat3; e2King = king3;
+    } else if (perspective == Player::PLAYER2) {
+        myMat = mat2; myKing = king2; e1Mat = mat1; e1King = king1; e2Mat = mat3; e2King = king3;
+    } else {
+        myMat = mat3; myKing = king3; e1Mat = mat1; e1King = king1; e2Mat = mat2; e2King = king2;
     }
-    
+
+    float score = myMat - (e1Mat + e2Mat) / 2.0f;
+    if (!myKing) score -= 500.f;
+    if (!e1King) score += 500.f;
+    if (!e2King) score += 500.f;
+
+    score += evaluatePositionBonus(perspective);
     return static_cast<int>(score);
 }
 

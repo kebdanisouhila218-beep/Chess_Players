@@ -517,6 +517,37 @@ void Renderer::drawHUD(const GameState& state) {
     nameText.setPosition({140.f, cy});
     window.draw(nameText);
 
+    // Calcul matière par joueur
+    int score1 = 0, score2 = 0, score3 = 0;
+    for (const HexCell& c : state.getBoard().allValidCells()) {
+        Piece* p = state.getBoard().getPiece(c);
+        if (!p) continue;
+        if (p->getType() == PieceType::KING) continue;
+        if (p->getOwner() == Player::PLAYER1)      score1 += p->getValue();
+        else if (p->getOwner() == Player::PLAYER2) score2 += p->getValue();
+        else if (p->getOwner() == Player::PLAYER3) score3 += p->getValue();
+    }
+
+    // Scores centrés dans le HUD
+    struct ScoreEntry { std::string label; int val; sf::Color col; };
+    const ScoreEntry scores[3] = {
+        {"J1:", score1, sf::Color(244, 244, 244)},
+        {"J2:", score2, sf::Color(66, 96, 220)},
+        {"J3:", score3, sf::Color(214, 72, 72)},
+    };
+    float sx = winW * 0.5f - 80.f;
+    for (const auto& se : scores) {
+        sf::Text st(m_font);
+        st.setString(se.label + std::to_string(se.val));
+        st.setCharacterSize(14);
+        st.setFillColor(se.col);
+        auto b = st.getLocalBounds();
+        st.setOrigin({b.position.x, b.position.y + b.size.y * 0.5f});
+        st.setPosition({sx, cy});
+        window.draw(st);
+        sx += b.size.x + 22.f;
+    }
+
     if (!m_statusMessage.empty()) {
         sf::Text statusText(m_font);
         statusText.setString(m_statusMessage);
