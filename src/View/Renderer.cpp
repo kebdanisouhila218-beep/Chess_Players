@@ -589,8 +589,70 @@ void Renderer::draw(const GameState& state) {
 
     drawPieces(state);
     drawHUD(state);
+    if (state.isGameOver())
+        drawGameOverBanner(state);
 
     window.display();
+}
+
+void Renderer::drawGameOverBanner(const GameState& state) {
+    if (!m_fontLoaded) return;
+
+    const sf::Vector2u winSize = window.getSize();
+    const float winW = static_cast<float>(winSize.x);
+    const float winH = static_cast<float>(winSize.y);
+
+    const float bw = 500.f, bh = 140.f;
+    const float bx = (winW - bw) * 0.5f;
+    const float by = winH * 0.35f;
+
+    sf::RectangleShape box({bw, bh});
+    box.setPosition({bx, by});
+    box.setFillColor(sf::Color(0, 0, 0, 220));
+    box.setOutlineColor(sf::Color(255, 215, 0));
+    box.setOutlineThickness(3.f);
+    window.draw(box);
+
+    const Player winner = state.getWinner();
+    const float cx = bx + bw * 0.5f;
+
+    sf::Text title(m_font);
+    title.setString("PARTIE TERMINEE");
+    title.setCharacterSize(32);
+    title.setFillColor(sf::Color::White);
+    title.setStyle(sf::Text::Bold);
+    {
+        auto b = title.getLocalBounds();
+        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y + b.size.y * 0.5f});
+    }
+    title.setPosition({cx, by + 42.f});
+    window.draw(title);
+
+    sf::Text sub(m_font);
+    sf::Color subColor;
+    std::string subStr;
+    if (winner == Player::PLAYER1) {
+        subStr = "Vainqueur : Joueur 1 - Blancs";
+        subColor = sf::Color(244, 244, 244);
+    } else if (winner == Player::PLAYER2) {
+        subStr = "Vainqueur : Joueur 2 - Bleus";
+        subColor = sf::Color(66, 96, 220);
+    } else if (winner == Player::PLAYER3) {
+        subStr = "Vainqueur : Joueur 3 - Rouges";
+        subColor = sf::Color(214, 72, 72);
+    } else {
+        subStr = "Match nul";
+        subColor = sf::Color(180, 180, 180);
+    }
+    sub.setString(subStr);
+    sub.setCharacterSize(24);
+    sub.setFillColor(subColor);
+    {
+        auto b = sub.getLocalBounds();
+        sub.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y + b.size.y * 0.5f});
+    }
+    sub.setPosition({cx, by + 95.f});
+    window.draw(sub);
 }
 
 void Renderer::setSelectedCell(const HexCell& cell) {

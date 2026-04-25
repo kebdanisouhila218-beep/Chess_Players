@@ -35,6 +35,7 @@ private:
     void drawCellIds(const Board& board);
     sf::ConvexShape createTile(const std::array<sf::Vector2f, 4>& points, sf::Color color) const;
     void drawHUD(const GameState& state);
+    void drawGameOverBanner(const GameState& state);
 
     sf::RenderWindow& window;
     const GameState*  currentState = nullptr;

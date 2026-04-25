@@ -26,6 +26,7 @@ private:
     void handleClick(int x, int y);
     void handleMenuClick(int x, int y);
     bool tryAIMove(bool ignoreDelay = false);
+    void updateStatusMessage(const std::string& yaltaMessage = "");
     std::string pieceLabel(const Piece* piece, const HexCell& cell) const;
 
     sf::RenderWindow window;

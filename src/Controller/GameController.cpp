@@ -15,13 +15,18 @@ namespace {
         }
     }
 
-    std::string winnerText(Player player) {
+    std::string playerName(Player player) {
         switch (player) {
             case Player::PLAYER1: return "Joueur 1 - Blancs";
             case Player::PLAYER2: return "Joueur 2 - Bleus";
             case Player::PLAYER3: return "Joueur 3 - Rouges";
-            default: return "Aucun gagnant";
+            default: return "Aucun";
         }
+    }
+
+    std::string winnerText(Player player) {
+        if (player == Player::NONE) return "Aucun gagnant";
+        return playerName(player);
     }
 
     int playerIndex(Player player) {
@@ -164,6 +169,33 @@ void GameController::handleMenuClick(int x, int y) {
     }
 }
 
+void GameController::updateStatusMessage(const std::string& yaltaMessage) {
+    if (state.isGameOver()) {
+        renderer.setStatusMessage("Partie terminee - Gagnant : " + winnerText(state.getWinner()));
+        return;
+    }
+    if (!yaltaMessage.empty()) {
+        renderer.setStatusMessage(yaltaMessage);
+        return;
+    }
+    switch (state.getStatus()) {
+        case GameStatus::CHECK:
+            renderer.setStatusMessage("Echec au roi !");
+            break;
+        case GameStatus::CHECKMATE:
+            renderer.setStatusMessage("Echec et mat !");
+            break;
+        case GameStatus::DRAW:
+            if (state.getHalfmoveClock() >= 50)
+                renderer.setStatusMessage("Match nul - Regle des 50 coups");
+            else
+                renderer.setStatusMessage("Pat - Match nul !");
+            break;
+        default:
+            break;
+    }
+}
+
 bool GameController::tryAIMove(bool ignoreDelay) {
     if (state.isGameOver()) {
         return false;
@@ -204,20 +236,14 @@ bool GameController::tryAIMove(bool ignoreDelay) {
                   << cellStr(b, bestMove->from) << " -> " << cellStr(b, bestMove->to) << "\n";
     }
 
-    if (state.isGameOver()) {
-        renderer.setStatusMessage("Partie terminee - Gagnant : " + winnerText(state.getWinner()));
-    } else {
-        switch (state.getStatus()) {
-            case GameStatus::CHECK:
-                renderer.setStatusMessage("Echec au roi !");
-                break;
-            case GameStatus::DRAW:
-                renderer.setStatusMessage("Pat - Match nul !");
-                break;
-            default:
-                renderer.setStatusMessage("Coup IA joue");
-                break;
+    {
+        const Move* lm = state.getLastMove();
+        std::string yMsg;
+        if (lm && lm->yaltaEliminatedPlayer != Player::NONE) {
+            yMsg = playerName(lm->yaltaEliminatedPlayer) + " elimine ! Pieces transferees a "
+                 + playerName(state.getLastAttacker());
         }
+        updateStatusMessage(yMsg);
     }
 
     renderer.draw(state);
@@ -403,19 +429,14 @@ void GameController::handleClick(int x, int y) {
                               << cellStr(b, move.from) << " -> " << cellStr(b, move.to) << "\n";
                 }
                 state.applyMove(move);
-                if (state.isGameOver()) {
-                    renderer.setStatusMessage("Partie terminee - Gagnant : " + winnerText(state.getWinner()));
-                } else {
-                    switch (state.getStatus()) {
-                        case GameStatus::CHECK:
-                            renderer.setStatusMessage("Echec au roi !");
-                            break;
-                        case GameStatus::DRAW:
-                            renderer.setStatusMessage("Pat - Match nul !");
-                            break;
-                        default:
-                            break;
+                {
+                    const Move* lm = state.getLastMove();
+                    std::string yMsg;
+                    if (lm && lm->yaltaEliminatedPlayer != Player::NONE) {
+                        yMsg = playerName(lm->yaltaEliminatedPlayer) + " elimine ! Pieces transferees a "
+                             + playerName(state.getLastAttacker());
                     }
+                    updateStatusMessage(yMsg);
                 }
             }
         } else {

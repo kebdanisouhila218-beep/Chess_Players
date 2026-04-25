@@ -176,7 +176,7 @@ std::optional<Move> GameState::findBestMove(int depth, Player aiPlayer) {
 }
 
 bool GameState::isGameOver() const {
-    return activePlayerCount() <= 1;
+    return activePlayerCount() <= 1 || status == GameStatus::DRAW;
 }
 
 Player GameState::getWinner() const {
@@ -206,6 +206,11 @@ int GameState::activePlayerCount() const {
 }
 
 void GameState::computeStatus() {
+    if (halfmoveClock >= 50) {
+        status = GameStatus::DRAW;
+        return;
+    }
+
     bool hasLegal = false;
     for (const HexCell& c : board.allValidCells()) {
         Piece* p = board.getPiece(c);
@@ -285,6 +290,7 @@ void GameState::applyMove(const Move& m, bool isSimulation) {
     Move applied = m;
     applied.previousLastAttacker = lastAttacker;
     applied.previousStatus = status;
+    applied.previousHalfmoveClock = halfmoveClock;
     applied.yaltaEliminatedPlayer = Player::NONE;
     applied.yaltaPiecesOwnerBefore.clear();
     if (!isSimulation) {
@@ -329,6 +335,12 @@ void GameState::applyMove(const Move& m, bool isSimulation) {
         applied.capturedCell = m.to;
         board.removePiece(m.to);
         delete capturedPiece;
+    }
+
+    {
+        const bool isPawnMove = (moving->getType() == PieceType::PAWN);
+        const bool isCapture  = applied.capturedExists;
+        halfmoveClock = (isPawnMove || isCapture) ? 0 : halfmoveClock + 1;
     }
 
     if (applied.isCastling) {
@@ -430,6 +442,7 @@ void GameState::undoMove(bool notifyObservers) {
     currentPlayer = last.player;
     status = last.previousStatus;
     lastAttacker = last.previousLastAttacker;
+    halfmoveClock = last.previousHalfmoveClock;
 
     if (notifyObservers) {
         notifyAll();

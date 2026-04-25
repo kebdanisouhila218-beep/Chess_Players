@@ -31,6 +31,7 @@ struct Move {
     bool   isPromotion = false;
     Player previousLastAttacker = Player::NONE;
     GameStatus previousStatus = GameStatus::PLAYING;
+    int previousHalfmoveClock = 0;
     Player yaltaEliminatedPlayer = Player::NONE;
     std::vector<std::pair<HexCell, Player>> yaltaPiecesOwnerBefore;
 };
@@ -61,7 +62,8 @@ public:
     const Board& getBoard()   const { return board; }
     Player       getCurrentPlayer() const { return currentPlayer; }
     GameStatus   getStatus()        const { return status; }
-    Player       getLastAttacker()  const { return lastAttacker; }
+    Player       getLastAttacker()   const { return lastAttacker; }
+    int          getHalfmoveClock() const { return halfmoveClock; }
     bool         isInCheck(Player player) const;
     const Move*  getLastMove()      const;
 
@@ -75,5 +77,6 @@ private:
     std::vector<Move>  moveHistory;
     std::set<Player>   eliminatedPlayers;
     Player             lastAttacker = Player::NONE;
+    int                halfmoveClock = 0;
     std::vector<IObserver*> observers;
 };
