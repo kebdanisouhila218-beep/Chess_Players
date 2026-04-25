@@ -47,8 +47,6 @@ public:
 
     int  minimax(int depth, Player rootPlayer);
     std::optional<Move> findBestMove(int depth, Player aiPlayer);
-    float evaluatePositionBonus(Player player) const;
-    int evaluateWithCoalition(Player rootPlayer) const;
     int  evaluate(Player perspective) const;
     int  evaluate() const;
     bool isGameOver() const;
