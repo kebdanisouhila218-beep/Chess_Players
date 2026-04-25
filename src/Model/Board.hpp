@@ -33,6 +33,9 @@ public:
     };
 
     Board();
+    Board(const Board& other);
+    ~Board();
+    Board& operator=(const Board&) = delete;
 
     bool   isValid(const HexCell& c) const;
     Piece* getPiece(const HexCell& c) const;

@@ -39,6 +39,8 @@ struct Move {
 class GameState {
 public:
     GameState();
+    GameState(const GameState& other);
+    GameState& operator=(const GameState&) = delete;
 
     void applyMove(const Move& m, bool isSimulation = false);
     void undoMove(bool notifyObservers = true);

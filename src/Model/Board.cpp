@@ -1,4 +1,5 @@
 #include "Board.hpp"
+#include "PieceFactory.hpp"
 
 #include <algorithm>
 #include <array>
@@ -54,6 +55,29 @@ Board::Board() {
     }
 
     buildNeighbors();
+}
+
+Board::Board(const Board& other)
+    : nodes(other.nodes)
+    , xyToId(other.xyToId)
+    , neighbors(other.neighbors)
+{
+    PieceFactory factory;
+    for (const auto& [cell, ptr] : other.cells) {
+        if (ptr) {
+            Piece* copy = factory.create(ptr->getType(), ptr->getOwner(), ptr->getPos());
+            copy->setHasMoved(ptr->getHasMoved());
+            cells[cell] = copy;
+        } else {
+            cells[cell] = nullptr;
+        }
+    }
+}
+
+Board::~Board() {
+    for (auto& [cell, ptr] : cells) {
+        delete ptr;
+    }
 }
 
 int Board::sextantFor(int x, int y) {

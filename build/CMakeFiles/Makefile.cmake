@@ -70,4 +70,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/Chess3Players.dir/DependInfo.cmake"
+  "CMakeFiles/TestFindBestMove.dir/DependInfo.cmake"
   )

@@ -51,6 +51,18 @@ GameState::GameState()
     factory.initBoard(board, Player::PLAYER3);
 }
 
+GameState::GameState(const GameState& other)
+    : board(other.board)
+    , currentPlayer(other.currentPlayer)
+    , status(other.status)
+    , moveHistory(other.moveHistory)
+    , eliminatedPlayers(other.eliminatedPlayers)
+    , lastAttacker(other.lastAttacker)
+    , halfmoveClock(other.halfmoveClock)
+    // observers intentionnellement omis : la copie est isolée, pas d'UI
+{
+}
+
 const Move* GameState::getLastMove() const {
     if (moveHistory.empty()) return nullptr;
     return &moveHistory.back();
@@ -161,9 +173,9 @@ std::optional<Move> GameState::findBestMove(int depth, Player aiPlayer) {
 
         std::vector<Move> legalMoves = getLegalMovesAsMove(cell);
         for (const Move& move : legalMoves) {
-            applyMove(move, true);
-            const int score = minimax(depth - 1, aiPlayer);
-            undoMove(false);
+            GameState copy(*this);
+            copy.applyMove(move, true);
+            const int score = copy.minimax(depth - 1, aiPlayer);
 
             if (!bestMove.has_value() || score > bestScore) {
                 bestScore = score;
