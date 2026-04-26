@@ -127,35 +127,32 @@ int GameState::minimax(int depth, Player rootPlayer) {
     std::vector<Move> allMoves;
     for (const HexCell& cell : board.allValidCells()) {
         Piece* piece = board.getPiece(cell);
-        if (!piece || piece->getOwner() != currentPlayer) {
-            continue;
-        }
+        if (!piece || piece->getOwner() != currentPlayer) continue;
         std::vector<Move> pieceMoves = getLegalMovesAsMove(cell);
         allMoves.insert(allMoves.end(), pieceMoves.begin(), pieceMoves.end());
     }
 
-    if (allMoves.empty()) {
-        return evaluate(rootPlayer);
-    }
+    if (allMoves.empty()) return evaluate(rootPlayer);
 
-    // For 3-player games, we need to consider coalition dynamics
-    // The current player wants to maximize their score, but the other two players
-    // may have different interests. We use a modified evaluation that considers
-    // the relative strength of all players.
-    
-    int bestScore = std::numeric_limits<int>::min();
-    
-    for (const Move& move : allMoves) {
-        applyMove(move, true);
-        
-        // Evaluate from current player's perspective with coalition awareness
-        int score = evaluate(rootPlayer);
-        undoMove(false);
-        
-        bestScore = std::max(bestScore, score);
+    // Paranoid minimax : rootPlayer maximise, les adversaires minimisent son score.
+    // Hypothèse pessimiste mais scalaire et défendable pour un jeu à 3 joueurs.
+    if (currentPlayer == rootPlayer) {
+        int best = std::numeric_limits<int>::min();
+        for (const Move& move : allMoves) {
+            applyMove(move, true);
+            best = std::max(best, minimax(depth - 1, rootPlayer));
+            undoMove(false);
+        }
+        return best;
+    } else {
+        int best = std::numeric_limits<int>::max();
+        for (const Move& move : allMoves) {
+            applyMove(move, true);
+            best = std::min(best, minimax(depth - 1, rootPlayer));
+            undoMove(false);
+        }
+        return best;
     }
-
-    return bestScore;
 }
 
 
