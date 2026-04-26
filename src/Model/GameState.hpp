@@ -68,6 +68,7 @@ public:
     int          getHalfmoveClock() const { return halfmoveClock; }
     bool         isInCheck(Player player) const;
     const Move*  getLastMove()      const;
+    const std::vector<Move>& getMoveHistory() const { return moveHistory; }
 
     void addObserver(IObserver* o);
     void notifyAll();

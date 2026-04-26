@@ -23,6 +23,7 @@ public:
 
     sf::Vector2f cellToPixel(const Board& board, const HexCell& c) const;
     std::optional<HexCell> pickCell(const Board& board, sf::Vector2f px) const;
+    sf::FloatRect getUndoButtonBounds() const { return m_undoButtonBounds; }
 
     void setCurrentState(const GameState* state) { currentState = state; }
     void toggleShowIds() { m_showIds = !m_showIds; }
@@ -51,6 +52,7 @@ private:
     std::string m_statusMessage;
     bool m_geometryReady = false;
     bool m_showIds = false;
+    sf::FloatRect m_undoButtonBounds;
     sf::Vector2u m_lastWindowSize{0u, 0u};
     std::chrono::steady_clock::time_point m_selectionPulseStart = std::chrono::steady_clock::now();
 };

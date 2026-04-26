@@ -13,6 +13,7 @@ public:
     void run();
     void setAIConfig(const std::array<bool, 3>& config);
     const std::array<bool, 3>& getAIConfig() const;
+    void setAIDifficulty(int depth);
     void startGameForTests();
     bool stepAIMoveForTests(bool ignoreDelay = true);
     bool hasGameStarted() const;
@@ -35,6 +36,7 @@ private:
     Renderer         renderer;
     PieceFactory     factory;
     std::array<bool, 3> isAI = {false, false, true};
+    int aiDepth = 2;
     bool gameStarted = false;
     std::chrono::steady_clock::time_point lastAIMoveTime = std::chrono::steady_clock::now();
     std::chrono::milliseconds aiMoveDelay{1400};

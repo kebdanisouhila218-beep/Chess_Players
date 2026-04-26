@@ -62,13 +62,20 @@ GameController::GameController(bool windowVisible)
     state.addObserver(&renderer);
     renderer.setCurrentState(&state);
 
-    menuRenderer.draw(isAI);
+    menuRenderer.draw(isAI, aiDepth);
 }
 
 void GameController::setAIConfig(const std::array<bool, 3>& config) {
     isAI = config;
     if (!gameStarted && window.isOpen()) {
-        menuRenderer.draw(isAI);
+        menuRenderer.draw(isAI, aiDepth);
+    }
+}
+
+void GameController::setAIDifficulty(int depth) {
+    aiDepth = depth;
+    if (!gameStarted && window.isOpen()) {
+        menuRenderer.draw(isAI, aiDepth);
     }
 }
 
@@ -126,7 +133,7 @@ void GameController::startGame() {
 }
 
 void GameController::showMenu() {
-    menuRenderer.draw(isAI);
+    menuRenderer.draw(isAI, aiDepth);
 
     while (window.isOpen() && !gameStarted) {
         while (const std::optional event = window.pollEvent()) {
@@ -141,7 +148,7 @@ void GameController::showMenu() {
                     static_cast<float>(resized->size.y)
                 }));
                 window.setView(view);
-                menuRenderer.draw(isAI);
+                menuRenderer.draw(isAI, aiDepth);
             }
 
             if (const auto* click = event->getIf<sf::Event::MouseButtonPressed>()) {
@@ -155,11 +162,21 @@ void GameController::showMenu() {
 
 void GameController::handleMenuClick(int x, int y) {
     const sf::Vector2f mouse{static_cast<float>(x), static_cast<float>(y)};
+
     const auto toggleBounds = menuRenderer.getToggleBounds();
     for (std::size_t i = 0; i < toggleBounds.size(); ++i) {
         if (toggleBounds[i].contains(mouse)) {
             isAI[i] = !isAI[i];
-            menuRenderer.draw(isAI);
+            menuRenderer.draw(isAI, aiDepth);
+            return;
+        }
+    }
+
+    const auto diffBounds = menuRenderer.getDifficultyBounds();
+    for (std::size_t i = 0; i < diffBounds.size(); ++i) {
+        if (diffBounds[i].contains(mouse)) {
+            aiDepth = static_cast<int>(i) + 1;
+            menuRenderer.draw(isAI, aiDepth);
             return;
         }
     }
@@ -220,7 +237,7 @@ bool GameController::tryAIMove(bool ignoreDelay) {
     renderer.clearHighlights();
     renderer.setStatusMessage("IA reflechit...");
 
-    std::optional<Move> bestMove = state.findBestMove(2, state.getCurrentPlayer());
+    std::optional<Move> bestMove = state.findBestMove(aiDepth, state.getCurrentPlayer());
     if (!bestMove.has_value()) {
         return false;
     }
@@ -266,7 +283,7 @@ void GameController::handleEvents() {
             if (gameStarted) {
                 renderer.draw(state);
             } else {
-                menuRenderer.draw(isAI);
+                menuRenderer.draw(isAI, aiDepth);
             }
         }
 
@@ -307,6 +324,29 @@ void GameController::handleClick(int x, int y) {
     sf::Vector2u winSize = window.getSize();
     if (y >= static_cast<int>(winSize.y) - 50)
         return;
+
+    // Bouton Annuler
+    const sf::Vector2f mousePos{static_cast<float>(x), static_cast<float>(y)};
+    if (renderer.getUndoButtonBounds().contains(mousePos)) {
+        if (!state.getMoveHistory().empty()) {
+            const bool anyAI = isAI[0] || isAI[1] || isAI[2];
+            const int movesToUndo = anyAI ? 2 : 1;
+            const int available   = static_cast<int>(state.getMoveHistory().size());
+            const int toUndo      = std::min(movesToUndo, available);
+            if (selected != nullptr) {
+                delete selected;
+                selected = nullptr;
+            }
+            validMoves.clear();
+            renderer.clearSelectedCell();
+            renderer.clearHighlights();
+            for (int i = 0; i < toUndo; ++i) {
+                state.undoMove(i == toUndo - 1);
+            }
+            updateStatusMessage();
+        }
+        return;
+    }
 
     std::optional<HexCell> picked = renderer.pickCell(state.getBoard(), {(float)x, (float)y});
     if (!picked.has_value()) {

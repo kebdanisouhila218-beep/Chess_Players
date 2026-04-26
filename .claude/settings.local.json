@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(cmake --build build --target Chess_Players)"
+      "Bash(cmake --build build --target Chess_Players)",
+      "Bash(cmake --build . --target Chess3Players)"
     ]
   }
 }

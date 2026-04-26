@@ -6,9 +6,10 @@ class MenuRenderer {
 public:
     explicit MenuRenderer(sf::RenderWindow& window);
 
-    void draw(const std::array<bool, 3>& isAI) const;
+    void draw(const std::array<bool, 3>& isAI, int aiDepth) const;
     std::array<sf::FloatRect, 3> getToggleBounds() const;
     sf::FloatRect getStartButtonBounds() const;
+    std::array<sf::FloatRect, 3> getDifficultyBounds() const;
 
 private:
     struct MenuLayout {
@@ -16,6 +17,8 @@ private:
         sf::FloatRect titleBounds;
         std::array<sf::FloatRect, 3> rowBounds;
         std::array<sf::FloatRect, 3> toggleBounds;
+        sf::FloatRect difficultyRowBounds;
+        std::array<sf::FloatRect, 3> difficultyBounds;
         sf::FloatRect startBounds;
     };
 

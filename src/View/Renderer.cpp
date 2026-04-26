@@ -559,6 +559,33 @@ void Renderer::drawHUD(const GameState& state) {
         window.draw(statusText);
     }
 
+    // Bouton Annuler — flottant en bas-à-gauche, juste au-dessus du HUD
+    {
+        const float btnW = 115.f;
+        const float btnH = 32.f;
+        const float btnX = 8.f;
+        const float btnY = hudY - btnH - 8.f;
+        m_undoButtonBounds = sf::FloatRect({btnX, btnY}, {btnW, btnH});
+
+        const bool canUndo = !state.getMoveHistory().empty();
+
+        sf::RectangleShape btn({btnW, btnH});
+        btn.setPosition({btnX, btnY});
+        btn.setFillColor(canUndo ? sf::Color(40, 44, 52) : sf::Color(28, 30, 35));
+        btn.setOutlineColor(canUndo ? sf::Color(76, 84, 100) : sf::Color(45, 50, 58));
+        btn.setOutlineThickness(1.5f);
+        window.draw(btn);
+
+        sf::Text btnText(m_font);
+        btnText.setString(sf::String(U"↩") + " Annuler");
+        btnText.setCharacterSize(14);
+        btnText.setFillColor(canUndo ? sf::Color(210, 215, 225) : sf::Color(85, 90, 100));
+        auto b = btnText.getLocalBounds();
+        btnText.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y + b.size.y * 0.5f});
+        btnText.setPosition({btnX + btnW * 0.5f, btnY + btnH * 0.5f});
+        window.draw(btnText);
+    }
+
     // Indicateur visuel des 3 joueurs (petits cercles a droite)
     float dotX = winW - 20.f;
     struct PlayerDot { Player p; sf::Color c; };

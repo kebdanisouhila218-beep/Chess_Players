@@ -40,7 +40,10 @@ MenuRenderer::MenuLayout MenuRenderer::computeLayout() const {
     const float titleHeight = 70.f;
     const float startHeight = 62.f;
     const float verticalPadding = 28.f;
-    const float panelHeight = titleHeight + verticalPadding * 2.f + rowHeight * 3.f + rowGap * 2.f + startHeight + 30.f;
+    const float diffRowHeight = 62.f;
+    const float diffRowGap = 18.f;
+    const float panelHeight = titleHeight + verticalPadding * 2.f + rowHeight * 3.f + rowGap * 2.f
+                            + diffRowHeight + diffRowGap + startHeight + 30.f;
     const float panelX = (width - panelWidth) * 0.5f;
     const float panelY = (height - panelHeight) * 0.5f;
 
@@ -55,6 +58,19 @@ MenuRenderer::MenuLayout MenuRenderer::computeLayout() const {
         currentY += rowHeight + rowGap;
     }
 
+    // Section difficulté : une ligne avec 3 boutons Facile / Normal / Difficile
+    layout.difficultyRowBounds = sf::FloatRect({panelX + 26.f, currentY}, {panelWidth - 52.f, diffRowHeight});
+    const float btnW = 90.f;
+    const float btnH = 40.f;
+    const float btnGap = 8.f;
+    const float btnsStartX = panelX + panelWidth - 26.f - 3.f * btnW - 2.f * btnGap;
+    for (std::size_t i = 0; i < 3; ++i) {
+        layout.difficultyBounds[i] = sf::FloatRect(
+            {btnsStartX + static_cast<float>(i) * (btnW + btnGap), currentY + (diffRowHeight - btnH) * 0.5f},
+            {btnW, btnH});
+    }
+    currentY += diffRowHeight + diffRowGap;
+
     layout.startBounds = sf::FloatRect({panelX + (panelWidth - 220.f) * 0.5f, panelY + panelHeight - startHeight - 22.f}, {220.f, startHeight});
     return layout;
 }
@@ -65,6 +81,10 @@ std::array<sf::FloatRect, 3> MenuRenderer::getToggleBounds() const {
 
 sf::FloatRect MenuRenderer::getStartButtonBounds() const {
     return computeLayout().startBounds;
+}
+
+std::array<sf::FloatRect, 3> MenuRenderer::getDifficultyBounds() const {
+    return computeLayout().difficultyBounds;
 }
 
 void MenuRenderer::drawCenteredText(const sf::String& text, unsigned int size, sf::Color color,
@@ -87,7 +107,7 @@ void MenuRenderer::drawCenteredText(const sf::String& text, unsigned int size, s
     window.draw(label);
 }
 
-void MenuRenderer::draw(const std::array<bool, 3>& isAI) const {
+void MenuRenderer::draw(const std::array<bool, 3>& isAI, int aiDepth) const {
     const MenuLayout layout = computeLayout();
 
     window.clear(sf::Color(10, 10, 14));
@@ -134,6 +154,34 @@ void MenuRenderer::draw(const std::array<bool, 3>& isAI) const {
         window.draw(toggle);
 
         drawCenteredText(isAI[i] ? "IA" : "Humain", 20, sf::Color::White, layout.toggleBounds[i], true);
+    }
+
+    // Section difficulté
+    {
+        sf::RectangleShape diffRow({layout.difficultyRowBounds.size.x, layout.difficultyRowBounds.size.y});
+        diffRow.setPosition({layout.difficultyRowBounds.position.x, layout.difficultyRowBounds.position.y});
+        diffRow.setFillColor(sf::Color(34, 38, 47));
+        diffRow.setOutlineColor(sf::Color(58, 64, 78));
+        diffRow.setOutlineThickness(1.5f);
+        window.draw(diffRow);
+
+        sf::FloatRect labelBounds = layout.difficultyRowBounds;
+        labelBounds.size.x *= 0.38f;
+        drawCenteredText("Difficulte IA", 19, sf::Color(235, 238, 244), labelBounds, true);
+
+        const std::array<const char*, 3> labels = {"Facile", "Normal", "Difficile"};
+        for (std::size_t i = 0; i < 3; ++i) {
+            const bool selected = (static_cast<int>(i) + 1 == aiDepth);
+            sf::RectangleShape btn({layout.difficultyBounds[i].size.x, layout.difficultyBounds[i].size.y});
+            btn.setPosition({layout.difficultyBounds[i].position.x, layout.difficultyBounds[i].position.y});
+            btn.setFillColor(selected ? sf::Color(224, 170, 58) : sf::Color(50, 55, 68));
+            btn.setOutlineColor(selected ? sf::Color(255, 239, 194) : sf::Color(245, 245, 245, 80));
+            btn.setOutlineThickness(1.5f);
+            window.draw(btn);
+            drawCenteredText(labels[i], 17,
+                selected ? sf::Color(32, 24, 12) : sf::Color(210, 214, 224),
+                layout.difficultyBounds[i], true);
+        }
     }
 
     sf::RectangleShape start({layout.startBounds.size.x, layout.startBounds.size.y});
