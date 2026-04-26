@@ -3,6 +3,8 @@
 #include "PieceFactory.hpp"
 #include <array>
 #include <cmath>
+#include <future>
+#include <thread>
 
 namespace {
     Board::Direction pawnForward(const Board& board, Player owner, const HexCell& pos) {
@@ -162,25 +164,37 @@ std::optional<Move> GameState::findBestMove(int depth, Player aiPlayer) {
         return std::nullopt;
     }
 
-    std::optional<Move> bestMove;
-    int bestScore = std::numeric_limits<int>::min();
-
+    // Phase 0 : collecter tous les coups légaux (séquentiel, *this non modifié)
+    std::vector<Move> allMoves;
     for (const HexCell& cell : board.allValidCells()) {
         Piece* piece = board.getPiece(cell);
-        if (!piece || piece->getOwner() != aiPlayer) {
-            continue;
-        }
+        if (!piece || piece->getOwner() != aiPlayer) continue;
+        std::vector<Move> pieceMoves = getLegalMovesAsMove(cell);
+        allMoves.insert(allMoves.end(), pieceMoves.begin(), pieceMoves.end());
+    }
 
-        std::vector<Move> legalMoves = getLegalMovesAsMove(cell);
-        for (const Move& move : legalMoves) {
-            GameState copy(*this);
-            copy.applyMove(move, true);
-            const int score = copy.minimax(depth - 1, aiPlayer);
+    if (allMoves.empty()) return std::nullopt;
 
-            if (!bestMove.has_value() || score > bestScore) {
-                bestScore = score;
-                bestMove = move;
-            }
+    // Phase 1 : évaluer chaque coup sur une copie indépendante, en parallèle
+    std::vector<std::future<int>> futures;
+    futures.reserve(allMoves.size());
+    for (const Move& move : allMoves) {
+        futures.push_back(std::async(std::launch::async,
+            [this, move, depth, aiPlayer]() {
+                GameState copy(*this);
+                copy.applyMove(move, true);
+                return copy.minimax(depth - 1, aiPlayer);
+            }));
+    }
+
+    // Phase 2 : collecter dans l'ordre → déterminisme garanti
+    std::optional<Move> bestMove;
+    int bestScore = std::numeric_limits<int>::min();
+    for (std::size_t i = 0; i < allMoves.size(); ++i) {
+        const int score = futures[i].get();
+        if (!bestMove.has_value() || score > bestScore) {
+            bestScore = score;
+            bestMove = allMoves[i];
         }
     }
 

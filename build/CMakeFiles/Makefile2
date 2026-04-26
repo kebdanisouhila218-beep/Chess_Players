@@ -63,12 +63,12 @@ CMAKE_BINARY_DIR = C:\Users\etudiant\Documents\GitHub\Chess_Players\build
 
 # The main recursive "all" target.
 all: CMakeFiles/Chess3Players.dir/all
-all: CMakeFiles/TestFindBestMove.dir/all
+all: CMakeFiles/TestThreaded.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/Chess3Players.dir/codegen
-codegen: CMakeFiles/TestFindBestMove.dir/codegen
+codegen: CMakeFiles/TestThreaded.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -77,7 +77,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/Chess3Players.dir/clean
-clean: CMakeFiles/TestFindBestMove.dir/clean
+clean: CMakeFiles/TestThreaded.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -113,36 +113,36 @@ CMakeFiles/Chess3Players.dir/clean:
 .PHONY : CMakeFiles/Chess3Players.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/TestFindBestMove.dir
+# Target rules for target CMakeFiles/TestThreaded.dir
 
 # All Build rule for target.
-CMakeFiles/TestFindBestMove.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestFindBestMove.dir\build.make CMakeFiles/TestFindBestMove.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestFindBestMove.dir\build.make CMakeFiles/TestFindBestMove.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=17,18,19,20,21,22,23,24,25,26,27,28,29 "Built target TestFindBestMove"
-.PHONY : CMakeFiles/TestFindBestMove.dir/all
+CMakeFiles/TestThreaded.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestThreaded.dir\build.make CMakeFiles/TestThreaded.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestThreaded.dir\build.make CMakeFiles/TestThreaded.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=17,18,19,20,21,22,23,24,25,26,27,28,29 "Built target TestThreaded"
+.PHONY : CMakeFiles/TestThreaded.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/TestFindBestMove.dir/rule: cmake_check_build_system
+CMakeFiles/TestThreaded.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles 13
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/TestFindBestMove.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/TestThreaded.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles 0
-.PHONY : CMakeFiles/TestFindBestMove.dir/rule
+.PHONY : CMakeFiles/TestThreaded.dir/rule
 
 # Convenience name for target.
-TestFindBestMove: CMakeFiles/TestFindBestMove.dir/rule
-.PHONY : TestFindBestMove
+TestThreaded: CMakeFiles/TestThreaded.dir/rule
+.PHONY : TestThreaded
 
 # codegen rule for target.
-CMakeFiles/TestFindBestMove.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestFindBestMove.dir\build.make CMakeFiles/TestFindBestMove.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=17,18,19,20,21,22,23,24,25,26,27,28,29 "Finished codegen for target TestFindBestMove"
-.PHONY : CMakeFiles/TestFindBestMove.dir/codegen
+CMakeFiles/TestThreaded.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestThreaded.dir\build.make CMakeFiles/TestThreaded.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=17,18,19,20,21,22,23,24,25,26,27,28,29 "Finished codegen for target TestThreaded"
+.PHONY : CMakeFiles/TestThreaded.dir/codegen
 
 # clean rule for target.
-CMakeFiles/TestFindBestMove.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestFindBestMove.dir\build.make CMakeFiles/TestFindBestMove.dir/clean
-.PHONY : CMakeFiles/TestFindBestMove.dir/clean
+CMakeFiles/TestThreaded.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestThreaded.dir\build.make CMakeFiles/TestThreaded.dir/clean
+.PHONY : CMakeFiles/TestThreaded.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
