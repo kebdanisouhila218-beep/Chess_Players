@@ -22,6 +22,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Model/Rook.cpp" "CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj" "gcc" "CMakeFiles/Chess3Players.dir/src/Model/Rook.cpp.obj.d"
   "C:/Users/etudiant/Documents/GitHub/Chess_Players/src/View/MenuRenderer.cpp" "CMakeFiles/Chess3Players.dir/src/View/MenuRenderer.cpp.obj" "gcc" "CMakeFiles/Chess3Players.dir/src/View/MenuRenderer.cpp.obj.d"
   "C:/Users/etudiant/Documents/GitHub/Chess_Players/src/View/Renderer.cpp" "CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj" "gcc" "CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj.d"
+  "C:/Users/etudiant/Documents/GitHub/Chess_Players/src/View/SetupScreen.cpp" "CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.obj" "gcc" "CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.obj.d"
   "C:/Users/etudiant/Documents/GitHub/Chess_Players/src/main.cpp" "CMakeFiles/Chess3Players.dir/src/main.cpp.obj" "gcc" "CMakeFiles/Chess3Players.dir/src/main.cpp.obj.d"
   )
 

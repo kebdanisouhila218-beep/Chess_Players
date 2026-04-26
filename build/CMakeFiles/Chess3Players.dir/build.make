@@ -281,11 +281,26 @@ CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.s"
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\View\Renderer.cpp -o CMakeFiles\Chess3Players.dir\src\View\Renderer.cpp.s
 
+CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
+CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
+CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/View/SetupScreen.cpp
+CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.obj"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\View\SetupScreen.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\View\SetupScreen.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\View\SetupScreen.cpp
+
+CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.i"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\etudiant\Documents\GitHub\Chess_Players\src\View\SetupScreen.cpp > CMakeFiles\Chess3Players.dir\src\View\SetupScreen.cpp.i
+
+CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.s"
+	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\etudiant\Documents\GitHub\Chess_Players\src\View\SetupScreen.cpp -o CMakeFiles\Chess3Players.dir\src\View\SetupScreen.cpp.s
+
 CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj: CMakeFiles/Chess3Players.dir/flags.make
 CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj: CMakeFiles/Chess3Players.dir/includes_CXX.rsp
 CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj: C:/Users/etudiant/Documents/GitHub/Chess_Players/src/Controller/GameController.cpp
 CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj: CMakeFiles/Chess3Players.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj"
 	C:\Users\etudiant\Downloads\winlibs-x86_64-posix-seh-gcc-14.2.0-llvm-19.1.7-mingw-w64ucrt-12.0.0-r3\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj -MF CMakeFiles\Chess3Players.dir\src\Controller\GameController.cpp.obj.d -o CMakeFiles\Chess3Players.dir\src\Controller\GameController.cpp.obj -c C:\Users\etudiant\Documents\GitHub\Chess_Players\src\Controller\GameController.cpp
 
 CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.i: cmake_force
@@ -312,6 +327,7 @@ Chess3Players_OBJECTS = \
 "CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.obj" \
 "CMakeFiles/Chess3Players.dir/src/View/MenuRenderer.cpp.obj" \
 "CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj" \
+"CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.obj" \
 "CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj"
 
 # External object files for target Chess3Players
@@ -331,6 +347,7 @@ Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Model/GameState.cpp.obj
 Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Model/PieceFactory.cpp.obj
 Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/View/MenuRenderer.cpp.obj
 Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.obj
+Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.obj
 Chess3Players.exe: CMakeFiles/Chess3Players.dir/src/Controller/GameController.cpp.obj
 Chess3Players.exe: CMakeFiles/Chess3Players.dir/build.make
 Chess3Players.exe: C:/SFML/lib/libsfml-graphics-d.a
@@ -339,7 +356,7 @@ Chess3Players.exe: C:/SFML/lib/libsfml-system-d.a
 Chess3Players.exe: CMakeFiles/Chess3Players.dir/linkLibs.rsp
 Chess3Players.exe: CMakeFiles/Chess3Players.dir/objects1.rsp
 Chess3Players.exe: CMakeFiles/Chess3Players.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable Chess3Players.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\etudiant\Documents\GitHub\Chess_Players\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable Chess3Players.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Chess3Players.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

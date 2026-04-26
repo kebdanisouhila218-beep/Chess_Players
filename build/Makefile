@@ -464,6 +464,30 @@ src/View/Renderer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/Renderer.cpp.s
 .PHONY : src/View/Renderer.cpp.s
 
+src/View/SetupScreen.obj: src/View/SetupScreen.cpp.obj
+.PHONY : src/View/SetupScreen.obj
+
+# target to build an object file
+src/View/SetupScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.obj
+.PHONY : src/View/SetupScreen.cpp.obj
+
+src/View/SetupScreen.i: src/View/SetupScreen.cpp.i
+.PHONY : src/View/SetupScreen.i
+
+# target to preprocess a source file
+src/View/SetupScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.i
+.PHONY : src/View/SetupScreen.cpp.i
+
+src/View/SetupScreen.s: src/View/SetupScreen.cpp.s
+.PHONY : src/View/SetupScreen.s
+
+# target to generate assembly for a file
+src/View/SetupScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chess3Players.dir\build.make CMakeFiles/Chess3Players.dir/src/View/SetupScreen.cpp.s
+.PHONY : src/View/SetupScreen.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -539,6 +563,9 @@ help:
 	@echo ... src/View/Renderer.obj
 	@echo ... src/View/Renderer.i
 	@echo ... src/View/Renderer.s
+	@echo ... src/View/SetupScreen.obj
+	@echo ... src/View/SetupScreen.i
+	@echo ... src/View/SetupScreen.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
