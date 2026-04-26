@@ -23,6 +23,7 @@ add_executable(Chess3Players
 
     src/View/MenuRenderer.cpp
     src/View/Renderer.cpp
+    src/View/SetupScreen.cpp
 
     src/Controller/GameController.cpp
 )

@@ -188,6 +188,29 @@ void Board::buildNeighbors() {
             linkNeighbor({11, 9 + k}, Direction::NORTH_WEST, {8 + k, 7});
         }
     }
+
+    // Couture 4 : bord est du sextant blanc gauche (x=3, y=0..3)
+    // vers bord ouest du sextant blanc droit (x=4, y=0..3).
+    // Cette liaison reste dans la zone PLAYER1, mais change de sextant.
+    for (int k = 0; k < 4; ++k) {
+        linkNeighbor({3, k}, Direction::EAST, {4, k});
+        linkNeighbor({4, k}, Direction::WEST, {3, k});
+    }
+
+    // Corrections diagonales pour la couture S0↔S1 (formules arithmétiques ne marchent pas)
+    linkNeighbor({3, 3}, Direction::NORTH_EAST, {3, 2});
+    linkNeighbor({3, 2}, Direction::SOUTH_WEST, {3, 3});
+    linkNeighbor({3, 3}, Direction::NORTH_WEST, {6, 3});
+    linkNeighbor({6, 3}, Direction::SOUTH_EAST, {3, 3});
+
+    // Corrections pour la couture S5↔S4 (y=3↔y=8 gap)
+    // Knight paths: (6,3) SOUTH → (6,11), (7,2) EAST → (?, ?)
+    for (int k = 0; k < 4; ++k) {
+        // (x, 3) SOUTH should map to (x, 11) for x ∈ [4, 8)
+        linkNeighbor({4 + k, 3}, Direction::SOUTH, {4 + k, 11});
+        linkNeighbor({4 + k, 11}, Direction::NORTH, {4 + k, 3});
+    }
+
 }
 
 bool Board::isValid(const HexCell& c) const {
@@ -298,6 +321,20 @@ int Board::getSextant(const HexCell& c) const {
     return node ? node->sextant : -1;
 }
 
+int Board::getSextant(int cellId) const {
+    const BoardNode* node = getNodeById(cellId);
+    return node ? node->sextant : -1;
+}
+
+std::pair<int,int> Board::getXY(int cellId) const {
+    const HexCell c = getCellById(cellId);
+    return {c.q, c.r};
+}
+
+int Board::getIdByXY(int x, int y) const {
+    return getId(HexCell{x, y});
+}
+
 Player Board::getZoneOwner(const HexCell& c) const {
     const BoardNode* node = getNode(c);
     return node ? node->zoneOwner : Player::NONE;
@@ -313,6 +350,13 @@ std::optional<HexCell> Board::step(const HexCell& from, Direction dir) const {
         return std::nullopt;
     }
     return getCellById(toId);
+}
+
+std::optional<int> Board::step(int fromId, Direction dir) const {
+    if (fromId < 0 || fromId >= CELL_COUNT) return std::nullopt;
+    const int toId = neighbors[fromId][static_cast<int>(dir)];
+    if (toId < 0) return std::nullopt;
+    return toId;
 }
 
 std::vector<HexCell> Board::ray(const HexCell& from, Direction dir) const {
@@ -353,6 +397,22 @@ std::optional<HexCell> Board::getPawnTransition(const HexCell& from, Player owne
         if (x == 7 && y >= 0 && y <= 3) return HexCell{6, y};
     }
     return std::nullopt;
+}
+
+std::vector<HexCell> Board::cellsBetween(const HexCell& from, const HexCell& to) const {
+    constexpr std::array<Direction, 4> cardinals = {
+        Direction::NORTH, Direction::SOUTH, Direction::EAST, Direction::WEST
+    };
+    for (Direction dir : cardinals) {
+        const auto cells = ray(from, dir);
+        for (std::size_t i = 0; i < cells.size(); ++i) {
+            if (cells[i] == to) {
+                return std::vector<HexCell>(cells.begin(),
+                                            cells.begin() + static_cast<std::ptrdiff_t>(i));
+            }
+        }
+    }
+    return {};
 }
 
 bool Board::isPromotionCell(const HexCell& c, Player owner) const {

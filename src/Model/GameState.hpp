@@ -73,6 +73,10 @@ public:
     void addObserver(IObserver* o);
     void notifyAll();
 
+    bool   isPromotionPending()  const { return m_promotionPending; }
+    Player getPromotionPlayer()  const { return m_promotionPlayer; }
+    void   applyPromotion(PieceType chosen);
+
 private:
     Board              board;
     Player             currentPlayer;
@@ -82,4 +86,10 @@ private:
     Player             lastAttacker = Player::NONE;
     int                halfmoveClock = 0;
     std::vector<IObserver*> observers;
+    bool               m_computingStatus  = false;
+
+    bool               m_promotionPending = false;
+    HexCell            m_promotionCell    = {0, 0};
+    Player             m_promotionPlayer  = Player::NONE;
+    Move               m_promotionApplied;
 };

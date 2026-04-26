@@ -52,6 +52,21 @@ namespace {
     }
 }
 
+GameController::GameController(const GameConfig& config, bool windowVisible)
+    : window(sf::VideoMode({800, 850}), "Chess 3 Players")
+    , menuRenderer(window)
+    , renderer(window)
+    , m_config(config)
+{
+    window.setVisible(windowVisible);
+    for (int i = 0; i < 3; ++i) isAI[i] = config.players[i].isAI;
+    aiDepth = config.players[0].aiDepth;
+    state.addObserver(&renderer);
+    renderer.setCurrentState(&state);
+    renderer.setBoardRotation(2.0f * 3.14159265359f / 3.0f);  // 120 degrees
+    startGame();
+}
+
 GameController::GameController(bool windowVisible)
     // 850 de hauteur = 800 pour le plateau + 50 pour le HUD joueur courant
     : window(sf::VideoMode({800, 850}), "Chess 3 Players")
@@ -61,12 +76,18 @@ GameController::GameController(bool windowVisible)
     window.setVisible(windowVisible);
     state.addObserver(&renderer);
     renderer.setCurrentState(&state);
-
+    renderer.setBoardRotation(2.0f * 3.14159265359f / 3.0f);  // 120 degrees
+    // init m_config from legacy defaults
+    for (int i = 0; i < 3; ++i) {
+        m_config.players[i].isAI    = isAI[i];
+        m_config.players[i].aiDepth = aiDepth;
+    }
     menuRenderer.draw(isAI, aiDepth);
 }
 
 void GameController::setAIConfig(const std::array<bool, 3>& config) {
     isAI = config;
+    for (int i = 0; i < 3; ++i) m_config.players[i].isAI = config[i];
     if (!gameStarted && window.isOpen()) {
         menuRenderer.draw(isAI, aiDepth);
     }
@@ -74,6 +95,7 @@ void GameController::setAIConfig(const std::array<bool, 3>& config) {
 
 void GameController::setAIDifficulty(int depth) {
     aiDepth = depth;
+    for (int i = 0; i < 3; ++i) m_config.players[i].aiDepth = depth;
     if (!gameStarted && window.isOpen()) {
         menuRenderer.draw(isAI, aiDepth);
     }
@@ -111,9 +133,9 @@ std::string GameController::pieceLabel(const Piece* piece, const HexCell& cell) 
 }
 
 void GameController::run() {
-    showMenu();
-    if (!window.isOpen() || !gameStarted) {
-        return;
+    if (!gameStarted) {
+        showMenu();
+        if (!window.isOpen() || !gameStarted) return;
     }
 
     while (window.isOpen()) {
@@ -167,6 +189,7 @@ void GameController::handleMenuClick(int x, int y) {
     for (std::size_t i = 0; i < toggleBounds.size(); ++i) {
         if (toggleBounds[i].contains(mouse)) {
             isAI[i] = !isAI[i];
+            m_config.players[i].isAI = isAI[i];
             menuRenderer.draw(isAI, aiDepth);
             return;
         }
@@ -176,6 +199,7 @@ void GameController::handleMenuClick(int x, int y) {
     for (std::size_t i = 0; i < diffBounds.size(); ++i) {
         if (diffBounds[i].contains(mouse)) {
             aiDepth = static_cast<int>(i) + 1;
+            for (int j = 0; j < 3; ++j) m_config.players[j].aiDepth = aiDepth;
             menuRenderer.draw(isAI, aiDepth);
             return;
         }
@@ -219,7 +243,7 @@ bool GameController::tryAIMove(bool ignoreDelay) {
     }
 
     const int currentIndex = playerIndex(state.getCurrentPlayer());
-    if (currentIndex < 0 || !isAI[static_cast<std::size_t>(currentIndex)]) {
+    if (currentIndex < 0 || !m_config.players[currentIndex].isAI) {
         return false;
     }
 
@@ -237,7 +261,8 @@ bool GameController::tryAIMove(bool ignoreDelay) {
     renderer.clearHighlights();
     renderer.setStatusMessage("IA reflechit...");
 
-    std::optional<Move> bestMove = state.findBestMove(aiDepth, state.getCurrentPlayer());
+    const int depth = m_config.players[currentIndex].aiDepth;
+    std::optional<Move> bestMove = state.findBestMove(depth, state.getCurrentPlayer());
     if (!bestMove.has_value()) {
         return false;
     }
@@ -306,17 +331,28 @@ void GameController::handleEvents() {
     }
 }
 
+void GameController::handleEndScreenClick(int x, int y) {
+    if (renderer.getQuitButtonBounds().contains(
+            sf::Vector2f(static_cast<float>(x), static_cast<float>(y)))) {
+        window.close();
+    }
+}
+
 void GameController::handleClick(int x, int y) {
-    if (state.isGameOver()) {
-        renderer.setStatusMessage("Partie terminee - Gagnant : " + winnerText(state.getWinner()));
-        if (selected != nullptr) {
-            delete selected;
-            selected = nullptr;
+    if (state.isPromotionPending()) {
+        PieceType chosen = renderer.getPromotionClick({(float)x, (float)y});
+        if (chosen != PieceType::PAWN) {
+            renderer.clearHighlights();
+            renderer.clearSelectedCell();
+            state.applyPromotion(chosen);
+            renderer.draw(state);
+            tryAIMove();
         }
-        validMoves.clear();
-        renderer.clearSelectedCell();
-        renderer.clearHighlights();
-        renderer.draw(state);
+        return;
+    }
+
+    if (state.isGameOver()) {
+        handleEndScreenClick(x, y);
         return;
     }
 

@@ -61,6 +61,10 @@ GameState::GameState(const GameState& other)
     , eliminatedPlayers(other.eliminatedPlayers)
     , lastAttacker(other.lastAttacker)
     , halfmoveClock(other.halfmoveClock)
+    , m_computingStatus(false)
+    , m_promotionPending(false)
+    , m_promotionCell({0, 0})
+    , m_promotionPlayer(Player::NONE)
     // observers intentionnellement omis : la copie est isolée, pas d'UI
 {
 }
@@ -229,8 +233,12 @@ int GameState::activePlayerCount() const {
 }
 
 void GameState::computeStatus() {
+    if (m_computingStatus) return;
+    m_computingStatus = true;
+
     if (halfmoveClock >= 50) {
         status = GameStatus::DRAW;
+        m_computingStatus = false;
         return;
     }
 
@@ -276,6 +284,7 @@ void GameState::computeStatus() {
     } else {
         status = GameStatus::PLAYING;
     }
+    m_computingStatus = false;
 }
 
 bool GameState::isInCheck(Player player) const {
@@ -316,9 +325,7 @@ void GameState::applyMove(const Move& m, bool isSimulation) {
     applied.previousHalfmoveClock = halfmoveClock;
     applied.yaltaEliminatedPlayer = Player::NONE;
     applied.yaltaPiecesOwnerBefore.clear();
-    if (!isSimulation) {
-        lastAttacker = m.player;
-    }
+    lastAttacker = m.player;
     Piece* moving = board.getPiece(m.from);
     if (!moving) return;
 
@@ -366,6 +373,33 @@ void GameState::applyMove(const Move& m, bool isSimulation) {
         halfmoveClock = (isPawnMove || isCapture) ? 0 : halfmoveClock + 1;
     }
 
+    // Castling detection: king moves exactly 2 cardinal steps toward own unmoved rook
+    if (moving->getType() == PieceType::KING && !applied.movingPieceHadMoved) {
+        constexpr std::array<Board::Direction, 4> cardinals = {
+            Board::Direction::NORTH, Board::Direction::SOUTH,
+            Board::Direction::EAST,  Board::Direction::WEST
+        };
+        for (Board::Direction dir : cardinals) {
+            const auto step1 = board.step(m.from, dir);
+            if (!step1.has_value()) continue;
+            const auto step2 = board.step(*step1, dir);
+            if (!step2.has_value() || *step2 != m.to) continue;
+            for (const HexCell& candidate : board.ray(m.to, dir)) {
+                Piece* r = board.getPiece(candidate);
+                if (!r) continue;
+                if (r->getType() == PieceType::ROOK &&
+                    r->getOwner() == moving->getOwner() &&
+                    !r->getHasMoved()) {
+                    applied.isCastling = true;
+                    applied.rookFrom   = candidate;
+                    applied.rookTo     = *step1;
+                }
+                break;
+            }
+            break;
+        }
+    }
+
     if (applied.isCastling) {
         Piece* rook = board.getPiece(applied.rookFrom);
         if (rook && rook->getType() == PieceType::ROOK && rook->getOwner() == moving->getOwner()) {
@@ -386,19 +420,48 @@ void GameState::applyMove(const Move& m, bool isSimulation) {
         if (board.isPromotionCell(m.to, moving->getOwner())) {
             applied.isPromotion = true;
             PieceFactory factory;
-            Piece* newQ = factory.create(PieceType::QUEEN, moving->getOwner(), m.to);
-
-            board.setPiece(m.to, newQ);
-            delete moving;
+            if (isSimulation) {
+                // Simulation (IA / vérification légale) : promeut en Dame sans menu
+                Piece* newQ = factory.create(PieceType::QUEEN, moving->getOwner(), m.to);
+                board.setPiece(m.to, newQ);
+                delete moving;
+            } else {
+                // Coup humain : attendre le choix du joueur
+                m_promotionPending = true;
+                m_promotionCell    = m.to;
+                m_promotionPlayer  = m.player;
+                m_promotionApplied = applied;
+                return; // nextPlayer / moveHistory / computeStatus différés à applyPromotion()
+            }
         }
     }
 
     moveHistory.push_back(applied);
     nextPlayer();
+    computeStatus();
     if (!isSimulation) {
-        computeStatus();
         notifyAll();
     }
+}
+
+void GameState::applyPromotion(PieceType chosen) {
+    if (!m_promotionPending) return;
+
+    PieceFactory factory;
+    Piece* pawn = board.getPiece(m_promotionCell);
+    Piece* promoted = factory.create(chosen, m_promotionPlayer, m_promotionCell);
+    board.setPiece(m_promotionCell, promoted);
+    delete pawn;
+
+    moveHistory.push_back(m_promotionApplied);
+
+    m_promotionPending = false;
+    m_promotionCell    = {0, 0};
+    m_promotionPlayer  = Player::NONE;
+
+    nextPlayer();
+    computeStatus();
+    notifyAll();
 }
 
 void GameState::undoMove(bool notifyObservers) {
@@ -489,6 +552,11 @@ void GameState::nextPlayer() {
 }
 
 int GameState::evaluate(Player perspective) const {
+    if (isGameOver()) {
+        if (isEliminated(perspective))        return -10000;
+        if (getWinner() == perspective)       return  10000;
+        return 0;
+    }
     int score = 0;
     for (const HexCell& c : board.allValidCells()) {
         Piece* p = board.getPiece(c);

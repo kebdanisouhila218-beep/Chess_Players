@@ -25,8 +25,13 @@ public:
     std::optional<HexCell> pickCell(const Board& board, sf::Vector2f px) const;
     sf::FloatRect getUndoButtonBounds() const { return m_undoButtonBounds; }
 
+    void      drawPromotionMenu(Player player);
+    PieceType getPromotionClick(sf::Vector2f px) const;
+    sf::FloatRect getQuitButtonBounds() const { return m_quitButtonBounds; }
+
     void setCurrentState(const GameState* state) { currentState = state; }
     void toggleShowIds() { m_showIds = !m_showIds; }
+    void setBoardRotation(float angleRadians) { m_boardRotation = angleRadians; m_geometryReady = false; }
 
 private:
     void initBoardGeometry(const Board& board);
@@ -36,7 +41,7 @@ private:
     void drawCellIds(const Board& board);
     sf::ConvexShape createTile(const std::array<sf::Vector2f, 4>& points, sf::Color color) const;
     void drawHUD(const GameState& state);
-    void drawGameOverBanner(const GameState& state);
+    void drawEndScreen(const GameState& state);
 
     sf::RenderWindow& window;
     const GameState*  currentState = nullptr;
@@ -53,6 +58,9 @@ private:
     bool m_geometryReady = false;
     bool m_showIds = false;
     sf::FloatRect m_undoButtonBounds;
+    mutable sf::FloatRect m_quitButtonBounds;
     sf::Vector2u m_lastWindowSize{0u, 0u};
     std::chrono::steady_clock::time_point m_selectionPulseStart = std::chrono::steady_clock::now();
+    mutable std::array<sf::FloatRect, 4> m_promotionRects{};
+    float m_boardRotation = 0.f;
 };

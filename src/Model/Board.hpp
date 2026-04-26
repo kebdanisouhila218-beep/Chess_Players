@@ -3,6 +3,7 @@
 #include "Piece.hpp"
 #include <array>
 #include <optional>
+#include <utility>
 #include <vector>
 #include <unordered_map>
 
@@ -52,12 +53,17 @@ public:
     ScreenCoord getScreenPosition(const HexCell& c) const;
     std::optional<HexCell> pickCellFromScreen(float px, float py, float maxDistance = 22.f) const;
     int getSextant(const HexCell& c) const;
+    int getSextant(int cellId) const;
+    std::pair<int,int> getXY(int cellId) const;
+    int getIdByXY(int x, int y) const;
     Player getZoneOwner(const HexCell& c) const;
     std::optional<HexCell> step(const HexCell& from, Direction dir) const;
+    std::optional<int>     step(int fromId, Direction dir) const;
     std::vector<HexCell> ray(const HexCell& from, Direction dir) const;
 
     std::optional<HexCell> getPawnTransition(const HexCell& from, Player owner) const;
     bool isPromotionCell(const HexCell& c, Player owner) const;
+    std::vector<HexCell> cellsBetween(const HexCell& from, const HexCell& to) const;
 
     static constexpr int BOARD_SIZE = 12;
     static constexpr int CELL_COUNT = 96;

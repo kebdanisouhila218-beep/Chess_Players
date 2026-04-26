@@ -36,6 +36,12 @@ namespace {
         return {a.x * k, a.y * k};
     }
 
+    sf::Vector2f rotateVec(const sf::Vector2f& v, float angle) {
+        float cos_a = std::cos(angle);
+        float sin_a = std::sin(angle);
+        return {v.x * cos_a - v.y * sin_a, v.x * sin_a + v.y * cos_a};
+    }
+
     sf::String chessGlyph(PieceType t, bool whiteSet) {
         if (whiteSet) {
             switch (t) {
@@ -234,12 +240,19 @@ void Renderer::initBoardGeometry(const Board& board) {
         const sf::Vector2f p4 = addVec(corner, addVec(mulVec(s1, ratioY2), mulVec(u2, ratioX1)));
         const sf::Vector2f center = addVec(corner, addVec(mulVec(s1, midRatioY), mulVec(midU, midRatioX)));
 
+        // Apply board rotation around center
+        sf::Vector2f p1_rot = addVec(boardCenter, rotateVec(subVec(p1, boardCenter), m_boardRotation));
+        sf::Vector2f p2_rot = addVec(boardCenter, rotateVec(subVec(p2, boardCenter), m_boardRotation));
+        sf::Vector2f p3_rot = addVec(boardCenter, rotateVec(subVec(p3, boardCenter), m_boardRotation));
+        sf::Vector2f p4_rot = addVec(boardCenter, rotateVec(subVec(p4, boardCenter), m_boardRotation));
+        sf::Vector2f center_rot = addVec(boardCenter, rotateVec(subVec(center, boardCenter), m_boardRotation));
+
         const sf::Color dark(18, 18, 18);
         const sf::Color light(226, 209, 169);
         const sf::Color fillColor = ((x + y + sextant) % 2 == 0) ? dark : light;
         m_baseColors.push_back(fillColor);
-        m_cellCenters.push_back(center);
-        m_cellShapes.push_back(createTile({p1, p2, p3, p4}, fillColor));
+        m_cellCenters.push_back(center_rot);
+        m_cellShapes.push_back(createTile({p1_rot, p2_rot, p3_rot, p4_rot}, fillColor));
     }
 
     m_geometryReady = true;
@@ -517,6 +530,21 @@ void Renderer::drawHUD(const GameState& state) {
     nameText.setPosition({140.f, cy});
     window.draw(nameText);
 
+    // Check alert — right of player name
+    if (state.isInCheck(state.getCurrentPlayer())) {
+        const float alertX = nameText.getGlobalBounds().position.x
+                           + nameText.getGlobalBounds().size.x + 14.f;
+        sf::Text alert(m_font);
+        alert.setString("ECHEC !");
+        alert.setCharacterSize(15);
+        alert.setFillColor(sf::Color(220, 50, 50));
+        alert.setStyle(sf::Text::Bold);
+        auto b = alert.getLocalBounds();
+        alert.setOrigin({b.position.x, b.position.y + b.size.y * 0.5f});
+        alert.setPosition({alertX, cy});
+        window.draw(alert);
+    }
+
     // Calcul matière par joueur
     int score1 = 0, score2 = 0, score3 = 0;
     for (const HexCell& c : state.getBoard().allValidCells()) {
@@ -613,73 +641,244 @@ void Renderer::drawHUD(const GameState& state) {
 void Renderer::draw(const GameState& state) {
     window.clear(sf::Color(8, 8, 8));
     drawBoard(state);
-
     drawPieces(state);
     drawHUD(state);
-    if (state.isGameOver())
-        drawGameOverBanner(state);
-
+    if (state.isGameOver()) {
+        drawEndScreen(state);
+        window.display();
+        return;
+    }
+    if (state.isPromotionPending())
+        drawPromotionMenu(state.getPromotionPlayer());
     window.display();
 }
 
-void Renderer::drawGameOverBanner(const GameState& state) {
+void Renderer::drawPromotionMenu(Player player) {
     if (!m_fontLoaded) return;
 
     const sf::Vector2u winSize = window.getSize();
     const float winW = static_cast<float>(winSize.x);
     const float winH = static_cast<float>(winSize.y);
 
-    const float bw = 500.f, bh = 140.f;
-    const float bx = (winW - bw) * 0.5f;
-    const float by = winH * 0.35f;
+    // Semi-transparent overlay
+    sf::RectangleShape overlay({winW, winH - 46.f});
+    overlay.setPosition({0.f, 0.f});
+    overlay.setFillColor(sf::Color(0, 0, 0, 150));
+    window.draw(overlay);
 
-    sf::RectangleShape box({bw, bh});
-    box.setPosition({bx, by});
-    box.setFillColor(sf::Color(0, 0, 0, 220));
-    box.setOutlineColor(sf::Color(255, 215, 0));
-    box.setOutlineThickness(3.f);
-    window.draw(box);
+    // Panel dimensions
+    constexpr float cellW   = 74.f;
+    constexpr float cellH   = 80.f;
+    constexpr float gap     = 10.f;
+    constexpr float padX    = 18.f;
+    constexpr float padTop  = 36.f;
+    constexpr float padBot  = 14.f;
+    constexpr int   nCells  = 4;
+    const float panelW = padX * 2.f + nCells * cellW + (nCells - 1) * gap;
+    const float panelH = padTop + cellH + padBot;
+    const float panelX = (winW - panelW) * 0.5f;
+    const float panelY = (winH - 46.f - panelH) * 0.5f;
 
-    const Player winner = state.getWinner();
-    const float cx = bx + bw * 0.5f;
+    sf::RectangleShape panel({panelW, panelH});
+    panel.setPosition({panelX, panelY});
+    panel.setFillColor(sf::Color(18, 20, 26, 250));
+    panel.setOutlineColor(sf::Color(200, 175, 90));
+    panel.setOutlineThickness(2.f);
+    window.draw(panel);
 
     sf::Text title(m_font);
-    title.setString("PARTIE TERMINEE");
-    title.setCharacterSize(32);
-    title.setFillColor(sf::Color::White);
-    title.setStyle(sf::Text::Bold);
+    title.setString("Choisir la promotion");
+    title.setCharacterSize(15);
+    title.setFillColor(sf::Color(215, 200, 160));
     {
         auto b = title.getLocalBounds();
         title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y + b.size.y * 0.5f});
     }
-    title.setPosition({cx, by + 42.f});
+    title.setPosition({panelX + panelW * 0.5f, panelY + 16.f});
     window.draw(title);
 
-    sf::Text sub(m_font);
-    sf::Color subColor;
-    std::string subStr;
-    if (winner == Player::PLAYER1) {
-        subStr = "Vainqueur : Joueur 1 - Blancs";
-        subColor = sf::Color(244, 244, 244);
-    } else if (winner == Player::PLAYER2) {
-        subStr = "Vainqueur : Joueur 2 - Bleus";
-        subColor = sf::Color(66, 96, 220);
-    } else if (winner == Player::PLAYER3) {
-        subStr = "Vainqueur : Joueur 3 - Rouges";
-        subColor = sf::Color(214, 72, 72);
-    } else {
-        subStr = "Match nul";
-        subColor = sf::Color(180, 180, 180);
+    sf::Color tokenColor;
+    bool whiteSet;
+    if (player == Player::PLAYER1)      { tokenColor = sf::Color(244, 244, 244); whiteSet = true;  }
+    else if (player == Player::PLAYER2) { tokenColor = sf::Color(66,  96,  220); whiteSet = false; }
+    else                                { tokenColor = sf::Color(214, 72,  72);  whiteSet = false; }
+
+    constexpr PieceType types[nCells] = {
+        PieceType::QUEEN, PieceType::ROOK, PieceType::BISHOP, PieceType::KNIGHT
+    };
+    const float cellsY = panelY + padTop;
+
+    for (int i = 0; i < nCells; ++i) {
+        const float cx = panelX + padX + i * (cellW + gap) + cellW * 0.5f;
+        const float cy = cellsY + cellH * 0.5f;
+
+        m_promotionRects[static_cast<std::size_t>(i)] = sf::FloatRect(
+            {panelX + padX + i * (cellW + gap), cellsY},
+            {cellW, cellH}
+        );
+
+        sf::RectangleShape cell({cellW, cellH});
+        cell.setPosition({m_promotionRects[static_cast<std::size_t>(i)].position.x,
+                          m_promotionRects[static_cast<std::size_t>(i)].position.y});
+        cell.setFillColor(sf::Color(32, 36, 46));
+        cell.setOutlineColor(sf::Color(75, 85, 105));
+        cell.setOutlineThickness(1.5f);
+        window.draw(cell);
+
+        sf::CircleShape token(cellW * 0.36f);
+        token.setFillColor(tokenColor);
+        token.setOutlineColor(sf::Color(15, 15, 15, 180));
+        token.setOutlineThickness(1.5f);
+        token.setOrigin({cellW * 0.36f, cellW * 0.36f});
+        token.setPosition({cx, cy - 4.f});
+        window.draw(token);
+
+        sf::Text glyph(m_font);
+        glyph.setString(chessGlyph(types[i], whiteSet));
+        glyph.setCharacterSize(26);
+        glyph.setFillColor(player == Player::PLAYER1
+                               ? sf::Color(28, 28, 28)
+                               : sf::Color(245, 245, 245));
+        {
+            auto b = glyph.getLocalBounds();
+            glyph.setOrigin({b.position.x + b.size.x * 0.5f,
+                             b.position.y + b.size.y * 0.58f});
+        }
+        glyph.setPosition({cx, cy - 4.f});
+        window.draw(glyph);
     }
-    sub.setString(subStr);
-    sub.setCharacterSize(24);
-    sub.setFillColor(subColor);
+}
+
+PieceType Renderer::getPromotionClick(sf::Vector2f px) const {
+    constexpr PieceType types[4] = {
+        PieceType::QUEEN, PieceType::ROOK, PieceType::BISHOP, PieceType::KNIGHT
+    };
+    for (std::size_t i = 0; i < 4; ++i) {
+        if (m_promotionRects[i].contains(px))
+            return types[i];
+    }
+    return PieceType::PAWN; // aucune sélection
+}
+
+void Renderer::drawEndScreen(const GameState& state) {
+    if (!m_fontLoaded) return;
+
+    const sf::Vector2u winSize = window.getSize();
+    const float winW = static_cast<float>(winSize.x);
+    const float winH = static_cast<float>(winSize.y);
+
+    // Full-screen semi-transparent overlay
+    sf::RectangleShape overlay({winW, winH});
+    overlay.setPosition({0.f, 0.f});
+    overlay.setFillColor(sf::Color(0, 0, 0, 180));
+    window.draw(overlay);
+
+    // Centered panel
+    constexpr float PANEL_W = 500.f;
+    constexpr float PANEL_H = 300.f;
+    const float px = (winW - PANEL_W) * 0.5f;
+    const float py = (winH - PANEL_H) * 0.5f;
+    const float cx = px + PANEL_W * 0.5f;
+
+    sf::RectangleShape panel({PANEL_W, PANEL_H});
+    panel.setPosition({px, py});
+    panel.setFillColor(sf::Color(18, 20, 26, 255));
+    panel.setOutlineColor(sf::Color(200, 175, 90));
+    panel.setOutlineThickness(3.f);
+    window.draw(panel);
+
+    const Player winner = state.getWinner();
+    const bool isDraw   = (winner == Player::NONE);
+
+    // Title
+    sf::Text title(m_font);
+    title.setString(isDraw ? "Egalite !" : "Victoire !");
+    title.setCharacterSize(40);
+    title.setStyle(sf::Text::Bold);
+    title.setFillColor(isDraw ? sf::Color(180, 180, 180) : sf::Color(255, 215, 0));
     {
-        auto b = sub.getLocalBounds();
-        sub.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y + b.size.y * 0.5f});
+        auto b = title.getLocalBounds();
+        title.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y + b.size.y * 0.5f});
     }
-    sub.setPosition({cx, by + 95.f});
-    window.draw(sub);
+    title.setPosition({cx, py + 52.f});
+    window.draw(title);
+
+    if (!isDraw) {
+        // Player color circle
+        sf::Color col;
+        std::string name;
+        if (winner == Player::PLAYER1)      { col = sf::Color(244, 244, 244); name = "Joueur 1 - Blancs"; }
+        else if (winner == Player::PLAYER2) { col = sf::Color(66,  96,  220); name = "Joueur 2 - Bleus";  }
+        else                                { col = sf::Color(214, 72,  72);  name = "Joueur 3 - Rouges"; }
+
+        sf::CircleShape dot(14.f);
+        dot.setOrigin({14.f, 14.f});
+        dot.setFillColor(col);
+        dot.setOutlineColor(sf::Color(255, 255, 255, 140));
+        dot.setOutlineThickness(2.f);
+        dot.setPosition({cx - 90.f, py + 130.f});
+        window.draw(dot);
+
+        sf::Text nameText(m_font);
+        nameText.setString(name);
+        nameText.setCharacterSize(22);
+        nameText.setFillColor(col);
+        nameText.setStyle(sf::Text::Bold);
+        {
+            auto b = nameText.getLocalBounds();
+            nameText.setOrigin({b.position.x, b.position.y + b.size.y * 0.5f});
+        }
+        nameText.setPosition({cx - 64.f, py + 130.f});
+        window.draw(nameText);
+
+        sf::Text sub(m_font);
+        sub.setString("gagne la partie");
+        sub.setCharacterSize(17);
+        sub.setFillColor(sf::Color(200, 200, 200));
+        {
+            auto b = sub.getLocalBounds();
+            sub.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y + b.size.y * 0.5f});
+        }
+        sub.setPosition({cx, py + 170.f});
+        window.draw(sub);
+    } else {
+        sf::Text sub(m_font);
+        sub.setString("Aucun joueur ne peut gagner");
+        sub.setCharacterSize(18);
+        sub.setFillColor(sf::Color(180, 180, 180));
+        {
+            auto b = sub.getLocalBounds();
+            sub.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y + b.size.y * 0.5f});
+        }
+        sub.setPosition({cx, py + 130.f});
+        window.draw(sub);
+    }
+
+    // "Quitter" button
+    constexpr float BTN_W = 160.f;
+    constexpr float BTN_H = 44.f;
+    const float btnX = cx - BTN_W * 0.5f;
+    const float btnY = py + PANEL_H - BTN_H - 22.f;
+    m_quitButtonBounds = sf::FloatRect({btnX, btnY}, {BTN_W, BTN_H});
+
+    sf::RectangleShape btn({BTN_W, BTN_H});
+    btn.setPosition({btnX, btnY});
+    btn.setFillColor(sf::Color(60, 30, 30));
+    btn.setOutlineColor(sf::Color(180, 60, 60));
+    btn.setOutlineThickness(2.f);
+    window.draw(btn);
+
+    sf::Text btnText(m_font);
+    btnText.setString("Quitter");
+    btnText.setCharacterSize(18);
+    btnText.setFillColor(sf::Color(230, 180, 180));
+    btnText.setStyle(sf::Text::Bold);
+    {
+        auto b = btnText.getLocalBounds();
+        btnText.setOrigin({b.position.x + b.size.x * 0.5f, b.position.y + b.size.y * 0.5f});
+    }
+    btnText.setPosition({cx, btnY + BTN_H * 0.5f});
+    window.draw(btnText);
 }
 
 void Renderer::setSelectedCell(const HexCell& cell) {
