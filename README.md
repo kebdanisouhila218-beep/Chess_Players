@@ -50,6 +50,20 @@ src/
 └── Controller/   — gestion des événements (GameController)
 ```
 
+## Patterns de conception
+
+Le projet applique plusieurs patterns de conception classiques :
+
+- **MVC (Modele-Vue-Controleur)** : separation entre la logique du jeu (`Model`), le rendu SFML (`View`) et la gestion des evenements utilisateur (`Controller`)
+- **Factory** (`PieceFactory`) : centralise la creation des pieces d'echecs (pion, cavalier, fou, tour, dame, roi) et l'initialisation du plateau pour chaque joueur, evitant la duplication de logique de construction
+- **Observer** (`IObserver`) : permet a la vue de se mettre a jour automatiquement lorsque l'etat du jeu change (`onStateChanged`), sans coupler directement le modele au rendu
+
+Diagrammes disponibles dans le dossier `Diagramme/` : diagramme de classes, diagramme de cas d'utilisation, diagramme etats-transitions, et illustrations des patterns Factory et Observer.
+
+## Fonction annuler (undo)
+
+Chaque coup joue est enregistre dans une structure `Move` conservant l'etat necessaire pour le defaire (piece capturee, roque, prise en passant, promotion, statut de partie precedent). Le bouton **Annuler** restaure le dernier coup a partir de cet historique, deux coups d'affilee lorsque l'IA est active (le coup de l'IA puis celui du joueur).
+
 ## Algorithme IA
 
 Minimax **paranoid** avec parallélisation `std::async` au niveau racine.  
